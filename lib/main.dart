@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'views/login_page.dart';
 import 'views/signup_page.dart';
+import 'views/home_page.dart';
+
 
 void main() {
   runApp(const MainApp());
@@ -13,11 +15,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+      home: HomePage()
     );
   }
 }
