@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'views/login_page.dart';
 import 'views/signup_page.dart';
+import 'views/signup_page_2.dart';
 
 void main() {
   runApp(const MainApp());
