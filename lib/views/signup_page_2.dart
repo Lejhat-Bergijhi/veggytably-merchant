@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+class SignUpPageCont extends StatelessWidget {
+  const SignUpPageCont({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class SignUpPage extends StatelessWidget {
               ),
                SizedBox(height: 40),
 
-              Text('Owner’s Data',
+              Text('Merchant’s Data',
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
@@ -45,21 +45,7 @@ class SignUpPage extends StatelessWidget {
                   width: 300,
                   child: TextField(
                     decoration: InputDecoration(
-                      hintText: 'Name',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10),
-
-               // Input Email or Telephone Number
-                Container(
-                  width: 300,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Email',
+                      hintText: 'Merchant Name',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -82,12 +68,11 @@ class SignUpPage extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
 
-                // Input Password
                 Container(
                   width: 300,
                   child: TextField(
                     decoration: InputDecoration(
-                      hintText: 'Password',
+                      hintText: 'Address',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -102,7 +87,7 @@ class SignUpPage extends StatelessWidget {
                   height: 45,
                   child: ElevatedButton(
                     onPressed: () {},
-                    child: Text('Continue'),
+                    child: Text('Sign Up'),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.green,
                       shape: RoundedRectangleBorder(
