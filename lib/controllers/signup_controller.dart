@@ -5,6 +5,9 @@ import "package:get/get.dart";
 import "package:vegytably_merchant/utils/api.endpoints.dart";
 import "package:http/http.dart" as http;
 
+import "../models/authentication_response.dart";
+import "../models/exception_response.dart";
+
 class SignUpController extends GetxController {
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -27,14 +30,21 @@ class SignUpController extends GetxController {
       http.Response response =
           await http.post(url, headers: headers, body: jsonEncode(body));
 
-      print(response.body);
       if (response.statusCode != 201) {
-        // TODO create exception handler
-        throw Exception(response);
+        // TODO create get exception message method
+        ExceptionResponse exceptionResponse =
+            ExceptionResponse.fromJson(jsonDecode(response.body));
+        print(exceptionResponse.errors![0].message);
+        throw Exception(exceptionResponse.errors![0].message);
       }
 
       final json = jsonDecode(response.body);
+
       // TODO handle json file
+      AuthenticationResponse authenticationResponse =
+          AuthenticationResponse.fromJson(json);
+
+      print(authenticationResponse.data!.toJson());
 
       Get.back();
     } catch (e) {
