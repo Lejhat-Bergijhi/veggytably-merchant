@@ -1,36 +1,40 @@
 class AuthenticationResponse {
-  Data? data;
+  late Data data;
 
-  AuthenticationResponse({this.data});
+  AuthenticationResponse({required this.data});
 
   AuthenticationResponse.fromJson(Map<String, dynamic> json) {
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = Data.fromJson(json['data']);
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
+    data['data'] = this.data.toJson();
     return data;
   }
 }
 
 class Data {
   late User user;
-  late String token;
+  late String accessToken;
+  late String refreshToken;
 
-  Data({required this.user, required this.token});
+  Data(
+      {required this.user,
+      required this.accessToken,
+      required this.refreshToken});
 
   Data.fromJson(Map<String, dynamic> json) {
     user = User.fromJson(json['user']);
-    token = json['token'];
+    accessToken = json['accessToken'];
+    refreshToken = json['refreshToken'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['user'] = user.toJson();
-    data['token'] = token;
+    data['accessToken'] = accessToken;
+    data['refreshToken'] = refreshToken;
     return data;
   }
 }

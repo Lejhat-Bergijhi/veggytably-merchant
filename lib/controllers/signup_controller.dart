@@ -1,6 +1,7 @@
 import "dart:convert";
 
 import "package:flutter/material.dart";
+import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import "package:get/get.dart";
 import "package:vegytably_merchant/utils/api.endpoints.dart";
 import "package:http/http.dart" as http;
@@ -14,6 +15,7 @@ class SignUpController extends GetxController {
   TextEditingController passwordController = TextEditingController();
 
   // TODO store to storage
+  final _storage = const FlutterSecureStorage();
 
   Future<void> signUp() async {
     try {
@@ -27,8 +29,11 @@ class SignUpController extends GetxController {
         "password": passwordController.text
       };
 
-      http.Response response =
-          await http.post(url, headers: headers, body: jsonEncode(body));
+      http.Response response = await http.post(
+        url,
+        headers: headers,
+        body: jsonEncode(body),
+      );
 
       if (response.statusCode != 201) {
         // TODO create get exception message method
@@ -40,12 +45,15 @@ class SignUpController extends GetxController {
 
       final json = jsonDecode(response.body);
 
-      // TODO handle json file
       AuthenticationResponse authenticationResponse =
           AuthenticationResponse.fromJson(json);
 
-      print(authenticationResponse.data!.toJson());
-
+      print(authenticationResponse.data.toJson());
+      // store accessToken and refreshToken in secure storage
+      await _storage.write(
+          key: "accessToken", value: authenticationResponse.data.accessToken);
+      await _storage.write(
+          key: "refreshToken", value: authenticationResponse.data.refreshToken);
       Get.back();
     } catch (e) {
       print(e);
