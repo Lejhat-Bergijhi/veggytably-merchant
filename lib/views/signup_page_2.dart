@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class SignUpPageCont extends StatelessWidget {
+  const SignUpPageCont({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,36 +13,39 @@ class LoginPage extends StatelessWidget {
             children: [
               SizedBox(height: 50),
 
-              // logo
-              Icon(Icons.lock, 
-              size:100,
-            ),
-              SizedBox(height: 50),
 
               // Text: VegyMerch
-              Text('VegyMerch',
+              Text('Welcome!',
               style: TextStyle(
-                fontSize: 30,
+                fontSize: 40,
                 fontWeight: FontWeight.bold,
               ),
             ),
               SizedBox(height: 10),
 
               // Text: Powered by Vegytably
-              Text('Powered by Vegytably',
+              Text('Manage your Bussiness Anywhere and Everywhere.',
               style: TextStyle(
                 fontSize: 10,
                 fontWeight: FontWeight.bold,
                 )
               ),
+               SizedBox(height: 40),
+
+              Text('Merchant’s Data',
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                )
+              ),
                SizedBox(height: 20),
 
-               // Input Email or Telephone Number
-                Container(
+              //Input nama
+              Container(
                   width: 300,
                   child: TextField(
                     decoration: InputDecoration(
-                      hintText: 'Email or Telephone Number',
+                      hintText: 'Merchant Name',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -51,12 +54,25 @@ class LoginPage extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
 
-                // Input Password
+                //input no telp
                 Container(
                   width: 300,
                   child: TextField(
                     decoration: InputDecoration(
-                      hintText: 'Password',
+                      hintText: 'Telephone Number',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
+
+                Container(
+                  width: 300,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Address',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -71,7 +87,7 @@ class LoginPage extends StatelessWidget {
                   height: 45,
                   child: ElevatedButton(
                     onPressed: () {},
-                    child: Text('Login'),
+                    child: Text('Sign Up'),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.green,
                       shape: RoundedRectangleBorder(
@@ -83,7 +99,7 @@ class LoginPage extends StatelessWidget {
                 SizedBox(height: 50),
 
                 // Text: Don't have an account?
-                Text('Don\'t have an account?',
+                Text('Already have an account?',
                 style: TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.bold,
@@ -92,7 +108,7 @@ class LoginPage extends StatelessWidget {
               SizedBox(height: 5),
 
                 // Text: Sign Up
-                Text('Sign Up',
+                Text('Login',
                 style: TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.bold,
