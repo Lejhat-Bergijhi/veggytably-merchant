@@ -34,21 +34,22 @@ class _SignUpPageState extends State<SignUpPage> {
             // Text: Powered by Vegytably
             Text('Manage your Bussiness Anywhere and Everywhere.',
                 style: TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                )),
-            SizedBox(height: 40),
-
-            Text('Owner’s Data',
-                style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 12,
                   fontWeight: FontWeight.bold,
                 )),
             SizedBox(height: 20),
 
+            Text('Owner’s Data',
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold,
+                )),
+            SizedBox(height: 10),
+
             //Input nama
             Container(
               width: 300,
+              height: 45,
               child: TextField(
                 controller: signUpController.usernameController,
                 decoration: InputDecoration(
@@ -64,6 +65,7 @@ class _SignUpPageState extends State<SignUpPage> {
             // Input Email or Telephone Number
             Container(
               width: 300,
+              height: 45,
               child: TextField(
                 controller: signUpController.emailController,
                 decoration: InputDecoration(
@@ -79,6 +81,7 @@ class _SignUpPageState extends State<SignUpPage> {
             //input no telp
             Container(
               width: 300,
+              height: 45,
               child: TextField(
                 decoration: InputDecoration(
                   hintText: 'Telephone Number',
@@ -93,6 +96,7 @@ class _SignUpPageState extends State<SignUpPage> {
             // Input Password
             Container(
               width: 300,
+              height: 45,
               child: TextField(
                 controller: signUpController.passwordController,
                 decoration: InputDecoration(
@@ -104,6 +108,42 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
             SizedBox(height: 10),
+
+            Text('Merchant’s Data',
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.bold,
+                )
+              ),
+            SizedBox(height: 10),
+
+            Container(
+                  width: 300,
+                  height: 45,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Merchant Name',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
+            
+            Container(
+                  width: 300,
+                  height: 45,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Address',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
 
             // Login button
             Container(
@@ -122,13 +162,13 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
             ),
-            SizedBox(height: 50),
+            SizedBox(height: 10),
 
             // Text: Don't have an account?
             Text(
               'Already have an account?',
               style: TextStyle(
-                fontSize: 10,
+                fontSize: 12,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -138,7 +178,10 @@ class _SignUpPageState extends State<SignUpPage> {
             Text(
               'Login',
               style: TextStyle(
-                fontSize: 10,
+                fontSize: 12,
+                decoration: TextDecoration.underline,
+                decorationThickness: 5,
+                decorationColor: Color.fromARGB(255, 1, 6, 3),
                 fontWeight: FontWeight.bold,
                 color: Colors.green,
               ),
