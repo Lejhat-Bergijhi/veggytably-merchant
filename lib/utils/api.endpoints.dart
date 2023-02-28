@@ -6,4 +6,5 @@ class ApiEndPoints {
 class _AuthEndPoints {
   final String signUp = "auth/signUp";
   final String login = "auth/login";
+  final String logout = "auth/logout";
 }
