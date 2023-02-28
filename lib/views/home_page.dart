@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:vegytably_merchant/controllers/auth_controller.dart';
 import 'package:vegytably_merchant/views/profile_page.dart';
+import '../api/merchant_api.dart';
+import '../controllers/auth_controller.dart';
+import '../models/merchant_profile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,11 +20,9 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _merchantProfile = MerchantApi.fetchMerchantProfile();
-    // TODO: implement checkAuth();
-    // WidgetsBinding.instance!.addPostFrameCallback((_) {
-    //   AuthController authController = Get.put(AuthController());
-    //   authController.checkAuth();
-    // });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AuthController.checkAuth();
+    });
   }
 
   @override
@@ -393,7 +393,8 @@ class _HomePageState extends State<HomePage> {
                         iconSize: 45.0,
                         icon: const Icon(Icons.account_circle),
                         onPressed: () {
-                          Get.to(() => ProfilePage());
+                          Get.to(() => ProfilePage(),
+                              transition: Transition.rightToLeftWithFade);
                         },
                         color: Colors.black,
                       ),

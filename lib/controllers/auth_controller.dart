@@ -110,7 +110,7 @@ class AuthController extends GetxController {
 
       Get.offAll(
         () => HomePage(),
-        transition: Transition.rightToLeft,
+        transition: Transition.fade,
       );
     } catch (e) {
       print(e);
@@ -138,7 +138,7 @@ class AuthController extends GetxController {
         headers: headers,
       );
       if (response.statusCode != 200) {
-        // TODO create get exception message method
+        // TODO: Create error handler based on status code
         String errorMessage =
             ExceptionResponse.getMessage(jsonDecode(response.body));
         throw Exception(errorMessage);
@@ -152,6 +152,22 @@ class AuthController extends GetxController {
         () => LoginPage(),
         transition: Transition.fade,
       );
+    } catch (e) {
+      print(e);
+      Get.snackbar("Error", e.toString());
+    }
+  }
+
+  static Future<void> checkAuth() async {
+    try {
+      const storage = FlutterSecureStorage();
+      String? refreshToken = await storage.read(key: "refreshToken");
+      if (refreshToken == null) {
+        Get.offAll(
+          () => LoginPage(),
+          transition: Transition.fade,
+        );
+      }
     } catch (e) {
       print(e);
       Get.snackbar("Error", e.toString());
