@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vegytably_merchant/views/login_page.dart';
+import 'package:email_validator/email_validator.dart';
 
 import '../controllers/auth_controller.dart';
 import '../widgets/input_text.dart';
@@ -59,15 +60,24 @@ class _SignUpPageState extends State<SignUpPage> {
             Container(
               width: 300,
               height: 45,
-              child: InputTextField(ownerUsernameController, "Username"),
+              child: InputTextField(ownerUsernameController, "Your Name"),
             ),
             SizedBox(height: 10),
 
             // Input Email or Telephone Number
             Container(
               width: 300,
-              height: 45,
-              child: InputTextField(emailController, "Email"),
+              child: TextFormField(
+                controller: emailController,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) => EmailValidator.validate(value!) ? null : "Please enter a valid email",
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
             ),
             SizedBox(height: 10),
 
@@ -85,7 +95,7 @@ class _SignUpPageState extends State<SignUpPage> {
               height: 45,
               child: InputTextField(passwordController, "Password"),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 20),
 
             Text('Restorant’s Data',
                 style: TextStyle(
