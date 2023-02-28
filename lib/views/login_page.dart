@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vegytably_merchant/views/signup_page.dart';
+import 'package:email_validator/email_validator.dart';
 
 import '../controllers/auth_controller.dart';
 import '../widgets/input_text.dart';
@@ -22,15 +23,14 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 50),
 
             // logo
-            Icon(
-              Icons.lock,
-              size: 100,
-            ),
-            SizedBox(height: 50),
+            //   Icon(Icons.lock,
+            //   size:100,
+            // ),
+            SizedBox(height: 100),
 
-            // Text: VegyMerch
+            // Text: VeggyMerch
             Text(
-              'VegyMerch',
+              'VeggyMerch',
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
@@ -38,10 +38,10 @@ class LoginPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
 
-            // Text: Powered by Vegytably
-            Text('Powered by Vegytably',
+            // Text: Powered by Veggytably
+            Text('Powered by Veggytably',
                 style: TextStyle(
-                  fontSize: 10,
+                  fontSize: 12,
                   fontWeight: FontWeight.bold,
                 )),
             SizedBox(height: 20),
@@ -49,9 +49,16 @@ class LoginPage extends StatelessWidget {
             // Input Email or Telephone Number
             Container(
               width: 300,
-              child: InputTextField(
-                emailController,
-                'Email',
+              child: TextFormField(
+                controller: emailController,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) => EmailValidator.validate(value!) ? null : "Please enter a valid email",
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
               ),
             ),
             SizedBox(height: 10),
@@ -94,10 +101,10 @@ class LoginPage extends StatelessWidget {
             Text(
               'Don\'t have an account?',
               style: TextStyle(
-                fontSize: 10,
+                fontSize: 12,
                 fontWeight: FontWeight.bold,
               ),
-            ),
+            
             SizedBox(height: 5),
 
             // Text: Sign Up
@@ -108,15 +115,14 @@ class LoginPage extends StatelessWidget {
               child: Text(
                 'Sign Up',
                 style: TextStyle(
-                  fontSize: 10,
+                  fontSize: 12,
                   fontWeight: FontWeight.bold,
                   color: Colors.green,
                 ),
               ),
             ),
-          ]),
+          ])
         ),
-      ),
-    );
+      ));
   }
 }

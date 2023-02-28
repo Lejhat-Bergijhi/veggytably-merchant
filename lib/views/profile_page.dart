@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:vegytably_merchant/views/login_page.dart';
+
+import '../controllers/auth_controller.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -134,6 +138,7 @@ class ProfilePage extends StatelessWidget {
                       //   width: 1.0,
                       // ),
                     ),
+
                   ),
                   padding: const EdgeInsets.only(left: 24.0, right: 24.0, top:10, bottom:10),
                   child: Row(

@@ -15,12 +15,12 @@ class AuthController extends GetxController {
   final _storage = const FlutterSecureStorage();
 
   Future<void> signUp(
-    TextEditingController ownerUsernameController,
+    TextEditingController usernameController,
     TextEditingController emailController,
-    TextEditingController telephoneController,
+    TextEditingController phoneController,
     TextEditingController passwordController,
-    TextEditingController merchantUsernameController,
-    TextEditingController addressController,
+    TextEditingController restaurantNameController,
+    TextEditingController restaurantAddressController,
   ) async {
     try {
       var headers = {"Content-Type": "application/json"};
@@ -28,9 +28,12 @@ class AuthController extends GetxController {
           Uri.parse(ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.signUp);
 
       Map<String, String> body = {
-        "username": ownerUsernameController.text,
+        "username": usernameController.text,
         "email": emailController.text.trim(),
-        "password": passwordController.text
+        "password": passwordController.text,
+        "phone": phoneController.text,
+        "restaurantName": restaurantNameController.text,
+        "restaurantAddress": restaurantAddressController.text,
       };
 
       http.Response response = await http.post(
@@ -38,13 +41,11 @@ class AuthController extends GetxController {
         headers: headers,
         body: jsonEncode(body),
       );
-
+      print(response.body.toString());
       if (response.statusCode != 201) {
-        // TODO create get exception message method
-        ExceptionResponse exceptionResponse =
-            ExceptionResponse.fromJson(jsonDecode(response.body));
-        print(exceptionResponse.errors![0].message);
-        throw Exception(exceptionResponse.errors![0].message);
+        String errorMessage =
+            ExceptionResponse.getMessage(jsonDecode(response.body));
+        throw Exception(errorMessage);
       }
 
       final json = jsonDecode(response.body);
@@ -58,7 +59,11 @@ class AuthController extends GetxController {
           key: "accessToken", value: authenticationResponse.data.accessToken);
       await _storage.write(
           key: "refreshToken", value: authenticationResponse.data.refreshToken);
-      Get.back();
+
+      Get.offAll(
+        () => HomePage(),
+        transition: Transition.rightToLeft,
+      );
     } catch (e) {
       print(e);
       Get.snackbar("Error", e.toString());
@@ -84,13 +89,12 @@ class AuthController extends GetxController {
         headers: headers,
         body: jsonEncode(body),
       );
+      print(response.body.toString());
 
       if (response.statusCode != 200) {
-        // TODO create get exception message method
-        ExceptionResponse exceptionResponse =
-            ExceptionResponse.fromJson(jsonDecode(response.body));
-        print(exceptionResponse.errors![0].message);
-        throw Exception(exceptionResponse.errors![0].message);
+        String errorMessage =
+            ExceptionResponse.getMessage(jsonDecode(response.body));
+        throw Exception(errorMessage);
       }
       final json = jsonDecode(response.body);
 
@@ -116,7 +120,16 @@ class AuthController extends GetxController {
 
   Future<void> logout() async {
     try {
-      var headers = {"Content-Type": "application/json"};
+      String? refreshToken = await _storage.read(key: "refreshToken");
+
+      if (refreshToken == null) {
+        throw Exception("Refresh token not found");
+      }
+
+      var headers = {
+        "Content-Type": "application/json",
+        "authorization": 'Bearer $refreshToken',
+      };
       var url =
           Uri.parse(ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.logout);
 
@@ -126,10 +139,9 @@ class AuthController extends GetxController {
       );
       if (response.statusCode != 200) {
         // TODO create get exception message method
-        ExceptionResponse exceptionResponse =
-            ExceptionResponse.fromJson(jsonDecode(response.body));
-        print(exceptionResponse.errors![0].message);
-        throw Exception(exceptionResponse.errors![0].message);
+        String errorMessage =
+            ExceptionResponse.getMessage(jsonDecode(response.body));
+        throw Exception(errorMessage);
       }
       final json = jsonDecode(response.body);
 
