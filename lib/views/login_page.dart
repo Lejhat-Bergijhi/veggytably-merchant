@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vegytably_merchant/views/signup_page.dart';
+import 'package:email_validator/email_validator.dart';
 
 import '../controllers/auth_controller.dart';
 import '../widgets/input_text.dart';
@@ -48,9 +49,16 @@ class LoginPage extends StatelessWidget {
             // Input Email or Telephone Number
             Container(
               width: 300,
-              child: InputTextField(
-                emailController,
-                'Email',
+              child: TextFormField(
+                controller: emailController,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) => EmailValidator.validate(value!) ? null : "Please enter a valid email",
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
               ),
             ),
             SizedBox(height: 10),
@@ -96,7 +104,7 @@ class LoginPage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
+            
             SizedBox(height: 5),
 
             // Text: Sign Up
@@ -113,9 +121,8 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
             ),
-          ]),
+          ])
         ),
-      ),
-    );
+      ));
   }
 }
