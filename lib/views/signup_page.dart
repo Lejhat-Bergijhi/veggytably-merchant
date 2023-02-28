@@ -123,8 +123,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   authController.signUp(
                     ownerUsernameController,
                     emailController,
-                    passwordController,
                     telephoneController,
+                    passwordController,
                     merchantUsernameController,
                     addressController,
                   );
