@@ -21,15 +21,16 @@ class LoginPage extends StatelessWidget {
         child: Center(
           child: Column(children: [
             SizedBox(height: 50),
-            
-              // logo
-            //   Icon(Icons.lock, 
+
+            // logo
+            //   Icon(Icons.lock,
             //   size:100,
             // ),
             SizedBox(height: 100),
 
-              // Text: VeggyMerch
-              Text('VeggyMerch',
+            // Text: VeggyMerch
+            Text(
+              'VeggyMerch',
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
@@ -37,14 +38,13 @@ class LoginPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
 
-              // Text: Powered by Veggytably
-              Text('Powered by Veggytably',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-                )
-              ),
-               SizedBox(height: 20),
+            // Text: Powered by Veggytably
+            Text('Powered by Veggytably',
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                )),
+            SizedBox(height: 20),
 
             // Input Email or Telephone Number
             Container(
@@ -97,12 +97,12 @@ class LoginPage extends StatelessWidget {
             ),
             SizedBox(height: 50),
 
-                // Text: Don't have an account?
-                Text('Don\'t have an account?',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ),
+            // Text: Don't have an account?
+            Text(
+              'Don\'t have an account?',
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
               ),
             
             SizedBox(height: 5),

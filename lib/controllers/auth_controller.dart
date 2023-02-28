@@ -120,7 +120,16 @@ class AuthController extends GetxController {
 
   Future<void> logout() async {
     try {
-      var headers = {"Content-Type": "application/json"};
+      String? refreshToken = await _storage.read(key: "refreshToken");
+
+      if (refreshToken == null) {
+        throw Exception("Refresh token not found");
+      }
+
+      var headers = {
+        "Content-Type": "application/json",
+        "authorization": 'Bearer $refreshToken',
+      };
       var url =
           Uri.parse(ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.logout);
 
