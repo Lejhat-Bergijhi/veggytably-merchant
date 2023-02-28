@@ -16,10 +16,10 @@ class LoginPage extends StatelessWidget {
     TextEditingController passwordController = TextEditingController();
 
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Center(
-          child: Column(children: [
+        backgroundColor: Colors.white,
+        body: SafeArea(
+          child: Center(
+              child: Column(children: [
             SizedBox(height: 50),
 
             // logo
@@ -52,7 +52,9 @@ class LoginPage extends StatelessWidget {
               child: TextFormField(
                 controller: emailController,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) => EmailValidator.validate(value!) ? null : "Please enter a valid email",
+                validator: (value) => EmailValidator.validate(value!)
+                    ? null
+                    : "Please enter a valid email",
                 decoration: InputDecoration(
                   labelText: 'Email',
                   border: OutlineInputBorder(
@@ -104,7 +106,7 @@ class LoginPage extends StatelessWidget {
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
               ),
-            
+            ),
             SizedBox(height: 5),
 
             // Text: Sign Up
@@ -121,8 +123,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
             ),
-          ])
-        ),
-      ));
+          ])),
+        ));
   }
 }
