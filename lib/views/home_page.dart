@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:vegytably_merchant/controllers/auth_controller.dart';
 import 'package:vegytably_merchant/views/profile_page.dart';
-
-import '../api/merchant_api.dart';
-import '../models/merchant_profile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -29,7 +27,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    AuthController authController = Get.put(AuthController());
     return Scaffold(
         //background color white
         backgroundColor: Colors.white,
