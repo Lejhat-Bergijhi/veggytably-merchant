@@ -48,7 +48,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 )),
             SizedBox(height: 20),
 
-            Text('Owner’s Data',
+            Text('Merchant’s Data',
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.bold,
@@ -87,7 +87,7 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             SizedBox(height: 10),
 
-            Text('Merchant’s Data',
+            Text('Restorant’s Data',
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.bold,
@@ -99,7 +99,7 @@ class _SignUpPageState extends State<SignUpPage> {
               height: 45,
               child: InputTextField(
                 merchantUsernameController,
-                "Merchant Name",
+                "Restorant Name",
               ),
             ),
             SizedBox(height: 10),
@@ -109,7 +109,7 @@ class _SignUpPageState extends State<SignUpPage> {
               height: 45,
               child: InputTextField(
                 addressController,
-                "Merchant Address",
+                "Restorant Address",
               ),
             ),
             SizedBox(height: 10),
