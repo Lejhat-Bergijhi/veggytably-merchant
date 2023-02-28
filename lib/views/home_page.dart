@@ -4,8 +4,26 @@ import 'package:get/get.dart';
 import 'package:vegytably_merchant/controllers/auth_controller.dart';
 import 'package:vegytably_merchant/views/profile_page.dart';
 
-class HomePage extends StatelessWidget {
-    const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late Future<MerchantProfile> _merchantProfile;
+
+  @override
+  void initState() {
+    super.initState();
+    _merchantProfile = MerchantApi.fetchMerchantProfile();
+    // TODO: implement checkAuth();
+    // WidgetsBinding.instance!.addPostFrameCallback((_) {
+    //   AuthController authController = Get.put(AuthController());
+    //   authController.checkAuth();
+    // });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,20 +38,26 @@ class HomePage extends StatelessWidget {
               //center
               // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // text
+                // Restaurant Name
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Container(
-                    child: Text(
-                      "Padang Vegan",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 27,
-                        // font Rubik medium
-                        fontFamily: "Rubik",
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    child: FutureBuilder(
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            return Text(snapshot.data!.restaurantName,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 27,
+                                  // font Rubik medium
+                                  fontFamily: "Rubik",
+                                  fontWeight: FontWeight.bold,
+                                ));
+                          }
+                          return const Text('Loading...');
+                        },
+                        future: _merchantProfile),
                   ),
                 ),
 
@@ -323,38 +347,44 @@ class HomePage extends StatelessWidget {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      //align left
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      //spacing
-                      mainAxisSize: MainAxisSize.min,
-                      //spacing
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      //spacing
-                      verticalDirection: VerticalDirection.down,
-                      //spacing
-                      textBaseline: TextBaseline.alphabetic,
-                      children: [
-                        Text(
-                          "Nandarelle Aurora Trevor",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 17,
-                            // font Rubik medium
-                            fontFamily: "Rubik",
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 5.83),
-                        Text(
-                          "+62 89101112131",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 17,
-                            fontFamily: "Rubik",
-                          ),
-                        ),
-                      ],
+                    FutureBuilder(
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return const Text("Loading");
+                        }
+                        if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          verticalDirection: VerticalDirection.down,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Text(
+                              snapshot.data!.username,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 17,
+                                // font Rubik medium
+                                fontFamily: "Rubik",
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 5.83),
+                            Text(
+                              snapshot.data!.phone,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 17,
+                                fontFamily: "Rubik",
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                      future: _merchantProfile,
                     ),
                     //spacing
 
