@@ -38,13 +38,11 @@ class AuthController extends GetxController {
         headers: headers,
         body: jsonEncode(body),
       );
-
+      print(response.body.toString());
       if (response.statusCode != 201) {
-        // TODO create get exception message method
-        ExceptionResponse exceptionResponse =
-            ExceptionResponse.fromJson(jsonDecode(response.body));
-        print(exceptionResponse.errors![0].message);
-        throw Exception(exceptionResponse.errors![0].message);
+        String errorMessage =
+            ExceptionResponse.getMessage(jsonDecode(response.body));
+        throw Exception(errorMessage);
       }
 
       final json = jsonDecode(response.body);
@@ -84,13 +82,12 @@ class AuthController extends GetxController {
         headers: headers,
         body: jsonEncode(body),
       );
-
+      print(response.body.toString());
+      print(response.statusCode);
       if (response.statusCode != 200) {
-        // TODO create get exception message method
-        ExceptionResponse exceptionResponse =
-            ExceptionResponse.fromJson(jsonDecode(response.body));
-        print(exceptionResponse.errors![0].message);
-        throw Exception(exceptionResponse.errors![0].message);
+        String errorMessage =
+            ExceptionResponse.getMessage(jsonDecode(response.body));
+        throw Exception(errorMessage);
       }
       final json = jsonDecode(response.body);
 
@@ -128,8 +125,8 @@ class AuthController extends GetxController {
         // TODO create get exception message method
         ExceptionResponse exceptionResponse =
             ExceptionResponse.fromJson(jsonDecode(response.body));
-        print(exceptionResponse.errors![0].message);
-        throw Exception(exceptionResponse.errors![0].message);
+        print(exceptionResponse.errors[0].message);
+        throw Exception(exceptionResponse.errors[0].message);
       }
       final json = jsonDecode(response.body);
 
