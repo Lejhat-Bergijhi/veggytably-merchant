@@ -67,12 +67,17 @@ class LoginPage extends StatelessWidget {
 
             // Input Password
             Container(
-              width: 300,
-              child: InputTextField(
-                passwordController,
-                'Password',
-              ),
-            ),
+                width: 300,
+                child: TextField(
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: "Password",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                )),
             SizedBox(height: 10),
 
             // Login button

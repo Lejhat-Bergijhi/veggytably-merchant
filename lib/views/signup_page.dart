@@ -70,7 +70,9 @@ class _SignUpPageState extends State<SignUpPage> {
               child: TextFormField(
                 controller: emailController,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) => EmailValidator.validate(value!) ? null : "Please enter a valid email",
+                validator: (value) => EmailValidator.validate(value!)
+                    ? null
+                    : "Please enter a valid email",
                 decoration: InputDecoration(
                   labelText: 'Email',
                   border: OutlineInputBorder(
@@ -93,11 +95,22 @@ class _SignUpPageState extends State<SignUpPage> {
             Container(
               width: 300,
               height: 45,
-              child: InputTextField(passwordController, "Password"),
+              child: Container(
+                  width: 300,
+                  child: TextField(
+                    controller: passwordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      hintText: "Password",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  )),
             ),
             SizedBox(height: 20),
 
-            Text('Restorant’s Data',
+            Text('Restaurant’s Data',
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.bold,
@@ -109,7 +122,7 @@ class _SignUpPageState extends State<SignUpPage> {
               height: 45,
               child: InputTextField(
                 merchantUsernameController,
-                "Restorant Name",
+                "Restaurant Name",
               ),
             ),
             SizedBox(height: 10),
@@ -119,7 +132,7 @@ class _SignUpPageState extends State<SignUpPage> {
               height: 45,
               child: InputTextField(
                 addressController,
-                "Restorant Address",
+                "Restaurant Address",
               ),
             ),
             SizedBox(height: 10),
