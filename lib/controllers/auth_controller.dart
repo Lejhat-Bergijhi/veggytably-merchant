@@ -81,7 +81,8 @@ class AuthController extends GetxController {
 
       Map<String, String> body = {
         "email": emailController.text.trim(),
-        "password": passwordController.text
+        "password": passwordController.text,
+        "role": "MERCHANT",
       };
 
       http.Response response = await http.post(
