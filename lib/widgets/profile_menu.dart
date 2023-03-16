@@ -13,11 +13,11 @@ class ProfileMenu extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: Color(0xFFA0A0A0),
+            color: Color(0xFFF6F7FB),
             width: 1.0,
           ),
           top: BorderSide(
-            color: first? Color(0xFFA0A0A0): Colors.transparent,
+            color: first? Color(0xFFF6F7FB): Colors.transparent,
             width: first? 1.0:0,
           ),
         ),

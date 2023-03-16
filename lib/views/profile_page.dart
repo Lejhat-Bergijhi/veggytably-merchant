@@ -86,8 +86,8 @@ class ProfilePage extends StatelessWidget {
                       // Get.offAll(() => EditRestrictionPage(), transition: Transition.fade);
                     },
                     child: ProfileMenu(
-                      "images/foodres.png",
-                      "Food Restriction",
+                      "images/orderrecap.png",
+                      "Order Recapitulation",
                       false
                     ),
                   )
