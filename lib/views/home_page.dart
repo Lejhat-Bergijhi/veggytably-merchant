@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:vegytably_merchant/views/profile_page.dart';
-import '../api/merchant_api.dart';
-import '../controllers/auth_controller.dart';
-import '../models/merchant_profile.dart';
+import 'package:vegytably_merchant/widgets/bottom_navbar.dart';
+import 'package:vegytably_merchant/widgets/sliver_search_app_bar.dart';
+// import '../api/merchant_api.dart';
+// import '../controllers/auth_controller.dart';
+// import '../models/merchant_profile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,443 +16,285 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<MerchantProfile> _merchantProfile;
+  // late Future<MerchantProfile> _merchantProfile;
 
   @override
   void initState() {
     super.initState();
-    _merchantProfile = MerchantApi.fetchMerchantProfile();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      AuthController.checkAuth();
-    });
+    // _merchantProfile = MerchantApi.fetchMerchantProfile();
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   // AuthController.checkAuth();
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
+    double marginleft = 24;
+    double boxWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        //background color white
-        backgroundColor: Colors.white,
-        body: Container(
-          padding: const EdgeInsets.only(left: 24.0, right: 24.0, top: 33.0),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              //center
-              // crossAxisAlignment: CrossAxisAlignment.center,
+      backgroundColor:  Color(0xfffcfffe),
+      body: Stack(
+        children:[
+          Container(
+            
+            height: 188,
+            width: boxWidth,
+            child: Image.asset('/images/backgroundhome.png', fit: BoxFit.cover),
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: marginleft),
+            child: ListView(
+              physics: BouncingScrollPhysics(),
               children: [
-                // Restaurant Name
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Container(
-                    child: FutureBuilder(
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.done) {
-                            return Text(snapshot.data!.restaurantName,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 27,
-                                  // font Rubik medium
-                                  fontFamily: "Rubik",
-                                  fontWeight: FontWeight.bold,
-                                ));
-                          }
-                          return const Text('Loading...');
-                        },
-                        future: _merchantProfile),
-                  ),
-                ),
-
-                const SizedBox(height: 17.0),
+                SizedBox(height: 149,),
                 Container(
-                    //position left
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(16),
-                          bottomLeft: Radius.circular(16),
-                          topRight: Radius.circular(16),
-                          topLeft: Radius.circular(16)),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
                       boxShadow: [
-                        BoxShadow(
-                            color: Color(0x40000000),
-                            spreadRadius: 0,
-                            blurRadius: 8,
-                            offset: Offset(0, 2))
+                          BoxShadow(
+                              color: Color(0x0c000000),
+                              blurRadius: 12,
+                              offset: Offset(0, 0),
+                          ),
                       ],
                       color: Colors.white,
-                    ),
-                    width: 312,
-                    height: 138,
-                    child: Column(children: [
-                      Row(children: [
-                        Container(
-                          //margin 24 24 36 41
-                          margin: const EdgeInsets.only(left: 17.0, top: 11.0),
-                          child: Text(
-                            "Today’s Recapitulation",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 17,
-                              // font Rubik medium
-                              fontFamily: "Rubik",
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                        //spacing
-                        const SizedBox(width: 10),
-                        Container(
-                          margin: const EdgeInsets.only(top: 15.0),
-                          child: Text(
-                            "Lihat Riwayat",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 10,
-                              // font Rubik medium
-                              fontFamily: "Rubik",
-                              //underline
-                              decoration: TextDecoration.underline,
-                              fontWeight: FontWeight.w300,
-                            ),
-                          ),
-                        ),
-                      ]),
-                      //spacing
-                      const SizedBox(height: 7),
+                  ),
+                  // height: 85,
+                  padding: EdgeInsets.symmetric(horizontal: 23, vertical: 14),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children:[
                       Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              Color(0xFF9F9F9F),
-                              Color(0xFF9F9F9F),
-                              Color(0xFFD1D1D6),
-                            ],
-                          ),
-                        ),
-                        height: 1,
+                        width: 35,
+                        child: Image.asset('images/merchantlogo.png', fit: BoxFit.fitWidth),
                       ),
-                      const SizedBox(height: 15),
-                      Center(
-                        child: Row(children: [
-                          const SizedBox(width: 40),
-                          Container(
-                              child: Center(
-                                  child: Column(children: [
+                      SizedBox(width: 12),
+                      Container(
+                        width: boxWidth-2*(23+24)-35-12,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
                             Text(
-                              "Done",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 17,
-                                // font Rubik medium
-                                fontFamily: "Rubik",
-                                fontWeight: FontWeight.w400,
-                              ),
+                                "Padang Vegan, Solo",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 17,
+                                    fontFamily: "Rubik",
+                                    fontWeight: FontWeight.bold,
+                                ),
                             ),
-                            const SizedBox(height: 5),
+                            SizedBox(height: 5),
                             Text(
+                                "Jl Wonorejo I/25 A, Jawa Timur, Surabaya",
+                                style: TextStyle(
+                                    color: Color(0xff9f9f9f),
+                                    fontSize: 12,
+                                    fontFamily: "Rubik",
+                                ),
+                            ),
+                            SizedBox(height: 5),
+                            Text(
+                                "+62 89101112131",
+                                style: TextStyle(
+                                    color: Color(0xff9f9f9f),
+                                    fontSize: 12,
+                                    fontFamily: "Rubik",
+                                ),
+                            ),
+                          ],
+                        ),
+                      )
+                      
+                    ]
+                  )
+                ),
+                SizedBox(height: 12,),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: [
+                          BoxShadow(
+                              color: Color(0x0c000000),
+                              blurRadius: 12,
+                              offset: Offset(0, 0),
+                          ),
+                      ],
+                      color: Colors.white,
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 23, vertical: 21),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children:[
+                      Container(
+                        width: 35,
+                        child: Image.asset('images/domveticon.png', fit: BoxFit.fitWidth),
+                      ),
+                      SizedBox(width: 12),
+                      Container(
+                        width: boxWidth-2*(23+24)-35-12,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                                "SALDO DOMVET",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                    fontFamily: "Rubik",
+                                    fontWeight: FontWeight.bold,
+                                ),
+                            ),
+                            SizedBox(height: 5),
+                            Text(
+                                "Rp 1.234.245,00",
+                                style: TextStyle(
+                                    color: Color(0xffd2b150),
+                                    fontSize: 22,
+                                    fontFamily: "Rubik",
+                                    fontWeight: FontWeight.w500,
+                                ),
+                            ),
+                          ]
+                        )
+                      ),
+
+
+                    ]
+                  )
+
+                ) ,
+
+                SizedBox(height: 23,),
+                Text(
+                    "REKAP HARI INI",
+                    style: TextStyle(
+                        color: Color(0xff9f9f9f),
+                        fontSize: 12,
+                        fontFamily: "Rubik",
+                        fontWeight: FontWeight.w500,
+                    ),
+                ),
+                SizedBox(height: 12,),
+                Container(
+                  height: 80,
+                  child: Row(children: [
+                    Container(
+                      padding: EdgeInsets.only(bottom: 12, top:7, left: 6, right: 6),
+                      width: (boxWidth-2*marginleft-12)/2,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.66),
+                          boxShadow: [
+                              BoxShadow(
+                                  color: Color(0x0c000000),
+                                  blurRadius: 16,
+                                  offset: Offset(0, 0),
+                              ),
+                          ],
+                          color: Colors.white,
+                      ),
+                      child: Column(
+                        children:[
+                          Text(
+                              "Pesanan Selesai",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 17,
+                              ),
+                          ),
+                          Spacer(),
+                          Container(
+                              padding: EdgeInsets.symmetric(horizontal: 7.5),
+                              height: 1,
+                              color: Color(0xffD1D1D6),
+                          ),
+                           Spacer(),
+                          Text(
                               "17",
                               style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 36,
-                                // font Rubik medium
-                                fontFamily: "Rubik",
-                                fontWeight: FontWeight.w400,
+                                  color: Color(0xff6ec885),
+                                  fontSize: 24,
                               ),
-                            ),
-                          ]))),
-                          const SizedBox(width: 57),
-                          Container(
-                              child: Center(
-                                  child: Column(children: [
-                            Text(
+                          ),
+                        ]
+                      ),
+                    ),
+                    SizedBox(width: 12,),
+                    Container(
+                       padding: EdgeInsets.only(bottom: 12, top:7, left: 6, right: 6),
+                      width: (boxWidth-2*marginleft-12)/2,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.66),
+                          boxShadow: [
+                              BoxShadow(
+                                  color: Color(0x0c000000),
+                                  blurRadius: 16,
+                                  offset: Offset(0, 0),
+                              ),
+                          ],
+                          color: Colors.white,
+                      ),
+                      child: Column(
+                        children:[
+                          Text(
                               "Profit",
+                              textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 17,
-                                // font Rubik medium
-                                fontFamily: "Rubik",
-                                fontWeight: FontWeight.w400,
+                                  color: Colors.black,
+                                  fontSize: 17,
                               ),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
+                          ),
+                          Spacer(),
+                          Container(
+                              padding: EdgeInsets.symmetric(horizontal: 7.5),
+                              height: 1,
+                              color: Color(0xffD1D1D6),
+                          ),
+                           Spacer(),
+                          Text(
                               "200.000",
                               style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 36,
-                                // font Rubik medium
-                                fontFamily: "Rubik",
-                                fontWeight: FontWeight.w400,
+                                  color: Color(0xff6ec885),
+                                  fontSize: 24,
                               ),
-                            ),
-                          ]))),
-                          const SizedBox(width: 28),
-                        ]),
-                      )
-                    ])),
-                //padding
-                const SizedBox(height: 20.0),
-                Container(
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(16),
-                          bottomLeft: Radius.circular(16),
-                          topRight: Radius.circular(16),
-                          topLeft: Radius.circular(16)),
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          Color(0xFFF8D879),
-                          Color(0xFFFFEAAD),
-                        ],
+                          ),
+                        ]
                       ),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Color(0x40000000),
-                            spreadRadius: 0,
-                            blurRadius: 8,
-                            offset: Offset(0, 2))
-                      ],
-                      //color from rgba
-
-                      color: Color(0xffb74093),
+                    
                     ),
-                    width: 312,
-                    height: 138,
-                    // margin: const EdgeInsets.only(left: 17.0, right: 25.0),
-                    child: Column(
-                      children: [
-                        Row(children: [
-                          const SizedBox(width: 17),
-                          Container(
-                              child: Column(children: [
-                            const SizedBox(height: 10),
-                            Icon(
-                              Icons.wallet,
-                              color: Colors.black,
-                              size: 20.0,
-                            )
-                          ])),
-                          //spacing
-                          const SizedBox(width: 8),
-                          Container(
-                            margin: const EdgeInsets.only(top: 11.0),
-                            child: Text(
-                              "Domvet",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 17,
-                                // font Rubik medium
-                                fontFamily: "Rubik",
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ]),
-                        //spacing
-                        const SizedBox(height: 7),
-                        Container(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Color(0xFFD2B150),
-                                Color(0xFFD2B150),
-                                // Color(0xFF9F9F9F),
-                                // Color(0xFFD1D1D6),
-                              ],
-                            ),
-                          ),
-                          height: 1,
-                        ),
-                        const SizedBox(height: 9.5),
-                        Row(
-                          children: [
-                            const SizedBox(width: 17),
-                            Text(
-                              "Saldo Anda:",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 17,
-                                // font Rubik medium
-                                fontFamily: "Rubik",
-                                fontWeight: FontWeight.w400,
-                              ),
-                              textAlign: TextAlign.left,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 5),
-                        Row(
-                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const SizedBox(width: 17),
-                            Text(
-                              "1.234.245,00",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 36,
-                                // font Rubik medium
-                                fontFamily: "Rubik",
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            Spacer(),
-                            Container(
-                              child: Icon(
-                                Icons.visibility,
-                                color: Colors.black,
-                                size: 29.0,
-                              ),
-                            ),
-                            const SizedBox(width: 25),
-                          ],
-                        ),
-                      ],
-                    )),
+                  ]),
+                ),
+
               ],
             ),
           ),
-        ),
-        appBar: AppBar(
-          //flexible space
-          flexibleSpace: Container(
-            //position left
+        ] 
+      ),
 
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(16),
-                  bottomLeft: Radius.circular(16)),
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color(0xFF60B874),
-                  Color(0xFF7BD896),
+      bottomNavigationBar: Container(   
+            height: 87.7,                                          
+            decoration: BoxDecoration(          
+                                                   
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(25.50), topRight: Radius.circular(25.50), bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0), ),
+        
+                boxShadow: [                                                               
+                BoxShadow(color: Color.fromRGBO(0,0,0,230), spreadRadius: 0, blurRadius: 20),       
                 ],
-              ),
-            ),
-          ),
-          //remove right padding
-          //set margin of appbar
-          titleSpacing: 0,
-          //make container the size of appbar
 
-          title: Container(
-              //margin 24 24 36 41
-              margin: const EdgeInsets.only(
-                  left: 24.0, right: 10.0, top: 41.0, bottom: 36.0),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    FutureBuilder(
-                      builder: (context, snapshot) {
-                        if (!snapshot.hasData) {
-                          return const Text("Loading");
-                        }
-                        if (snapshot.hasError) {
-                          return Text('${snapshot.error}');
-                        }
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          verticalDirection: VerticalDirection.down,
-                          textBaseline: TextBaseline.alphabetic,
-                          children: [
-                            Text(
-                              snapshot.data!.username,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 17,
-                                // font Rubik medium
-                                fontFamily: "Rubik",
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 5.83),
-                            Text(
-                              snapshot.data!.phone,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 17,
-                                fontFamily: "Rubik",
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                      future: _merchantProfile,
-                    ),
-                    //spacing
+            ),               
 
-                    Container(
-                      child: IconButton(
-                        iconSize: 45.0,
-                        icon: const Icon(Icons.account_circle),
-                        onPressed: () {
-                          Get.to(() => ProfilePage(),
-                              transition: Transition.rightToLeftWithFade);
-                        },
-                        color: Colors.black,
-                      ),
-                    )
-                  ])),
-
-          //color transparent
-          backgroundColor: Colors.transparent,
-          toolbarHeight: 115.0,
-          elevation: 0,
-          actions: <Widget>[
-            //spacing
-            const SizedBox(width: 0),
-          ],
-        ),
-        bottomNavigationBar: Container(
-            height: 82.7,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(16), topLeft: Radius.circular(16)),
-              boxShadow: [
-                BoxShadow(
-                    color: Color.fromRGBO(0, 0, 0, 230),
-                    spreadRadius: 0,
-                    blurRadius: 20),
-              ],
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16.0),
-                topRight: Radius.circular(16.0),
-              ),
-              child: BottomNavigationBar(
-                items: const <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.home_rounded),
-                    label: 'Home',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.local_dining_rounded),
-                    label: 'Orders',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.menu_book_rounded),
-                    label: 'Menu',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.wallet),
-                    label: 'Domvet',
-                  ),
-                ],
-                // currentIndex: _selectedIndex,
-                // onTap: _onItemTapped,
-                selectedItemColor: Colors.black,
-                unselectedItemColor: Colors.black38,
-              ),
-            )));
+            child: ClipRRect( 
+                
+                                                                         
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(25.50), topRight: Radius.circular(25.50), bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0), ),
+                                                                   
+                child: CustomBottomNavigationBar(initialIndex: 0),
+            )
+      )
+    );
   }
 }
