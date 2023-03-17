@@ -23,17 +23,14 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 50),
 
             //logo
-            Padding(
-              padding: EdgeInsets.all(1),
-              child: Align(
+           Align(
                 alignment: Alignment.center,
                 child: Image.asset(
-                  'assets/Group335.png',
+                  'assets/Group336.png',
                   width: 360.0,
                   height: 270.71,
                 ),
               ),
-            ),
             SizedBox(height: 10),
 
             Padding(
@@ -42,7 +39,7 @@ class LoginPage extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Image.asset(
                   'assets/Subtract.png',
-                  width: 39.0,
+                  width: 40.0,
                   height: 35.93,
                 ),
               ),
