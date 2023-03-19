@@ -5,9 +5,9 @@ import 'views/signup_page.dart';
 import 'views/signup_page_2.dart';
 import 'views/home_page.dart';
 import 'views/profile_page.dart';
+import 'views/edit_profile.dart';
 import 'views/list_menu_page.dart';
 import 'views/list_menu_2_page.dart';
-
 
 void main() {
   runApp(const MainApp());

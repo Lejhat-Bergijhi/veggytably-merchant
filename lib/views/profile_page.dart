@@ -20,28 +20,12 @@ class ProfilePage extends StatelessWidget {
           Column(
             children: [
               SizedBox(height: 67,),
-              Stack(
-                children: [Container(
+              Container(
                   height:100,
                   width: 100,
-                  child: Image.asset('images/Profpic.png'),
+                  child: Image.asset('images/ProfPic.png'),
                 ),
-                Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: InkWell(
-                    onTap: () {
-                      // showModal();
-                    },
-                    child: const Icon(
-                      Icons.camera_alt,
-                      color: Color.fromARGB(255, 23, 47, 44),
-                      size: 28,
-                    ),
-                  ),
-                ),
-                ]
-              ),
+              
               SizedBox(height: 14,),
               Text(
                   "NadiahhhHasna",

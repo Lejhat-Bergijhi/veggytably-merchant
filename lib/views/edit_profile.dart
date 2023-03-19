@@ -12,8 +12,13 @@ class EditProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController mercNameController = TextEditingController();
     TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
+    TextEditingController telpController = TextEditingController();
+    TextEditingController resNameController = TextEditingController();
+    TextEditingController resAddressController = TextEditingController();
+
+    var name = '/assets/ProfPic.png';
     return Scaffold(
       appBar: AppBar(
         
@@ -52,16 +57,37 @@ class EditProfile extends StatelessWidget {
         child: ListView(
           physics: BouncingScrollPhysics(),
           children: [
-          
-            Container(
-              // height: 150,
-              // child: UploadPic(),
-            ),
+
+            SizedBox(height: 30),
+
+            Column(
+                children: [Container(
+                  height:100,
+                  width: 100,
+                  child: Image.asset('images/EditProfPic.png'),
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: InkWell(
+                    onTap: () {
+                      // showModal();
+                    },
+                    child: const Icon(
+                      Icons.camera_alt,
+                      color: Color.fromARGB(255, 23, 47, 44),
+                      size: 28,
+                    ),
+                  ),
+                ),
+                ]
+              ),
+            SizedBox(height: 20),
              Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                    "NAME",
+                    "Merchant's Data",
                     style: TextStyle(
                         color: Color(0xff9f9f9f),
                         fontSize: 10,
@@ -74,45 +100,25 @@ class EditProfile extends StatelessWidget {
                 Container(
                   // width: 300,
                   child: InputTextField(
-                    emailController,
+                    mercNameController,
                     'Name',
                   ),
                 ),
                 SizedBox(height: 5),
-                Text(
-                    "EMAIL",
-                    style: TextStyle(
-                        color: Color(0xff9f9f9f),
-                        fontSize: 10,
-                        fontFamily: "Rubik",
-                        fontWeight: FontWeight.w600,
-                    ),
-                    textAlign: TextAlign.left,
-                ),
                 SizedBox(height: 5),
-                Container(
-                  // width: 300,
-                  child: InputTextField(
-                    passwordController,
-                    'Email',
-                  ),
-                ),
-                SizedBox(height: 5),
-                Text(
-                    "TELEPHONE NUMBER",
-                    style: TextStyle(
-                        color: Color(0xff9f9f9f),
-                        fontSize: 10,
-                        fontFamily: "Rubik",
-                        fontWeight: FontWeight.w600,
-                    ),
-                    textAlign: TextAlign.left,
-                ),
-                SizedBox(height: 5),                
                 Container(
                   // width: 300,
                   child: InputTextField(
                     emailController,
+                    'Email',
+                  ),
+                ),
+                SizedBox(height: 5),
+                SizedBox(height: 5),                
+                Container(
+                  // width: 300,
+                  child: InputTextField(
+                    telpController,
                     'Telephone Number',
                   ),
                 ),
@@ -122,6 +128,34 @@ class EditProfile extends StatelessWidget {
             ),
             // Input Email or Telephone Number
             SizedBox(height: 10),
+            Text(
+                    "Restaurant's Data",
+                    style: TextStyle(
+                        color: Color(0xff9f9f9f),
+                        fontSize: 10,
+                        fontFamily: "Rubik",
+                        fontWeight: FontWeight.w600,
+                    ),
+                    textAlign: TextAlign.left,
+                ),
+            SizedBox(height: 5),
+                Container(
+                  // width: 300,
+                  child: InputTextField(
+                    resNameController,
+                    "Name",
+                ),
+              ),
+            SizedBox(height: 5),
+                Container(
+                  // width: 300,
+                  child: InputTextField(
+                    resAddressController,
+                    "Address",
+                ),
+              ),
+            SizedBox(height: 10),
+
 
             // Login button
             Container(
