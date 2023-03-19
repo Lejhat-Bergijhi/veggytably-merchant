@@ -9,16 +9,26 @@ class InputTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      //hint text color
+      
       controller: textEditingController,
       decoration: InputDecoration(
+        //outline color
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color:Color(0xfff6f7fb), width: 0),
+          borderRadius: BorderRadius.circular(10),
+        ),
         filled: true,
-        fillColor: Color.fromARGB(255, 186, 192, 186).withOpacity(0.1),
+        fillColor: Color(0xfff6f7fb),
         hintText: hintText,
         hintStyle: TextStyle(
           color: Color(0xff9f9f9f),
         ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color.fromARGB(255, 171, 174, 171), width: 1.0),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8 ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Color(0xfff6f7fb), width: 0),
           borderRadius: BorderRadius.circular(10),
         ),
       ),
