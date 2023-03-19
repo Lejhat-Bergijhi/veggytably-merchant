@@ -34,6 +34,7 @@ class MerchantController extends GetxController {
     fetchMerchantProfile();
   }
 
+  @override
   void onClose() {
     super.onClose();
     clearMerchant();

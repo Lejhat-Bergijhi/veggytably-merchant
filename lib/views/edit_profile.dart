@@ -101,20 +101,20 @@ class EditProfile extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 InputTextField(
-                  usernameController,
-                  'Name',
+                  textEditingController: usernameController,
+                  hintText: 'Name',
                 ),
                 const SizedBox(height: 5),
                 const SizedBox(height: 5),
                 InputTextField(
-                  emailController,
-                  'Email',
+                  textEditingController: emailController,
+                  hintText: 'Email',
                 ),
                 const SizedBox(height: 5),
                 const SizedBox(height: 5),
                 InputTextField(
-                  phoneController,
-                  'Telephone Number',
+                  textEditingController: phoneController,
+                  hintText: 'Telephone Number',
                 ),
                 const SizedBox(height: 10),
               ],
@@ -135,16 +135,16 @@ class EditProfile extends StatelessWidget {
             Container(
               // width: 300,
               child: InputTextField(
-                restaurantNameController,
-                "Name",
+                textEditingController: restaurantNameController,
+                hintText: "Name",
               ),
             ),
             const SizedBox(height: 5),
             Container(
               // width: 300,
               child: InputTextField(
-                restaurantAddressController,
-                "Address",
+                textEditingController: restaurantAddressController,
+                hintText: "Address",
               ),
             ),
             const SizedBox(height: 10),

@@ -5,7 +5,8 @@ class InputTextField extends StatelessWidget {
   final String hintText;
   final String fontFamily;
 
-  const InputTextField(this.textEditingController, this.hintText, this.fontFamily);
+  const InputTextField(
+      {required this.textEditingController, required this.hintText, this.fontFamily="Rubik"});
 
   @override
   Widget build(BuildContext context) {

@@ -13,6 +13,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MerchantController merchantController = Get.find<MerchantController>();
     // MerchantController merchantController = Get.find<MerchantController>();
     return Scaffold(
       backgroundColor: Colors.white,
@@ -20,7 +21,7 @@ class ProfilePage extends StatelessWidget {
         children: [
           Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 67,
               ),
               Container(
@@ -29,31 +30,37 @@ class ProfilePage extends StatelessWidget {
                 child: Image.asset('assets/images/ProfPic.png'),
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 14,
               ),
-              Obx(
-                () => Text(
-                  MerchantController.to.merchant.username,
+              Obx(() {
+                if (merchantController.isLoading.value) {
+                  return const CircularProgressIndicator();
+                }
+
+                return Text(
+                  merchantController.merchant.username,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Color(0xff242424),
                     fontSize: 22,
                   ),
-                ),
-              ),
-              SizedBox(
+                );
+              }),
+              const SizedBox(
                 height: 7,
               ),
-              Text(
-                MerchantController.to.merchant.phone,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Color(0xff6482a6),
-                  fontSize: 12,
+              Obx(
+                () => Text(
+                  merchantController.merchant.phone,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Color(0xff6482a6),
+                    fontSize: 12,
+                  ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 61,
               ),
 
@@ -65,19 +72,19 @@ class ProfilePage extends StatelessWidget {
                       Get.to(() => const EditProfile(),
                           transition: Transition.rightToLeft);
                     },
-                    child: ProfileMenu(
+                    child: const ProfileMenu(
                       "assets/images/editprofile.png",
                       "Edit Profile",
                       true,
                     ),
                   ),
-                  ProfileMenu(
+                  const ProfileMenu(
                       "assets/images/notif.png", "Notifications", false),
                   GestureDetector(
                     onTap: () {
                       // Get.offAll(() => EditRestrictionPage(), transition: Transition.fade);
                     },
-                    child: ProfileMenu("assets/images/orderrecap.png",
+                    child: const ProfileMenu("assets/images/orderrecap.png",
                         "Order Recapitulation", false),
                   )
                   // Add more list tiles here
