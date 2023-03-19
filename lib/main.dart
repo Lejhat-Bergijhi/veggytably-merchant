@@ -4,6 +4,7 @@ import 'views/login_page.dart';
 import 'views/signup_page.dart';
 import 'views/home_page.dart';
 import 'views/profile_page.dart';
+import 'views/addmenu_page.dart';
 
 
 void main() {
@@ -17,7 +18,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: AddMenu(),
     );
   }
 }
