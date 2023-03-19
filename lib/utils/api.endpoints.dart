@@ -8,8 +8,10 @@ class _AuthEndPoints {
   final String signUp = "auth/signUp/merchant";
   final String login = "auth/login";
   final String logout = "auth/logout";
+  final String verifyAuth = "auth/verify";
 }
 
 class _MerchantEndPoints {
+  final String updateProfile = "merchants/profile";
   final String getProfile = "merchants/profile";
 }
