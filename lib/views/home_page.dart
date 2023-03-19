@@ -2,31 +2,16 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:vegytably_merchant/views/profile_page.dart';
-import '../api/merchant_api.dart';
 import '../controllers/auth_controller.dart';
-import '../models/merchant_profile.dart';
+import '../controllers/merchant_controller.dart';
+import '../models/merchant.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  late Future<MerchantProfile> _merchantProfile;
-
-  @override
-  void initState() {
-    super.initState();
-    _merchantProfile = MerchantApi.fetchMerchantProfile();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      AuthController.checkAuth();
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    MerchantController merchantController = Get.put(MerchantController());
     return Scaffold(
         //background color white
         backgroundColor: Colors.white,
@@ -41,24 +26,19 @@ class _HomePageState extends State<HomePage> {
                 // Restaurant Name
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Container(
-                    child: FutureBuilder(
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.done) {
-                            return Text(snapshot.data!.restaurantName,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 27,
-                                  // font Rubik medium
-                                  fontFamily: "Rubik",
-                                  fontWeight: FontWeight.bold,
-                                ));
-                          }
-                          return const Text('Loading...');
-                        },
-                        future: _merchantProfile),
-                  ),
+                  child: Obx(() {
+                    if (merchantController.isLoading.value) {
+                      return const Text("Loading...");
+                    }
+                    return Text(
+                        merchantController.merchant.value.restaurantName,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 27,
+                          fontFamily: "Rubik",
+                          fontWeight: FontWeight.bold,
+                        ));
+                  }),
                 ),
 
                 const SizedBox(height: 17.0),
@@ -86,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                         Container(
                           //margin 24 24 36 41
                           margin: const EdgeInsets.only(left: 17.0, top: 11.0),
-                          child: Text(
+                          child: const Text(
                             "Today’s Recapitulation",
                             style: TextStyle(
                               color: Colors.black,
@@ -101,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(width: 10),
                         Container(
                           margin: const EdgeInsets.only(top: 15.0),
-                          child: Text(
+                          child: const Text(
                             "Lihat Riwayat",
                             style: TextStyle(
                               color: Colors.black,
@@ -118,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                       //spacing
                       const SizedBox(height: 7),
                       Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           gradient: LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
@@ -137,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                           const SizedBox(width: 40),
                           Container(
                               child: Center(
-                                  child: Column(children: [
+                                  child: Column(children: const [
                             Text(
                               "Done",
                               style: TextStyle(
@@ -148,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
-                            const SizedBox(height: 5),
+                            SizedBox(height: 5),
                             Text(
                               "17",
                               style: TextStyle(
@@ -163,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                           const SizedBox(width: 57),
                           Container(
                               child: Center(
-                                  child: Column(children: [
+                                  child: Column(children: const [
                             Text(
                               "Profit",
                               style: TextStyle(
@@ -174,7 +154,7 @@ class _HomePageState extends State<HomePage> {
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
-                            const SizedBox(height: 5),
+                            SizedBox(height: 5),
                             Text(
                               "200.000",
                               style: TextStyle(
@@ -228,7 +208,7 @@ class _HomePageState extends State<HomePage> {
                           Container(
                               child: Column(children: [
                             const SizedBox(height: 10),
-                            Icon(
+                            const Icon(
                               Icons.wallet,
                               color: Colors.black,
                               size: 20.0,
@@ -238,7 +218,7 @@ class _HomePageState extends State<HomePage> {
                           const SizedBox(width: 8),
                           Container(
                             margin: const EdgeInsets.only(top: 11.0),
-                            child: Text(
+                            child: const Text(
                               "Domvet",
                               style: TextStyle(
                                 color: Colors.black,
@@ -253,7 +233,7 @@ class _HomePageState extends State<HomePage> {
                         //spacing
                         const SizedBox(height: 7),
                         Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             gradient: LinearGradient(
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
@@ -269,8 +249,8 @@ class _HomePageState extends State<HomePage> {
                         ),
                         const SizedBox(height: 9.5),
                         Row(
-                          children: [
-                            const SizedBox(width: 17),
+                          children: const [
+                            SizedBox(width: 17),
                             Text(
                               "Saldo Anda:",
                               style: TextStyle(
@@ -289,7 +269,7 @@ class _HomePageState extends State<HomePage> {
                           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const SizedBox(width: 17),
-                            Text(
+                            const Text(
                               "1.234.245,00",
                               style: TextStyle(
                                 color: Colors.black,
@@ -299,9 +279,9 @@ class _HomePageState extends State<HomePage> {
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Container(
-                              child: Icon(
+                              child: const Icon(
                                 Icons.visibility,
                                 color: Colors.black,
                                 size: 29.0,
@@ -347,45 +327,78 @@ class _HomePageState extends State<HomePage> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    FutureBuilder(
-                      builder: (context, snapshot) {
-                        if (!snapshot.hasData) {
-                          return const Text("Loading");
-                        }
-                        if (snapshot.hasError) {
-                          return Text('${snapshot.error}');
-                        }
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          verticalDirection: VerticalDirection.down,
-                          textBaseline: TextBaseline.alphabetic,
-                          children: [
-                            Text(
-                              snapshot.data!.username,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 17,
-                                // font Rubik medium
-                                fontFamily: "Rubik",
-                                fontWeight: FontWeight.bold,
-                              ),
+                    Obx(() {
+                      if (merchantController.isLoading.value) {
+                        return const CircularProgressIndicator();
+                      }
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        verticalDirection: VerticalDirection.down,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          Text(
+                            merchantController.merchant.value.username,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 17,
+                              // font Rubik medium
+                              fontFamily: "Rubik",
+                              fontWeight: FontWeight.bold,
                             ),
-                            const SizedBox(height: 5.83),
-                            Text(
-                              snapshot.data!.phone,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 17,
-                                fontFamily: "Rubik",
-                              ),
+                          ),
+                          const SizedBox(height: 5.83),
+                          Text(
+                            merchantController.merchant.value.phone,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 17,
+                              fontFamily: "Rubik",
                             ),
-                          ],
-                        );
-                      },
-                      future: _merchantProfile,
-                    ),
+                          ),
+                        ],
+                      );
+                    }),
+                    // FutureBuilder(
+                    //   builder: (context, snapshot) {
+                    //     if (!snapshot.hasData) {
+                    //       return const Text("Loading");
+                    //     }
+                    //     if (snapshot.hasError) {
+                    //       return Text('${snapshot.error}');
+                    //     }
+                    //     return Column(
+                    //       crossAxisAlignment: CrossAxisAlignment.start,
+                    //       mainAxisSize: MainAxisSize.min,
+                    //       mainAxisAlignment: MainAxisAlignment.start,
+                    //       verticalDirection: VerticalDirection.down,
+                    //       textBaseline: TextBaseline.alphabetic,
+                    //       children: [
+                    //         Text(
+                    //           snapshot.data!.username,
+                    //           style: const TextStyle(
+                    //             color: Colors.black,
+                    //             fontSize: 17,
+                    //             // font Rubik medium
+                    //             fontFamily: "Rubik",
+                    //             fontWeight: FontWeight.bold,
+                    //           ),
+                    //         ),
+                    //         const SizedBox(height: 5.83),
+                    //         Text(
+                    //           snapshot.data!.phone,
+                    //           style: const TextStyle(
+                    //             color: Colors.black,
+                    //             fontSize: 17,
+                    //             fontFamily: "Rubik",
+                    //           ),
+                    //         ),
+                    //       ],
+                    //     );
+                    //   },
+                    //   future: _merchantProfile,
+                    // ),
                     //spacing
 
                     Container(
@@ -393,7 +406,7 @@ class _HomePageState extends State<HomePage> {
                         iconSize: 45.0,
                         icon: const Icon(Icons.account_circle),
                         onPressed: () {
-                          Get.to(() => ProfilePage(),
+                          Get.to(() => const ProfilePage(),
                               transition: Transition.rightToLeftWithFade);
                         },
                         color: Colors.black,
@@ -405,14 +418,13 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.transparent,
           toolbarHeight: 115.0,
           elevation: 0,
-          actions: <Widget>[
-            //spacing
-            const SizedBox(width: 0),
+          actions: const <Widget>[
+            SizedBox(width: 0),
           ],
         ),
         bottomNavigationBar: Container(
             height: 82.7,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               borderRadius: BorderRadius.only(
                   topRight: Radius.circular(16), topLeft: Radius.circular(16)),
               boxShadow: [
@@ -423,7 +435,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(16.0),
                 topRight: Radius.circular(16.0),
               ),

@@ -1,4 +1,4 @@
-class MerchantProfile {
+class Merchant {
   final String id;
   final String username;
   final String email;
@@ -7,7 +7,7 @@ class MerchantProfile {
   final String phone;
   final double rating;
 
-  MerchantProfile({
+  Merchant({
     required this.id,
     required this.username,
     required this.email,
@@ -17,9 +17,9 @@ class MerchantProfile {
     required this.rating,
   });
 
-  factory MerchantProfile.fromJson(Map<String, dynamic> json) {
+  factory Merchant.fromJson(Map<String, dynamic> json) {
     final userData = json['data']['user'];
-    return MerchantProfile(
+    return Merchant(
       id: userData['id'],
       username: userData['username'],
       email: userData['email'],
