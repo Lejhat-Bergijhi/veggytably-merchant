@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vegytably_merchant/views/profile_page.dart';
-import 'package:vegytably_merchant/widgets/bottom_navbar.dart';
-import 'package:vegytably_merchant/widgets/profile_menu.dart';
-import 'package:vegytably_merchant/widgets/upload_pic.dart';
 import 'package:vegytably_merchant/widgets/input_text.dart';
+
+import '../controllers/merchant_controller.dart';
+import '../models/merchant.dart';
 
 class EditProfile extends StatelessWidget {
   const EditProfile({super.key});
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController mercNameController = TextEditingController();
-    TextEditingController emailController = TextEditingController();
-    TextEditingController telpController = TextEditingController();
-    TextEditingController resNameController = TextEditingController();
-    TextEditingController resAddressController = TextEditingController();
+    MerchantController merchantController = Get.find();
+
+    Merchant merchant = merchantController.merchant;
+
+    TextEditingController usernameController =
+        TextEditingController(text: merchant.username);
+    TextEditingController emailController =
+        TextEditingController(text: merchant.email);
+    TextEditingController phoneController =
+        TextEditingController(text: merchant.phone);
+    TextEditingController restaurantNameController =
+        TextEditingController(text: merchant.restaurantName);
+    TextEditingController restaurantAddressController =
+        TextEditingController(text: merchant.restaurantAddress);
 
     var name = '/assets/ProfPic.png';
     return Scaffold(
@@ -24,16 +33,16 @@ class EditProfile extends StatelessWidget {
         elevation: 0,
         leading: GestureDetector(
           onTap: () {
-            Get.offAll(() => ProfilePage(), transition: Transition.fade);
+            Get.back();
           },
           child: Container(
             padding: const EdgeInsets.only(left: 12.0, top: 10),
-            child: Icon(Icons.arrow_back, color: Colors.black),
+            child: const Icon(Icons.arrow_back, color: Colors.black),
           ),
         ),
         title: Container(
           padding: const EdgeInsets.only(top: 10),
-          child: Text(
+          child: const Text(
             "Edit Profile",
             style: TextStyle(
               color: Colors.black,
@@ -45,40 +54,42 @@ class EditProfile extends StatelessWidget {
         toolbarHeight: 50,
         leadingWidth: 30,
       ),
-      backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+      backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       body: Container(
-        padding: EdgeInsets.only(top: 11, left: 40, right: 40),
+        padding: const EdgeInsets.only(top: 11, left: 40, right: 40),
         child: ListView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           children: [
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
 
-            Column(children: [
-              Container(
-                height: 100,
-                width: 100,
-                child: Image.asset('assets/images/EditProfPic.png'),
-              ),
-              Positioned(
-                bottom: 0,
-                right: 0,
-                child: InkWell(
-                  onTap: () {
-                    // showModal();
-                  },
-                  child: const Icon(
-                    Icons.camera_alt,
-                    color: Color.fromARGB(255, 23, 47, 44),
-                    size: 28,
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                SizedBox(
+                  height: 100,
+                  width: 100,
+                  child: Image.asset('assets/images/EditProfPic.png'),
+                ),
+                Positioned(
+                  bottom: -12,
+                  child: InkWell(
+                    onTap: () {
+                      // showModal();
+                    },
+                    child: const Icon(
+                      Icons.camera_alt,
+                      color: Color.fromARGB(255, 23, 47, 44),
+                      size: 28,
+                    ),
                   ),
                 ),
-              ),
-            ]),
-            SizedBox(height: 20),
+              ],
+            ),
+            const SizedBox(height: 20),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Merchant's Data",
                   style: TextStyle(
                     color: Color(0xff9f9f9f),
@@ -88,38 +99,29 @@ class EditProfile extends StatelessWidget {
                   ),
                   textAlign: TextAlign.left,
                 ),
-                SizedBox(height: 5),
-                Container(
-                  // width: 300,
-                  child: InputTextField(
-                    mercNameController,
-                    'Name',
-                  ),
+                const SizedBox(height: 5),
+                InputTextField(
+                  usernameController,
+                  'Name',
                 ),
-                SizedBox(height: 5),
-                SizedBox(height: 5),
-                Container(
-                  // width: 300,
-                  child: InputTextField(
-                    emailController,
-                    'Email',
-                  ),
+                const SizedBox(height: 5),
+                const SizedBox(height: 5),
+                InputTextField(
+                  emailController,
+                  'Email',
                 ),
-                SizedBox(height: 5),
-                SizedBox(height: 5),
-                Container(
-                  // width: 300,
-                  child: InputTextField(
-                    telpController,
-                    'Telephone Number',
-                  ),
+                const SizedBox(height: 5),
+                const SizedBox(height: 5),
+                InputTextField(
+                  phoneController,
+                  'Telephone Number',
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
               ],
             ),
-            // Input Email or Telephone Number
-            SizedBox(height: 10),
-            Text(
+            // Restaurant Data
+            const SizedBox(height: 10),
+            const Text(
               "Restaurant's Data",
               style: TextStyle(
                 color: Color(0xff9f9f9f),
@@ -129,23 +131,23 @@ class EditProfile extends StatelessWidget {
               ),
               textAlign: TextAlign.left,
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Container(
               // width: 300,
               child: InputTextField(
-                resNameController,
+                restaurantNameController,
                 "Name",
               ),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Container(
               // width: 300,
               child: InputTextField(
-                resAddressController,
+                restaurantAddressController,
                 "Address",
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             // Login button
             Container(
@@ -153,20 +155,23 @@ class EditProfile extends StatelessWidget {
               height: 45,
               child: ElevatedButton(
                 onPressed: () {
-                  Get.offAll(() => ProfilePage(), transition: Transition.fade);
-                  // emailController.clear();
-                  // passwordController.clear();
+                  merchantController.updateProfile(
+                      usernameController,
+                      emailController,
+                      phoneController,
+                      restaurantNameController,
+                      restaurantAddressController);
                 },
-                child: Text(
+                style: ElevatedButton.styleFrom(
+                  primary: const Color(0xff70cb88),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: const Text(
                   'Save',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: Color(0xff70cb88),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
                   ),
                 ),
               ),

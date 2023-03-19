@@ -18,15 +18,24 @@ class Merchant {
   });
 
   factory Merchant.fromJson(Map<String, dynamic> json) {
-    final userData = json['data']['user'];
     return Merchant(
-      id: userData['id'],
-      username: userData['username'],
-      email: userData['email'],
-      restaurantName: userData['restaurantName'],
-      restaurantAddress: userData['restaurantAddress'],
-      phone: userData['phone'],
-      rating: userData['rating']?.toDouble() ?? 0.0,
+      id: json['id'],
+      username: json['username'],
+      email: json['email'],
+      restaurantName: json['restaurantName'],
+      restaurantAddress: json['restaurantAddress'],
+      phone: json['phone'],
+      rating: json['rating']?.toDouble() ?? 0.0,
     );
   }
 }
+
+/**
+    id: string;
+    restaurantName: string;
+    restaurantAddress: string;
+    rating: number;
+    username: string;
+    email: string;
+    phone: string;
+ */

@@ -29,10 +29,10 @@ class _SignUpPageState extends State<SignUpPage2> {
       body: SafeArea(
         child: Center(
           child: Column(children: [
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
 
             Padding(
-              padding: EdgeInsets.only(left: 36),
+              padding: const EdgeInsets.only(left: 36),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Image.asset(
@@ -42,9 +42,9 @@ class _SignUpPageState extends State<SignUpPage2> {
                 ),
               ),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
 
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(left: 36),
               child: Align(
                 alignment: Alignment.centerLeft,
@@ -57,9 +57,9 @@ class _SignUpPageState extends State<SignUpPage2> {
                 ),
               ),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
 
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(left: 36),
               child: Align(
                 alignment: Alignment.centerLeft,
@@ -73,9 +73,9 @@ class _SignUpPageState extends State<SignUpPage2> {
                 ),
               ),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
 
-             Padding(
+            const Padding(
               padding: EdgeInsets.only(left: 36),
               child: Align(
                 alignment: Alignment.centerLeft,
@@ -90,52 +90,52 @@ class _SignUpPageState extends State<SignUpPage2> {
               ),
             ),
             // Text:
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             Container(
-              padding: EdgeInsets.all(36),
+              padding: const EdgeInsets.all(36),
               width: 300,
               height: 300,
-              
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.grey,
                   width: 1,
                   style: BorderStyle.solid,
                 ),
-                 borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(10),
               ),
-               child: Column(
+              child: Column(
                 children: [
                   Image.asset(
                     'assets/imageup.png',
                     width: 130.0,
                     height: 130.0,
                   ),
-                  Text(
+                  const Text(
                     'Upload from your device',
                     style: TextStyle(fontSize: 12.0),
                   ),
-                  SizedBox(height: 14),
+                  const SizedBox(height: 14),
                   Container(
-                     width: 200,
+                    width: 200,
                     padding: const EdgeInsets.only(
-                    left: 0.0, right: 0.0, top: 5, bottom: 5),
+                        left: 0.0, right: 0.0, top: 5, bottom: 5),
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: Color.fromARGB(119, 219, 218, 218), // warna border
+                        color: const Color.fromARGB(
+                            119, 219, 218, 218), // warna border
                         width: 1.0, // ketebalan border
                       ),
-                       borderRadius: BorderRadius.circular(8.0),
-                       color: Color.fromARGB(119, 219, 218, 218),
+                      borderRadius: BorderRadius.circular(8.0),
+                      color: const Color.fromARGB(119, 219, 218, 218),
                     ),
                     child: Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.camera_alt_rounded, size: 15),
+                          const Icon(Icons.camera_alt_rounded, size: 15),
                           const SizedBox(width: 5),
-                          Text(
+                          const Text(
                             'Camera',
                             style: TextStyle(
                               fontSize: 15,
@@ -146,26 +146,27 @@ class _SignUpPageState extends State<SignUpPage2> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 2),
+                  const SizedBox(height: 2),
                   Container(
                     width: 200,
                     padding: const EdgeInsets.only(
-                    left: 0.0, right: 0.0, top: 5, bottom: 5),
+                        left: 0.0, right: 0.0, top: 5, bottom: 5),
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: Color.fromARGB(119, 219, 218, 218), // warna border
+                        color: const Color.fromARGB(
+                            119, 219, 218, 218), // warna border
                         width: 1.0, // ketebalan border
                       ),
-                       borderRadius: BorderRadius.circular(8.0),
-                       color: Color.fromARGB(119, 219, 218, 218),
+                      borderRadius: BorderRadius.circular(8.0),
+                      color: const Color.fromARGB(119, 219, 218, 218),
                     ),
                     child: Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.cloud_upload_sharp, size: 15),
+                          const Icon(Icons.cloud_upload_sharp, size: 15),
                           const SizedBox(width: 5),
-                          Text(
+                          const Text(
                             'Gallery',
                             style: TextStyle(
                               fontSize: 15,
@@ -179,7 +180,9 @@ class _SignUpPageState extends State<SignUpPage2> {
                 ],
               ),
             ),
-            SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             Container(
               width: 300,
               height: 45,
@@ -194,7 +197,7 @@ class _SignUpPageState extends State<SignUpPage2> {
                     addressController,
                   );
                 },
-                child: Text(
+                child: const Text(
                   'Continue',
                   style: TextStyle(
                     fontSize: 14,
@@ -202,14 +205,14 @@ class _SignUpPageState extends State<SignUpPage2> {
                   ),
                 ),
                 style: ElevatedButton.styleFrom(
-                  primary: Color(0xff70cb88),
+                  primary: const Color(0xff70cb88),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             SizedBox(
                 width: 219,
@@ -217,18 +220,19 @@ class _SignUpPageState extends State<SignUpPage2> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                  Text(
-                    "Already have an account? ",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
+                    const Text(
+                      "Already have an account? ",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
                         fontSize: 14,
+                      ),
                     ),
-                  ),
-                   GestureDetector(
+                    GestureDetector(
                       onTap: () {
-                        // Get.offAll(() => SignUpPage(), transition: Transition.fade);
+                        Get.offAll(() => const LoginPage(),
+                            transition: Transition.fade);
                       },
-                      child: Text(
+                      child: const Text(
                         'Login',
                         style: TextStyle(
                           fontSize: 14,
@@ -239,11 +243,9 @@ class _SignUpPageState extends State<SignUpPage2> {
                         ),
                       ),
                     ),
-                ],)
-            ),
-          ]
-          
-          ),
+                  ],
+                )),
+          ]),
         ),
       ),
     );

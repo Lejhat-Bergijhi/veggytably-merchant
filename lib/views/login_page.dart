@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vegytably_merchant/views/signup_page.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:vegytably_merchant/views/signup_page_2.dart';
 
 import '../controllers/auth_controller.dart';
 
@@ -100,11 +101,7 @@ class LoginPage extends StatelessWidget {
                 SizedBox(
                     width: 300,
                     child: TextFormField(
-                      controller: emailController,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) => EmailValidator.validate(value!)
-                          ? null
-                          : "Please enter a valid email",
+                      controller: passwordController,
                       decoration: InputDecoration(
                         hintText: "Password",
                         fillColor: const Color.fromARGB(255, 171, 174, 171),
@@ -121,12 +118,10 @@ class LoginPage extends StatelessWidget {
                   height: 45,
                   child: ElevatedButton(
                     onPressed: () {
-                      // authController.login(
-                      //   emailController,
-                      //   passwordController,
-                      // );
-                      // emailController.clear();
-                      // passwordController.clear();
+                      AuthController.to.login(
+                        emailController,
+                        passwordController,
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       primary: const Color(0xff70cb88),

@@ -8,7 +8,15 @@ import 'package:vegytably_merchant/views/profile_page.dart';
 class CustomBottomNavigationBar extends StatefulWidget {
   @override
   final int initialIndex;
-  CustomBottomNavigationBar({this.initialIndex = 0});
+  final void Function(int index) setSelectedIndex;
+
+  const CustomBottomNavigationBar({
+    super.key,
+    this.initialIndex = 0,
+    required this.setSelectedIndex,
+  });
+
+  @override
   _CustomBottomNavigationBarState createState() =>
       _CustomBottomNavigationBarState(initialIndex);
 }
@@ -53,16 +61,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         height: Size,
       );
     });
-    if (index == 0) {
-      Get.offAll(() => HomePage(), transition: Transition.fade);
-    } else if (index == 1) {
-      //  Get.offAll(() => DiscountPage(), transition: Transition.fade);
-    } else if (index == 2) {
-      //  Get.offAll(() => OrderPage(), transition: Transition.fade);
-    } else if (index == 3) {
-      Get.offAll(() => ProfilePage(), transition: Transition.fade);
-    }
-    //change page
+    widget.setSelectedIndex(index);
   }
 
   @override
