@@ -5,6 +5,7 @@ import 'views/signup_page.dart';
 import 'views/home_page.dart';
 import 'views/profile_page.dart';
 import 'views/addmenu_page.dart';
+import 'views/editmenu_page.dart';
 
 
 void main() {

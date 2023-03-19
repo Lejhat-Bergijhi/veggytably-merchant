@@ -11,8 +11,8 @@ import 'package:dotted_border/dotted_border.dart';
 import '../widgets/menu_checkbox.dart';
 
 
-class AddMenu extends StatelessWidget {
-  const AddMenu({super.key});
+class EditMenu extends StatelessWidget {
+  const EditMenu({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +39,10 @@ class AddMenu extends StatelessWidget {
         title: Container(
           padding: const EdgeInsets.only(top: 10),
           child: Text(
-            "Add Menu",
+            "Edit Menu",
             style: TextStyle(
               color: Colors.black,
+              fontFamily: "Rubik",
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
@@ -64,6 +65,7 @@ class AddMenu extends StatelessWidget {
                       'Detail Menu',
                       style: TextStyle(
                         fontSize: 18,
+                        fontFamily: "Rubik",
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -330,7 +332,7 @@ class AddMenu extends StatelessWidget {
                   // passwordController.clear();
                 },
                 child: Text(
-                  'Add Menu',
+                  'Save Changes',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),

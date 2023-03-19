@@ -75,7 +75,7 @@ class EditProfile extends StatelessWidget {
                   // width: 300,
                   child: InputTextField(
                     emailController,
-                    'Name',
+                    'Name', 'Rubik',
                   ),
                 ),
                 SizedBox(height: 5),
@@ -94,7 +94,7 @@ class EditProfile extends StatelessWidget {
                   // width: 300,
                   child: InputTextField(
                     passwordController,
-                    'Email',
+                    'Email', 'Rubik',
                   ),
                 ),
                 SizedBox(height: 5),
@@ -113,7 +113,7 @@ class EditProfile extends StatelessWidget {
                   // width: 300,
                   child: InputTextField(
                     emailController,
-                    'Telephone Number',
+                    'Telephone Number', 'Rubik',
                   ),
                 ),
                 SizedBox(height: 10),
