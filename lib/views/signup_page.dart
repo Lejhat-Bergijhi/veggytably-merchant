@@ -42,52 +42,102 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 5),
+            ),
+            SizedBox(height: 10),
 
-              const Padding(
-                padding: EdgeInsets.only(left: 36),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Sign Up',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                    ),
+            // Text: Powered by Vegytably
+            Text('Manage your Bussiness Anywhere and Everywhere.',
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                )),
+            SizedBox(height: 20),
+
+            Text('Merchant’s Data',
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold,
+                )),
+            SizedBox(height: 10),
+
+            //Input nama
+            Container(
+              width: 300,
+              height: 45,
+              child: InputTextField(ownerUsernameController, "Your Name", 'Rubik',),
+            ),
+            SizedBox(height: 10),
+
+            // Input Email or Telephone Number
+            Container(
+              width: 300,
+              child: TextFormField(
+                controller: emailController,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (value) => EmailValidator.validate(value!)
+                    ? null
+                    : "Please enter a valid email",
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
                 ),
               ),
-              const SizedBox(height: 5),
+            ),
+            SizedBox(height: 10),
 
-              const Padding(
-                padding: EdgeInsets.only(left: 36),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Manage your Bussiness Anywhere and Everywhere.',
-                    style: TextStyle(
-                      color: Color.fromARGB(206, 47, 47, 47),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
+            //input no telp
+            Container(
+              width: 300,
+              height: 45,
+              child: InputTextField(telephoneController, "Telephone Number", 'Rubik',),
+            ),
+            SizedBox(height: 10),
+
+            // Input Password
+            Container(
+              width: 300,
+              height: 45,
+              child: Container(
+                  width: 300,
+                  child: TextField(
+                    controller: passwordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      hintText: "Password",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
-                  ),
-                ),
+                  )),
+            ),
+            SizedBox(height: 20),
+
+            Text('Restaurant’s Data',
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold,
+                )),
+            SizedBox(height: 10),
+
+            Container(
+              width: 300,
+              height: 45,
+              child: InputTextField(
+                merchantUsernameController,
+                "Restaurant Name", 'Rubik',
               ),
-              const SizedBox(height: 10),
+            ),
+            SizedBox(height: 10),
 
-              const Padding(
-                padding: EdgeInsets.only(left: 36),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'MERCHANT’S DATA',
-                    style: TextStyle(
-                      color: Color.fromARGB(131, 88, 83, 83),
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+            Container(
+              width: 300,
+              height: 45,
+              child: InputTextField(
+                addressController,
+                "Restaurant Address", 'Rubik',
+
               ),
               // Text:
               const SizedBox(height: 10),
