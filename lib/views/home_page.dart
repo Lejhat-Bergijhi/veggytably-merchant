@@ -32,8 +32,9 @@ class _HomePageState extends State<HomePage> {
     double marginleft = 24;
     double boxWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        backgroundColor: Color(0xfffcfffe),
-        body: Stack(children: [
+      backgroundColor: Color(0xfffcfffe),
+      body: Stack(
+        children: [
           Container(
             height: 188,
             width: boxWidth,
@@ -268,31 +269,8 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-        ]),
-        bottomNavigationBar: Container(
-            height: 87.7,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(25.50),
-                topRight: Radius.circular(25.50),
-                bottomLeft: Radius.circular(0),
-                bottomRight: Radius.circular(0),
-              ),
-              boxShadow: [
-                BoxShadow(
-                    color: Color.fromRGBO(0, 0, 0, 230),
-                    spreadRadius: 0,
-                    blurRadius: 20),
-              ],
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(25.50),
-                topRight: Radius.circular(25.50),
-                bottomLeft: Radius.circular(0),
-                bottomRight: Radius.circular(0),
-              ),
-              child: CustomBottomNavigationBar(initialIndex: 0),
-            )));
+        ],
+      ),
+    );
   }
 }

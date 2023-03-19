@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import "package:get/get.dart" hide Response;
 import "package:vegytably_merchant/utils/api.endpoints.dart";
+import "package:vegytably_merchant/views/landing_page.dart";
 import "package:vegytably_merchant/views/login_page.dart";
 
 import "../api/auth_api.dart";
@@ -37,7 +38,7 @@ class AuthController extends GetxController {
   void _initialScreen(bool isLogin) {
     if (isLogin) {
       Get.offAll(
-        () => const HomePage(),
+        () => LandingPage(),
         transition: Transition.rightToLeft,
       );
     } else {
@@ -82,7 +83,7 @@ class AuthController extends GetxController {
           key: "refreshToken", value: authenticationResponse.data.refreshToken);
 
       Get.offAll(
-        () => const HomePage(),
+        () => LandingPage(),
         transition: Transition.fade,
       );
     } catch (e) {
@@ -123,7 +124,7 @@ class AuthController extends GetxController {
           key: "refreshToken", value: authenticationResponse.data.refreshToken);
 
       Get.offAll(
-        () => const HomePage(),
+        () => LandingPage(),
         transition: Transition.fade,
       );
     } catch (e) {

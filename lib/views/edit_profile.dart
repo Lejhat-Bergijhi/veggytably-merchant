@@ -33,7 +33,8 @@ class EditProfile extends StatelessWidget {
         elevation: 0,
         leading: GestureDetector(
           onTap: () {
-            Get.offAll(() => const ProfilePage(), transition: Transition.fade);
+            // Get.offAll(() => const ProfilePage(), transition: Transition.fade);
+            Get.back();
           },
           child: Container(
             padding: const EdgeInsets.only(left: 12.0, top: 10),
