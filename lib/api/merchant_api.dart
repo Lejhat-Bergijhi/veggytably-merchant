@@ -1,42 +1,57 @@
-import 'dart:convert';
-import 'dart:io';
-
+import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import "package:http/http.dart" as http;
-import '../models/exception_response.dart';
-import '../models/merchant_profile.dart';
 import '../utils/api.endpoints.dart';
 
 class MerchantApi {
-  static Future<MerchantProfile> fetchMerchantProfile() async {
-    const storage = FlutterSecureStorage();
-    String? refreshToken = await storage.read(key: "refreshToken");
+  static final MerchantApi instance = MerchantApi();
+  final _storage = const FlutterSecureStorage();
 
-    if (refreshToken == null) {
-      throw Exception("Refresh token is null");
-    }
-
+  Future<dynamic> fetchMerchant(String refreshToken) async {
     var headers = {
       "Content-Type": "application/json",
       "authorization": 'Bearer $refreshToken',
     };
-    var url = Uri.parse(
-        ApiEndPoints.baseUrl + ApiEndPoints.merchantEndpoints.getProfile);
 
-    http.Response response = await http.get(
-      url,
-      headers: headers,
-    );
-    if (response.statusCode != 200) {
-      String errorMessage =
-          ExceptionResponse.getMessage(jsonDecode(response.body));
-      throw Exception(errorMessage);
+    try {
+      Response response = await Dio().get(
+        ApiEndPoints.baseUrl + ApiEndPoints.merchantEndpoints.getProfile,
+        options: Options(
+          headers: headers,
+        ),
+      );
+
+      return response;
+    } on DioError catch (e) {
+      return e.response;
+    } catch (e) {
+      print(e);
+      return e;
     }
+  }
 
-    final json = jsonDecode(response.body);
-    print(json.toString());
+  Future<dynamic> updateProfile(Map<String, String> body) async {
+    try {
+      String? refreshToken = await _storage.read(key: "refreshToken");
 
-    MerchantProfile merchantProfile = MerchantProfile.fromJson(json);
-    return merchantProfile;
+      var headers = {
+        "Content-Type": "application/json",
+        "authorization": 'Bearer $refreshToken',
+      };
+
+      Response response = await Dio().put(
+        ApiEndPoints.baseUrl + ApiEndPoints.merchantEndpoints.updateProfile,
+        data: body,
+        options: Options(
+          headers: headers,
+        ),
+      );
+
+      return response;
+    } on DioError catch (e) {
+      return e.response;
+    } catch (e) {
+      print(e);
+      return e;
+    }
   }
 }

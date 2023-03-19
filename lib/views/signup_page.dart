@@ -14,7 +14,6 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  AuthController authController = Get.put(AuthController());
   TextEditingController ownerUsernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController telephoneController = TextEditingController();
@@ -27,16 +26,21 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Center(
-          child: Column(children: [
-            SizedBox(height: 50),
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(children: [
+              const SizedBox(height: 50),
 
-            // Text: VegyMerch
-            Text(
-              'Welcome!',
-              style: TextStyle(
-                fontSize: 40,
-                fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.only(left: 36),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Image.asset(
+                    'assets/Subtract.png',
+                    width: 39.0,
+                    height: 35.93,
+                  ),
+                ),
               ),
             ),
             SizedBox(height: 10),
@@ -133,64 +137,162 @@ class _SignUpPageState extends State<SignUpPage> {
               child: InputTextField(
                 addressController,
                 "Restaurant Address", 'Rubik',
-              ),
-            ),
-            SizedBox(height: 10),
 
-            // signup button
-            Container(
-              width: 300,
-              height: 45,
-              child: ElevatedButton(
-                onPressed: () {
-                  authController.signUp(
-                    ownerUsernameController,
-                    emailController,
-                    telephoneController,
-                    passwordController,
-                    merchantUsernameController,
-                    addressController,
-                  );
-                },
-                child: Text('Continue'),
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.green,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+              ),
+              // Text:
+              const SizedBox(height: 10),
+
+              //Input nama
+              SizedBox(
+                width: 300,
+                child: InputTextField(ownerUsernameController, "Name"),
+              ),
+              const SizedBox(height: 10),
+
+              // Input Email or Telephone Number
+              SizedBox(
+                width: 300,
+                child: TextFormField(
+                  controller: emailController,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) => EmailValidator.validate(value!)
+                      ? null
+                      : "Please enter a valid email",
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 10),
+              const SizedBox(height: 10),
 
-            // Text: Don't have an account?
-            Text(
-              'Already have an account?',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
+              //input no telp
+              SizedBox(
+                width: 300,
+                child: InputTextField(telephoneController, "Telephone Number"),
               ),
-            ),
-            SizedBox(height: 5),
+              const SizedBox(height: 10),
 
-            // Text: login
-            GestureDetector(
-              onTap: () {
-                Get.offAll(() => LoginPage(), transition: Transition.fade);
-              },
-              child: Text(
-                'Login',
-                style: TextStyle(
-                  fontSize: 12,
-                  decoration: TextDecoration.underline,
-                  decorationThickness: 5,
-                  decorationColor: Color.fromARGB(255, 1, 6, 3),
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green,
+              // Input Password
+              SizedBox(
+                width: 300,
+                child: SizedBox(
+                  width: 300,
+                  child: TextField(
+                      controller: passwordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        hintText: "Password",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      )),
                 ),
               ),
-            ),
-          ]),
+              const SizedBox(height: 20),
+
+              const Padding(
+                padding: EdgeInsets.only(left: 36),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'RESTAURANT’S DATA',
+                    style: TextStyle(
+                      color: Color.fromARGB(131, 88, 83, 83),
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              // Text:
+              const SizedBox(height: 10),
+
+              SizedBox(
+                width: 300,
+                child: InputTextField(
+                  merchantUsernameController,
+                  "Restaurant Name",
+                ),
+              ),
+              const SizedBox(height: 10),
+
+              SizedBox(
+                width: 300,
+                child: InputTextField(
+                  addressController,
+                  "Restaurant Address",
+                ),
+              ),
+              const SizedBox(height: 10),
+
+              // signup button
+              SizedBox(
+                width: 300,
+                height: 45,
+                child: ElevatedButton(
+                  onPressed: () {
+                    AuthController.to.signUp(
+                      ownerUsernameController,
+                      emailController,
+                      telephoneController,
+                      passwordController,
+                      merchantUsernameController,
+                      addressController,
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: const Color(0xff70cb88),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: const Text(
+                    'Continue',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+
+              SizedBox(
+                  width: 219,
+                  height: 21,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Already have an account? ",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Get.offAll(() => const LoginPage(),
+                              transition: Transition.fade);
+                        },
+                        child: const Text(
+                          'Login',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff356631),
+                            //underline
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
+            ]),
+          ),
         ),
       ),
     );

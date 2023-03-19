@@ -1,18 +1,52 @@
-import "dart:convert";
-
+import "package:dio/dio.dart";
 import "package:flutter/material.dart";
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
-import "package:get/get.dart";
+import "package:get/get.dart" hide Response;
 import "package:vegytably_merchant/utils/api.endpoints.dart";
-import "package:http/http.dart" as http;
+import "package:vegytably_merchant/views/landing_page.dart";
 import "package:vegytably_merchant/views/login_page.dart";
 
+import "../api/auth_api.dart";
 import "../models/authentication_response.dart";
 import "../models/exception_response.dart";
-import "../views/home_page.dart";
+import "../models/user_model.dart";
 
 class AuthController extends GetxController {
+  static AuthController to = Get.find();
   final _storage = const FlutterSecureStorage();
+
+  final Rx<User> _user = User(
+    id: "",
+    username: "",
+    email: "",
+    phone: "",
+  ).obs;
+  RxBool isLogin = false.obs;
+  RxBool isLoading = false.obs;
+
+  User get user => _user.value;
+
+  @override
+  void onReady() {
+    super.onReady();
+    // TODO uncomment code if ready to implement
+    checkAuth();
+    ever(isLogin, _initialScreen);
+  }
+
+  void _initialScreen(bool isLogin) {
+    if (isLogin) {
+      Get.offAll(
+        () => LandingPage(),
+        transition: Transition.rightToLeft,
+      );
+    } else {
+      Get.offAll(
+        () => const LoginPage(),
+        transition: Transition.rightToLeft,
+      );
+    }
+  }
 
   Future<void> signUp(
     TextEditingController usernameController,
@@ -23,10 +57,6 @@ class AuthController extends GetxController {
     TextEditingController restaurantAddressController,
   ) async {
     try {
-      var headers = {"Content-Type": "application/json"};
-      var url =
-          Uri.parse(ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.signUp);
-
       Map<String, String> body = {
         "username": usernameController.text,
         "email": emailController.text.trim(),
@@ -36,33 +66,24 @@ class AuthController extends GetxController {
         "restaurantAddress": restaurantAddressController.text,
       };
 
-      http.Response response = await http.post(
-        url,
-        headers: headers,
-        body: jsonEncode(body),
-      );
-      print(response.body.toString());
+      Response response = await AuthApi.instance.postSignUp(body);
+
       if (response.statusCode != 201) {
-        String errorMessage =
-            ExceptionResponse.getMessage(jsonDecode(response.body));
+        String errorMessage = ExceptionResponse.getMessage(response.data);
         throw Exception(errorMessage);
       }
 
-      final json = jsonDecode(response.body);
-
       AuthenticationResponse authenticationResponse =
-          AuthenticationResponse.fromJson(json);
+          AuthenticationResponse.fromJson(response.data);
 
       print(authenticationResponse.data.toJson());
-      // store accessToken and refreshToken in secure storage
-      await _storage.write(
-          key: "accessToken", value: authenticationResponse.data.accessToken);
+      // store refreshToken in secure storage
       await _storage.write(
           key: "refreshToken", value: authenticationResponse.data.refreshToken);
 
       Get.offAll(
-        () => HomePage(),
-        transition: Transition.rightToLeft,
+        () => LandingPage(),
+        transition: Transition.fade,
       );
     } catch (e) {
       print(e);
@@ -85,32 +106,24 @@ class AuthController extends GetxController {
         "role": "MERCHANT",
       };
 
-      http.Response response = await http.post(
-        url,
-        headers: headers,
-        body: jsonEncode(body),
-      );
-      print(response.body.toString());
+      Response response = await AuthApi.instance.postLogin(body);
+      print(response.data.toString());
 
       if (response.statusCode != 200) {
-        String errorMessage =
-            ExceptionResponse.getMessage(jsonDecode(response.body));
+        String errorMessage = ExceptionResponse.getMessage(response.data);
         throw Exception(errorMessage);
       }
-      final json = jsonDecode(response.body);
 
       AuthenticationResponse authenticationResponse =
-          AuthenticationResponse.fromJson(json);
+          AuthenticationResponse.fromJson(response.data);
 
       print(authenticationResponse.data.toJson());
-      // store accessToken and refreshToken in secure storage
-      await _storage.write(
-          key: "accessToken", value: authenticationResponse.data.accessToken);
+      // store refreshToken in secure storage
       await _storage.write(
           key: "refreshToken", value: authenticationResponse.data.refreshToken);
 
       Get.offAll(
-        () => HomePage(),
+        () => LandingPage(),
         transition: Transition.fade,
       );
     } catch (e) {
@@ -127,30 +140,17 @@ class AuthController extends GetxController {
         throw Exception("Refresh token not found");
       }
 
-      var headers = {
-        "Content-Type": "application/json",
-        "authorization": 'Bearer $refreshToken',
-      };
-      var url =
-          Uri.parse(ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.logout);
-
-      http.Response response = await http.post(
-        url,
-        headers: headers,
-      );
+      Response response = await AuthApi.instance.postLogout(refreshToken);
       if (response.statusCode != 200) {
         // TODO: Create error handler based on status code
-        String errorMessage =
-            ExceptionResponse.getMessage(jsonDecode(response.body));
+        String errorMessage = ExceptionResponse.getMessage(response.data);
         throw Exception(errorMessage);
       }
-      final json = jsonDecode(response.body);
 
       await _storage.delete(key: "refreshToken");
-      await _storage.delete(key: "accessToken");
 
       Get.offAll(
-        () => LoginPage(),
+        () => const LoginPage(),
         transition: Transition.fade,
       );
     } catch (e) {
@@ -159,19 +159,50 @@ class AuthController extends GetxController {
     }
   }
 
-  static Future<void> checkAuth() async {
+  Future<void> checkAuth() async {
     try {
-      const storage = FlutterSecureStorage();
-      String? refreshToken = await storage.read(key: "refreshToken");
+      String? refreshToken = await _storage.read(key: "refreshToken");
+
+      // check expire time of refreshToken
       if (refreshToken == null) {
-        Get.offAll(
-          () => LoginPage(),
-          transition: Transition.fade,
-        );
+        clearUser();
+        return;
       }
+      // verify refreshToken
+      Response response = await AuthApi.instance.postVerifyAuth();
+
+      if (response.statusCode != 200) {
+        if (response.statusCode == 401) {
+          clearUser();
+        }
+
+        String errorMessage = ExceptionResponse.getMessage(response.data);
+        throw Exception(errorMessage);
+      }
+
+      User user = User.fromJson(response.data["data"]["user"]);
+
+      setUser(user);
     } catch (e) {
       print(e);
       Get.snackbar("Error", e.toString());
     }
+  }
+
+  void setUser(User u) {
+    _user.value = u;
+    isLogin.value = true;
+    update();
+  }
+
+  void clearUser() {
+    _user.value = User(
+      id: "",
+      username: "",
+      email: "",
+      phone: "",
+    );
+    isLogin.value = false;
+    update();
   }
 }

@@ -15,8 +15,15 @@ class InputTextField extends StatelessWidget {
         fontFamily: fontFamily,
       ),
       decoration: InputDecoration(
+        filled: true,
+        fillColor: const Color.fromARGB(255, 186, 192, 186).withOpacity(0.1),
         hintText: hintText,
-        border: OutlineInputBorder(
+        hintStyle: const TextStyle(
+          color: Color(0xff9f9f9f),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+              color: Color.fromARGB(255, 171, 174, 171), width: 1.0),
           borderRadius: BorderRadius.circular(10),
         ),
       ),
