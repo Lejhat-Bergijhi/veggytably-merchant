@@ -6,7 +6,6 @@ import 'package:vegytably_merchant/widgets/profile_menu.dart';
 import 'package:vegytably_merchant/widgets/upload_pic.dart';
 import 'package:vegytably_merchant/widgets/input_text.dart';
 
-
 class EditProfile extends StatelessWidget {
   const EditProfile({super.key});
 
@@ -21,19 +20,15 @@ class EditProfile extends StatelessWidget {
     var name = '/assets/ProfPic.png';
     return Scaffold(
       appBar: AppBar(
-        
         backgroundColor: Colors.white,
         elevation: 0,
         leading: GestureDetector(
           onTap: () {
-
-              Get.offAll(() => ProfilePage(), transition: Transition.fade);
-            },
+            Get.offAll(() => ProfilePage(), transition: Transition.fade);
+          },
           child: Container(
             padding: const EdgeInsets.only(left: 12.0, top: 10),
-            child:Icon(Icons.arrow_back, color: Colors.black),
-              
-            
+            child: Icon(Icons.arrow_back, color: Colors.black),
           ),
         ),
         title: Container(
@@ -49,7 +44,6 @@ class EditProfile extends StatelessWidget {
         ),
         toolbarHeight: 50,
         leadingWidth: 30,
-      
       ),
       backgroundColor: Color.fromRGBO(255, 255, 255, 1),
       body: Container(
@@ -57,44 +51,42 @@ class EditProfile extends StatelessWidget {
         child: ListView(
           physics: BouncingScrollPhysics(),
           children: [
-
             SizedBox(height: 30),
 
-            Column(
-                children: [Container(
-                  height:100,
-                  width: 100,
-                  child: Image.asset('images/EditProfPic.png'),
-                ),
-                Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: InkWell(
-                    onTap: () {
-                      // showModal();
-                    },
-                    child: const Icon(
-                      Icons.camera_alt,
-                      color: Color.fromARGB(255, 23, 47, 44),
-                      size: 28,
-                    ),
+            Column(children: [
+              Container(
+                height: 100,
+                width: 100,
+                child: Image.asset('assets/images/EditProfPic.png'),
+              ),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: InkWell(
+                  onTap: () {
+                    // showModal();
+                  },
+                  child: const Icon(
+                    Icons.camera_alt,
+                    color: Color.fromARGB(255, 23, 47, 44),
+                    size: 28,
                   ),
                 ),
-                ]
               ),
+            ]),
             SizedBox(height: 20),
-             Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                    "Merchant's Data",
-                    style: TextStyle(
-                        color: Color(0xff9f9f9f),
-                        fontSize: 10,
-                        fontFamily: "Rubik",
-                        fontWeight: FontWeight.w600,
-                    ),
-                    textAlign: TextAlign.left,
+                  "Merchant's Data",
+                  style: TextStyle(
+                    color: Color(0xff9f9f9f),
+                    fontSize: 10,
+                    fontFamily: "Rubik",
+                    fontWeight: FontWeight.w600,
+                  ),
+                  textAlign: TextAlign.left,
                 ),
                 SizedBox(height: 5),
                 Container(
@@ -114,7 +106,7 @@ class EditProfile extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 5),
-                SizedBox(height: 5),                
+                SizedBox(height: 5),
                 Container(
                   // width: 300,
                   child: InputTextField(
@@ -123,39 +115,37 @@ class EditProfile extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 10),
-                
               ],
             ),
             // Input Email or Telephone Number
             SizedBox(height: 10),
             Text(
-                    "Restaurant's Data",
-                    style: TextStyle(
-                        color: Color(0xff9f9f9f),
-                        fontSize: 10,
-                        fontFamily: "Rubik",
-                        fontWeight: FontWeight.w600,
-                    ),
-                    textAlign: TextAlign.left,
-                ),
-            SizedBox(height: 5),
-                Container(
-                  // width: 300,
-                  child: InputTextField(
-                    resNameController,
-                    "Name",
-                ),
+              "Restaurant's Data",
+              style: TextStyle(
+                color: Color(0xff9f9f9f),
+                fontSize: 10,
+                fontFamily: "Rubik",
+                fontWeight: FontWeight.w600,
               ),
+              textAlign: TextAlign.left,
+            ),
             SizedBox(height: 5),
-                Container(
-                  // width: 300,
-                  child: InputTextField(
-                    resAddressController,
-                    "Address",
-                ),
+            Container(
+              // width: 300,
+              child: InputTextField(
+                resNameController,
+                "Name",
               ),
+            ),
+            SizedBox(height: 5),
+            Container(
+              // width: 300,
+              child: InputTextField(
+                resAddressController,
+                "Address",
+              ),
+            ),
             SizedBox(height: 10),
-
 
             // Login button
             Container(
@@ -181,26 +171,25 @@ class EditProfile extends StatelessWidget {
                 ),
               ),
             ),
-         ],
+          ],
         ),
       ),
-      // bottomNavigationBar: Container(   
-      //       height: 87.7,                                          
-      //       decoration: BoxDecoration(          
-                                                   
+      // bottomNavigationBar: Container(
+      //       height: 87.7,
+      //       decoration: BoxDecoration(
+
       //           borderRadius: BorderRadius.only(topLeft: Radius.circular(25.50), topRight: Radius.circular(25.50), bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0), ),
-        
-      //           boxShadow: [                                                               
-      //           BoxShadow(color: Color.fromRGBO(0,0,0,230), spreadRadius: 0, blurRadius: 20),       
+
+      //           boxShadow: [
+      //           BoxShadow(color: Color.fromRGBO(0,0,0,230), spreadRadius: 0, blurRadius: 20),
       //           ],
 
-      //       ),               
+      //       ),
 
-      //       child: ClipRRect( 
-                
-                                                                         
+      //       child: ClipRRect(
+
       //           borderRadius: BorderRadius.only(topLeft: Radius.circular(25.50), topRight: Radius.circular(25.50), bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0), ),
-                                                                   
+
       //           child: CustomBottomNavigationBar(initialIndex: 3),
       //       )
       // )

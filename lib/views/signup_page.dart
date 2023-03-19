@@ -29,10 +29,10 @@ class _SignUpPageState extends State<SignUpPage> {
       body: SafeArea(
         child: Center(
           child: Column(children: [
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
 
             Padding(
-              padding: EdgeInsets.only(left: 36),
+              padding: const EdgeInsets.only(left: 36),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Image.asset(
@@ -42,9 +42,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
 
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(left: 36),
               child: Align(
                 alignment: Alignment.centerLeft,
@@ -57,9 +57,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
 
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(left: 36),
               child: Align(
                 alignment: Alignment.centerLeft,
@@ -73,9 +73,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(left: 36),
               child: Align(
                 alignment: Alignment.centerLeft,
@@ -90,17 +90,17 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
             // Text:
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             //Input nama
-            Container(
+            SizedBox(
               width: 300,
               child: InputTextField(ownerUsernameController, "Name"),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             // Input Email or Telephone Number
-            Container(
+            SizedBox(
               width: 300,
               child: TextFormField(
                 controller: emailController,
@@ -116,21 +116,21 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             //input no telp
-            Container(
+            SizedBox(
               width: 300,
               child: InputTextField(telephoneController, "Telephone Number"),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             // Input Password
-            Container(
+            SizedBox(
               width: 300,
-              child: Container(
-                  width: 300,
-                  child: TextField(
+              child: SizedBox(
+                width: 300,
+                child: TextField(
                     controller: passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
@@ -140,9 +140,10 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     )),
               ),
-              SizedBox(height: 20),
+            ),
+            const SizedBox(height: 20),
 
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(left: 36),
               child: Align(
                 alignment: Alignment.centerLeft,
@@ -157,28 +158,28 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
             // Text:
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
-            Container(
+            SizedBox(
               width: 300,
               child: InputTextField(
                 merchantUsernameController,
                 "Restaurant Name",
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
-            Container(
+            SizedBox(
               width: 300,
               child: InputTextField(
                 addressController,
                 "Restaurant Address",
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             // signup button
-            Container(
+            SizedBox(
               width: 300,
               height: 45,
               child: ElevatedButton(
@@ -192,22 +193,22 @@ class _SignUpPageState extends State<SignUpPage> {
                     addressController,
                   );
                 },
-                child: Text(
+                style: ElevatedButton.styleFrom(
+                  primary: const Color(0xff70cb88),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: const Text(
                   'Continue',
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                style: ElevatedButton.styleFrom(
-                  primary: Color(0xff70cb88),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
 
             SizedBox(
                 width: 219,
@@ -215,18 +216,19 @@ class _SignUpPageState extends State<SignUpPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                  Text(
-                    "Already have an account? ",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
+                    const Text(
+                      "Already have an account? ",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
                         fontSize: 14,
+                      ),
                     ),
-                  ),
-                   GestureDetector(
+                    GestureDetector(
                       onTap: () {
-                        // Get.offAll(() => SignUpPage(), transition: Transition.fade);
+                        Get.offAll(() => const LoginPage(),
+                            transition: Transition.fade);
                       },
-                      child: Text(
+                      child: const Text(
                         'Login',
                         style: TextStyle(
                           fontSize: 14,
@@ -237,8 +239,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                       ),
                     ),
-                ],)
-            ),
+                  ],
+                )),
           ]),
         ),
       ),

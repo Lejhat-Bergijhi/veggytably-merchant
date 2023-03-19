@@ -3,11 +3,11 @@ import 'package:get/get.dart';
 
 int _selectedIndex = 2;
 
-class ListMenuReadyPage extends StatefulWidget{
+class ListMenuReadyPage extends StatefulWidget {
   const ListMenuReadyPage({super.key});
-  
+
   @override
-  State <ListMenuReadyPage> createState() => _ListMenuReadyPageState();
+  State<ListMenuReadyPage> createState() => _ListMenuReadyPageState();
 }
 
 class _ListMenuReadyPageState extends State<ListMenuReadyPage> {
@@ -17,145 +17,171 @@ class _ListMenuReadyPageState extends State<ListMenuReadyPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Column(
-          children: [
-            SizedBox(height: 25),
-            Padding(
-              padding: EdgeInsets.only(left: 24),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Daftar Menu',
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
+        child: Column(children: [
+          const SizedBox(height: 25),
+          const Padding(
+            padding: EdgeInsets.only(left: 24),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Daftar Menu',
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            SizedBox(height: 10),
-
-            Row(
-              children: [
+          ),
+          const SizedBox(height: 10),
+          Row(
+            children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0), 
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: TextButton(
                   onPressed: () {
                     setState(() {
                       activeButton = 'Ready Stock';
-                    });// do something when the "Ready Stock" button is pressed
+                    }); // do something when the "Ready Stock" button is pressed
                   },
-                  child: Text(
+                  child: const Text(
                     'Ready Stock',
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
                       color: Colors.black,
                       decoration: TextDecoration.underline,
-                    ),),
+                    ),
+                  ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 4.0), 
+                padding: const EdgeInsets.symmetric(horizontal: 4.0),
                 child: TextButton(
                   onPressed: () {
                     setState(() {
                       activeButton = 'Out of Stock';
-                    });// do something when the "Out of Stock" button is pressed
+                    }); // do something when the "Out of Stock" button is pressed
                   },
-                  child: Text(
+                  child: const Text(
                     'Out of Stock',
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
                       color: Color.fromARGB(185, 103, 102, 102),
-                    ),),
-                ),
-                ),
-              ],
-            ),
-            SizedBox(height: 5),
-
-            Expanded(
-              child: ListView(
-                children: <Widget>[
-                  new ListMenu(gambar: "image9.png", text: "Salad Yammy", harga: "Rp 15.000", syarat: "yammy.png", edit: "Edit Menu"),
-                  new ListMenu(gambar: "image7.png", text: "Tomyum Guwrih", harga: "Rp 35.000", syarat: "tomyum.png",edit: "Edit Menu"),
-                  new ListMenu(gambar: "image6.png", text: "Gado-gado Wuenak", harga: "Rp 12.000", syarat: "gado.png", edit: "Edit Menu"),
-                  new ListMenu(gambar: "image8.png", text: "Roasted Chic", harga: "Rp 60.000", syarat: "roasted.png", edit: "Edit Menu"),
-                  new ListMenu(gambar: "image9.png", text: "Salad Yammy", harga: "Rp 15.000", syarat: "yammy.png", edit: "Edit Menu"),
-                  new ListMenu(gambar: "image6.png", text: "Salad Juowo", harga: "Rp 9.000", syarat: "juowo.png", edit: "Edit Menu")
-                ],
-              ),
-            ),
-
-            Container(
-              width: 312,
-              height: 44,
-              child: ElevatedButton(
-                onPressed: () {
-                  // do something when the "Sign up" button is pressed
-                },
-                child: Text(
-                  'Add Menu+',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: Color(0xff70cb88),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 15),
-
-            BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              backgroundColor: Colors.white,
-              selectedItemColor: Color(0xff70cb88),
-              unselectedItemColor: Colors.grey,
-              currentIndex: _selectedIndex,
-              items: [
-                BottomNavigationBarItem(
-                  icon: Image.asset(
-                    'home.png',
-                    width: 30.0,
-                    height: 30.0,
-                  ),
-                  label: "",
-                ),
-                BottomNavigationBarItem(
-                  icon: Image.asset(
-                    'menu.png',
-                    width: 35.0,
-                    height: 35.0,
-                  ),
-                  label: "",
-                ),
-                BottomNavigationBarItem(
-                  icon: Image.asset(
-                    'daftarmenu.png',
-                    width: 35.0,
-                    height: 35.0,
-                  ),
-                  label: "",
-                ),
-                BottomNavigationBarItem(
-                  icon: Image.asset(
-                    'profile.png',
-                    width: 30.0,
-                    height: 30.0,
-                  ),
-                  label: "",
-                ),
+            ],
+          ),
+          const SizedBox(height: 5),
+          Expanded(
+            child: ListView(
+              children: const <Widget>[
+                ListMenu(
+                    gambar: "image9.png",
+                    text: "Salad Yammy",
+                    harga: "Rp 15.000",
+                    syarat: "yammy.png",
+                    edit: "Edit Menu"),
+                ListMenu(
+                    gambar: "image7.png",
+                    text: "Tomyum Guwrih",
+                    harga: "Rp 35.000",
+                    syarat: "tomyum.png",
+                    edit: "Edit Menu"),
+                ListMenu(
+                    gambar: "image6.png",
+                    text: "Gado-gado Wuenak",
+                    harga: "Rp 12.000",
+                    syarat: "gado.png",
+                    edit: "Edit Menu"),
+                ListMenu(
+                    gambar: "image8.png",
+                    text: "Roasted Chic",
+                    harga: "Rp 60.000",
+                    syarat: "roasted.png",
+                    edit: "Edit Menu"),
+                ListMenu(
+                    gambar: "image9.png",
+                    text: "Salad Yammy",
+                    harga: "Rp 15.000",
+                    syarat: "yammy.png",
+                    edit: "Edit Menu"),
+                ListMenu(
+                    gambar: "image6.png",
+                    text: "Salad Juowo",
+                    harga: "Rp 9.000",
+                    syarat: "juowo.png",
+                    edit: "Edit Menu")
               ],
             ),
-          ]
-        ),
+          ),
+          Container(
+            width: 312,
+            height: 44,
+            child: ElevatedButton(
+              onPressed: () {
+                // do something when the "Sign up" button is pressed
+              },
+              style: ElevatedButton.styleFrom(
+                primary: const Color(0xff70cb88),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: const Text(
+                'Add Menu+',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 15),
+          BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Colors.white,
+            selectedItemColor: const Color(0xff70cb88),
+            unselectedItemColor: Colors.grey,
+            currentIndex: _selectedIndex,
+            items: [
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  'home.png',
+                  width: 30.0,
+                  height: 30.0,
+                ),
+                label: "",
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  'menu.png',
+                  width: 35.0,
+                  height: 35.0,
+                ),
+                label: "",
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  'daftarmenu.png',
+                  width: 35.0,
+                  height: 35.0,
+                ),
+                label: "",
+              ),
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  'profile.png',
+                  width: 30.0,
+                  height: 30.0,
+                ),
+                label: "",
+              ),
+            ],
+          ),
+        ]),
       ),
     );
   }
@@ -168,12 +194,18 @@ class ListMenu extends StatelessWidget {
   final String edit;
   final String syarat;
 
-  const ListMenu({required this.gambar, required this.text, required this.harga, required this.syarat, required this.edit});
+  const ListMenu({
+    required this.gambar,
+    required this.text,
+    required this.harga,
+    required this.syarat,
+    required this.edit,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      decoration: BoxDecoration(
+    return Container(
+      decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(
             color: Colors.black12,
@@ -183,55 +215,54 @@ class ListMenu extends StatelessWidget {
           //   color: Colors.black12,
           //   width: 1.0,
           // ),
-        ),),
-      padding: new EdgeInsets.only(left: 15),
-      child: new Align(
+        ),
+      ),
+      padding: const EdgeInsets.only(left: 15),
+      child: Align(
         alignment: Alignment.topLeft,
-        child: new Row(
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            new Image(
-              image: AssetImage(gambar), width: 100.0,
+            Image(
+              image: AssetImage("assets/$gambar"),
+              width: 100.0,
             ),
-            new Container(
-              padding: EdgeInsets.all(5),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: new Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      text,
-                      style: TextStyle(
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 5),
-                    Text(
-                      harga,
-                      style: TextStyle(
-                        fontSize: 13.0,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black),
-                    ),
-                    SizedBox(height: 5),
-                    Image(
-                      image: AssetImage(syarat), 
-                      width: 200.0,
-                    ),
-                    SizedBox(height: 8),
-                    Text(
-                      edit,
-                      style: TextStyle(
-                        fontSize: 11.0,
-                        fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(129, 57, 56, 56),
-                        decoration: TextDecoration.underline,),
-                    ),
-                  ]
-                )
-              )
-            ),
+            Container(
+                padding: const EdgeInsets.all(5),
+                child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            text,
+                            style: const TextStyle(
+                                fontSize: 15.0, fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            harga,
+                            style: const TextStyle(
+                                fontSize: 13.0,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
+                          ),
+                          const SizedBox(height: 5),
+                          Image(
+                            image: AssetImage("assets/$syarat"),
+                            width: 200.0,
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            edit,
+                            style: const TextStyle(
+                              fontSize: 11.0,
+                              fontWeight: FontWeight.w500,
+                              color: Color.fromARGB(129, 57, 56, 56),
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ]))),
           ],
         ),
       ),
