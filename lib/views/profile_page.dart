@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vegytably_merchant/controllers/merchant_controller.dart';
 // import 'package:vegytably_merchant/controllers/merchant_controller.dart';
 import 'package:vegytably_merchant/views/login_page.dart';
 // import 'package:vegytably_merchant/views/restriction_page1.dart';
@@ -31,19 +32,21 @@ class ProfilePage extends StatelessWidget {
               SizedBox(
                 height: 14,
               ),
-              Text(
-                "NadiahhhHasna",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Color(0xff242424),
-                  fontSize: 22,
+              Obx(
+                () => Text(
+                  MerchantController.to.merchant.username,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color(0xff242424),
+                    fontSize: 22,
+                  ),
                 ),
               ),
               SizedBox(
                 height: 7,
               ),
               Text(
-                "+6234567891011",
+                MerchantController.to.merchant.phone,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Color(0xff6482a6),

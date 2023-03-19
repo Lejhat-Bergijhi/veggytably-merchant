@@ -11,19 +11,19 @@ class EditProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MerchantController merchantController = Get.put(MerchantController());
+    MerchantController merchantController = Get.find();
 
     Merchant merchant = merchantController.merchant;
 
-    TextEditingController mercNameController =
+    TextEditingController usernameController =
         TextEditingController(text: merchant.username);
     TextEditingController emailController =
         TextEditingController(text: merchant.email);
-    TextEditingController telpController =
+    TextEditingController phoneController =
         TextEditingController(text: merchant.phone);
-    TextEditingController resNameController =
+    TextEditingController restaurantNameController =
         TextEditingController(text: merchant.restaurantName);
-    TextEditingController resAddressController =
+    TextEditingController restaurantAddressController =
         TextEditingController(text: merchant.restaurantAddress);
 
     var name = '/assets/ProfPic.png';
@@ -33,7 +33,6 @@ class EditProfile extends StatelessWidget {
         elevation: 0,
         leading: GestureDetector(
           onTap: () {
-            // Get.offAll(() => const ProfilePage(), transition: Transition.fade);
             Get.back();
           },
           child: Container(
@@ -102,7 +101,7 @@ class EditProfile extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 InputTextField(
-                  mercNameController,
+                  usernameController,
                   'Name',
                 ),
                 const SizedBox(height: 5),
@@ -114,7 +113,7 @@ class EditProfile extends StatelessWidget {
                 const SizedBox(height: 5),
                 const SizedBox(height: 5),
                 InputTextField(
-                  telpController,
+                  phoneController,
                   'Telephone Number',
                 ),
                 const SizedBox(height: 10),
@@ -136,7 +135,7 @@ class EditProfile extends StatelessWidget {
             Container(
               // width: 300,
               child: InputTextField(
-                resNameController,
+                restaurantNameController,
                 "Name",
               ),
             ),
@@ -144,7 +143,7 @@ class EditProfile extends StatelessWidget {
             Container(
               // width: 300,
               child: InputTextField(
-                resAddressController,
+                restaurantAddressController,
                 "Address",
               ),
             ),
@@ -156,21 +155,23 @@ class EditProfile extends StatelessWidget {
               height: 45,
               child: ElevatedButton(
                 onPressed: () {
-                  Get.offAll(() => const ProfilePage(),
-                      transition: Transition.fade);
-                  // emailController.clear();
-                  // passwordController.clear();
+                  merchantController.updateProfile(
+                      usernameController,
+                      emailController,
+                      phoneController,
+                      restaurantNameController,
+                      restaurantAddressController);
                 },
-                child: const Text(
-                  'Save',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
                 style: ElevatedButton.styleFrom(
                   primary: const Color(0xff70cb88),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: const Text(
+                  'Save',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),

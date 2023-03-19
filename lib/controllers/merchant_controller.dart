@@ -6,10 +6,13 @@ import 'package:get/get.dart' hide Response;
 import '../api/merchant_api.dart';
 import '../models/exception_response.dart';
 import '../models/merchant.dart';
+import '../views/landing_page.dart';
 import '../views/login_page.dart';
 import 'auth_controller.dart';
 
 class MerchantController extends GetxController {
+  static MerchantController to = Get.find();
+
   final _storage = const FlutterSecureStorage();
   final Rx<Merchant> _merchant = Merchant(
           email: '',
@@ -31,8 +34,25 @@ class MerchantController extends GetxController {
     fetchMerchantProfile();
   }
 
+  void onClose() {
+    super.onClose();
+    clearMerchant();
+  }
+
   void setMerchant(Merchant merchant) {
     _merchant.value = merchant;
+    update();
+  }
+
+  void clearMerchant() {
+    _merchant.value = Merchant(
+        email: '',
+        id: '',
+        phone: '',
+        rating: 0,
+        restaurantAddress: '',
+        restaurantName: '',
+        username: '');
     update();
   }
 
@@ -100,24 +120,19 @@ class MerchantController extends GetxController {
         throw Exception(errorMessage);
       }
 
-      print(response);
       Merchant merchant = Merchant.fromJson(response.data["data"]["merchant"]);
 
-      print(merchant);
       setMerchant(merchant);
 
-      Get.snackbar("Success", "Update profile success!");
-      // Get.offAll(
-      //   () => LandingPage(initialIndex: 3),
-      //   transition: Transition.fade,
-      // );
+      Get.back();
 
-      // setUser(user);
+      Get.snackbar("Success", "Update profile success!");
     } catch (e) {
       print(e);
       Get.snackbar("Error", e.toString());
     } finally {
       isLoading.value = false;
+      update();
     }
   }
 }

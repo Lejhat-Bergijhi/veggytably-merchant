@@ -10,7 +10,6 @@ import "../api/auth_api.dart";
 import "../models/authentication_response.dart";
 import "../models/exception_response.dart";
 import "../models/user_model.dart";
-import "../views/home_page.dart";
 
 class AuthController extends GetxController {
   static AuthController to = Get.find();
@@ -31,8 +30,8 @@ class AuthController extends GetxController {
   void onReady() {
     super.onReady();
     // TODO uncomment code if ready to implement
-    // checkAuth();
-    // ever(isLogin, _initialScreen);
+    checkAuth();
+    ever(isLogin, _initialScreen);
   }
 
   void _initialScreen(bool isLogin) {
