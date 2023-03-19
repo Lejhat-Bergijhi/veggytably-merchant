@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'views/login_page.dart';
 import 'views/signup_page.dart';
+import 'views/signup_page_2.dart';
 import 'views/home_page.dart';
 import 'views/profile_page.dart';
 

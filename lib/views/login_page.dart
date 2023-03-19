@@ -22,29 +22,61 @@ class LoginPage extends StatelessWidget {
               child: Column(children: [
             SizedBox(height: 50),
 
-            // logo
-            //   Icon(Icons.lock,
-            //   size:100,
-            // ),
-            SizedBox(height: 100),
-
-            // Text: VeggyMerch
-            Text(
-              'VeggyMerch',
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
+            //logo
+           Align(
+                alignment: Alignment.center,
+                child: Image.asset(
+                  'assets/Group336.png',
+                  width: 360.0,
+                  height: 270.71,
+                ),
               ),
-            ),
             SizedBox(height: 10),
 
-            // Text: Powered by Veggytably
-            Text('Powered by Veggytably',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                )),
-            SizedBox(height: 20),
+            Padding(
+              padding: EdgeInsets.only(left: 36),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Image.asset(
+                  'assets/Subtract.png',
+                  width: 40.0,
+                  height: 35.93,
+                ),
+              ),
+            ),
+            SizedBox(height: 5),
+
+            Padding(
+              padding: EdgeInsets.only(left: 36),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Welcome Back!',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 5),
+
+           Padding(
+              padding: EdgeInsets.only(left: 36),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Please login to your account to continue',
+                  style: TextStyle(
+                    color: Color.fromARGB(131, 88, 83, 83),
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
+            // Text:
+            SizedBox(height: 16),
 
             // Input Email or Telephone Number
             Container(
@@ -73,6 +105,7 @@ class LoginPage extends StatelessWidget {
                   obscureText: true,
                   decoration: InputDecoration(
                     hintText: "Password",
+                    fillColor: Color.fromARGB(255, 171, 174, 171), 
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -93,11 +126,16 @@ class LoginPage extends StatelessWidget {
                   // emailController.clear();
                   // passwordController.clear();
                 },
-                child: Text('Login'),
+                child: Text(
+                  'Login',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.green,
+                  primary: Color(0xff70cb88),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(8),
                   ),
                 ),
               ),
@@ -105,29 +143,38 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 50),
 
             // Text: Don't have an account?
-            Text(
-              'Don\'t have an account?',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
-              ),
+            SizedBox(
+                width: 219,
+                height: 21,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                  Text(
+                    "New user? ",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 14,
+                    ),
+                  ),
+                   GestureDetector(
+                      onTap: () {
+                        // Get.offAll(() => SignUpPage(), transition: Transition.fade);
+                      },
+                      child: Text(
+                        'Sign Up',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff356631),
+                          //underline
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                ],)
             ),
             SizedBox(height: 5),
 
-            // Text: Sign Up
-            GestureDetector(
-              onTap: () {
-                Get.offAll(() => SignUpPage(), transition: Transition.fade);
-              },
-              child: Text(
-                'Sign Up',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green,
-                ),
-              ),
-            ),
           ])),
         ));
   }

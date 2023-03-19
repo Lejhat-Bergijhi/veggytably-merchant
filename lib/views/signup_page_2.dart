@@ -6,14 +6,14 @@ import 'package:email_validator/email_validator.dart';
 import '../controllers/auth_controller.dart';
 import '../widgets/input_text.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+class SignUpPage2 extends StatefulWidget {
+  const SignUpPage2({super.key});
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<SignUpPage2> createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignUpPageState extends State<SignUpPage2> {
   AuthController authController = Get.put(AuthController());
   TextEditingController ownerUsernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -73,14 +73,14 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 15),
 
-            Padding(
+             Padding(
               padding: EdgeInsets.only(left: 36),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'MERCHANT’S DATA',
+                  'MERCHANT’S PHOTO',
                   style: TextStyle(
                     color: Color.fromARGB(131, 88, 83, 83),
                     fontSize: 10,
@@ -92,93 +92,94 @@ class _SignUpPageState extends State<SignUpPage> {
             // Text:
             SizedBox(height: 10),
 
-            //Input nama
             Container(
+              padding: EdgeInsets.all(36),
               width: 300,
-              child: InputTextField(ownerUsernameController, "Name"),
-            ),
-            SizedBox(height: 10),
-
-            // Input Email or Telephone Number
-            Container(
-              width: 300,
-              child: TextFormField(
-                controller: emailController,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: (value) => EmailValidator.validate(value!)
-                    ? null
-                    : "Please enter a valid email",
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+              height: 300,
+              
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey,
+                  width: 1,
+                  style: BorderStyle.solid,
                 ),
+                 borderRadius: BorderRadius.circular(10),
               ),
-            ),
-            SizedBox(height: 10),
-
-            //input no telp
-            Container(
-              width: 300,
-              child: InputTextField(telephoneController, "Telephone Number"),
-            ),
-            SizedBox(height: 10),
-
-            // Input Password
-            Container(
-              width: 300,
-              child: Container(
-                  width: 300,
-                  child: TextField(
-                    controller: passwordController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: "Password",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+               child: Column(
+                children: [
+                  Image.asset(
+                    'assets/imageup.png',
+                    width: 130.0,
+                    height: 130.0,
+                  ),
+                  Text(
+                    'Upload from your device',
+                    style: TextStyle(fontSize: 12.0),
+                  ),
+                  SizedBox(height: 14),
+                  Container(
+                     width: 200,
+                    padding: const EdgeInsets.only(
+                    left: 0.0, right: 0.0, top: 5, bottom: 5),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Color.fromARGB(119, 219, 218, 218), // warna border
+                        width: 1.0, // ketebalan border
+                      ),
+                       borderRadius: BorderRadius.circular(8.0),
+                       color: Color.fromARGB(119, 219, 218, 218),
+                    ),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.camera_alt_rounded, size: 15),
+                          const SizedBox(width: 5),
+                          Text(
+                            'Camera',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  )),
-            ),
-            SizedBox(height: 20),
-
-            Padding(
-              padding: EdgeInsets.only(left: 36),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'RESTAURANT’S DATA',
-                  style: TextStyle(
-                    color: Color.fromARGB(131, 88, 83, 83),
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
                   ),
-                ),
+                  SizedBox(height: 2),
+                  Container(
+                    width: 200,
+                    padding: const EdgeInsets.only(
+                    left: 0.0, right: 0.0, top: 5, bottom: 5),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Color.fromARGB(119, 219, 218, 218), // warna border
+                        width: 1.0, // ketebalan border
+                      ),
+                       borderRadius: BorderRadius.circular(8.0),
+                       color: Color.fromARGB(119, 219, 218, 218),
+                    ),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.cloud_upload_sharp, size: 15),
+                          const SizedBox(width: 5),
+                          Text(
+                            'Gallery',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-            // Text:
-            SizedBox(height: 10),
-
-            Container(
-              width: 300,
-              child: InputTextField(
-                merchantUsernameController,
-                "Restaurant Name",
-              ),
-            ),
-            SizedBox(height: 10),
-
-            Container(
-              width: 300,
-              child: InputTextField(
-                addressController,
-                "Restaurant Address",
-              ),
-            ),
-            SizedBox(height: 10),
-
-            // signup button
+            SizedBox(height: 10,),
             Container(
               width: 300,
               height: 45,
@@ -240,7 +241,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                 ],)
             ),
-          ]),
+          ]
+          
+          ),
         ),
       ),
     );
