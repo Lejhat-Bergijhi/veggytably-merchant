@@ -138,10 +138,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                    ),
-                  )),
-            ),
-            SizedBox(height: 20),
+                    )),
+              ),
+              SizedBox(height: 20),
 
             Padding(
               padding: EdgeInsets.only(left: 36),

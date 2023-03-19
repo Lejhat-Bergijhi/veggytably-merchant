@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vegytably_merchant/controllers/merchant_controller.dart';
 import 'package:vegytably_merchant/views/login_page.dart';
 // import 'package:vegytably_merchant/views/restriction_page1.dart';
 import 'package:vegytably_merchant/widgets/bottom_navbar.dart';
@@ -12,6 +13,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MerchantController merchantController = Get.find<MerchantController>();
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(

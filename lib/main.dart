@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get.dart';
+import 'controllers/auth_controller.dart';
 import 'views/login_page.dart';
 import 'views/signup_page.dart';
 import 'views/signup_page_2.dart';
@@ -18,9 +19,12 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
+      initialBinding: BindingsBuilder(() {
+        Get.put(AuthController());
+      }),
       debugShowCheckedModeBanner: false,
-      home: ListMenuOutPage(),
+      home: const LoginPage(),
     );
   }
 }

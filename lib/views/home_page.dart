@@ -8,7 +8,7 @@ import 'package:vegytably_merchant/widgets/sliver_search_app_bar.dart';
 // import '../controllers/auth_controller.dart';
 // import '../models/merchant_profile.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
@@ -268,7 +268,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ]),
                 ),
-
               ],
             ),
           ),
