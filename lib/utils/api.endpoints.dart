@@ -14,4 +14,14 @@ class _AuthEndPoints {
 class _MerchantEndPoints {
   final String updateProfile = "merchants/profile";
   final String getProfile = "merchants/profile";
+
+  final String menu = "merchants/menu";
+
+  String singleMenu(String menuId) => "merchants/menu/$menuId";
+  // get one, update, delete
+
+  String getMenuImage(String imageId) => "merchants/menu/images/$imageId";
+  final String postMenuImage = "merchants/menu/upload-image";
+  String deleteMenuImage(String menuId, String imageId) =>
+      "merchants/menu/$menuId/$imageId";
 }

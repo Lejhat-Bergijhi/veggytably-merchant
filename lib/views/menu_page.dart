@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vegytably_merchant/views/list_menu_page.dart';
 
+import '../controllers/menu_controller.dart';
+
 class MenuPage extends StatelessWidget {
+  final MerchantMenuController menuController =
+      Get.put(MerchantMenuController());
+
   final int initialIndex;
   final List<Widget> pages = [
     const ListMenuReadyPage(),

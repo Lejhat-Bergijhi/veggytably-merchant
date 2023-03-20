@@ -30,8 +30,8 @@ class AuthController extends GetxController {
   void onReady() {
     super.onReady();
     // TODO uncomment code if ready to implement
-    // checkAuth();
-    // ever(isLogin, _initialScreen);
+    checkAuth();
+    ever(isLogin, _initialScreen);
   }
 
   void _initialScreen(bool isLogin) {
