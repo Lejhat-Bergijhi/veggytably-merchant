@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class InputTextField extends StatelessWidget {
   final TextEditingController textEditingController;
   final String hintText;
-  final String fontFamily;
 
   const InputTextField(
       {required this.textEditingController, required this.hintText, this.fontFamily="Rubik"});
@@ -11,11 +10,10 @@ class InputTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      //hint text color
       controller: textEditingController,
-      style: TextStyle(
-        fontFamily: fontFamily,
-      ),
       decoration: InputDecoration(
+
         filled: true,
         fillColor: const Color.fromARGB(255, 186, 192, 186).withOpacity(0.1),
         hintText: hintText,
