@@ -110,9 +110,7 @@ class MenuPage extends StatelessWidget {
                         itemBuilder: (BuildContext context, index) {
                           var menuItem = menuList[index];
                           return MenuItem(
-                            name: menuItem.name,
-                            imageUrl: menuItem.imageUrl,
-                            price: menuItem.price,
+                            menu: menuItem,
                           );
                         },
                       );

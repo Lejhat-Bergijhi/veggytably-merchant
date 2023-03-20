@@ -132,4 +132,48 @@ class MerchantMenuController extends GetxController {
       update();
     }
   }
+
+  Future<void> updateMenu(
+    TextEditingController nameController,
+    TextEditingController descriptionController,
+    TextEditingController priceController,
+  ) async {
+    try {
+      isLoading.value = true;
+      update();
+
+      String? refreshToken = await _storage.read(key: "refreshToken");
+
+      if (refreshToken == null) {
+        throw Exception("Refresh token is null");
+      }
+      ;
+
+      Map<String, dynamic> body = {
+        "name": nameController.text,
+        "price": double.tryParse(priceController.text.trim()) ?? 0,
+        "description": descriptionController.text,
+      };
+
+      Response response =
+          await MenuApi.instance.updateMenu(body, selectedMenu.id);
+
+      if (response.statusCode != 200) {
+        print(response);
+        String errorMessage = ExceptionResponse.getMessage(response.data);
+        throw Exception(errorMessage);
+      }
+
+      // refetch menu list
+      fetchMenuList();
+
+      Get.back();
+      Get.snackbar("Success!", "Updated menu successfully.");
+    } catch (e) {
+      print(e);
+    } finally {
+      isLoading.value = false;
+      update();
+    }
+  }
 }

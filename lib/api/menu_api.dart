@@ -53,4 +53,35 @@ class MenuApi {
       return e;
     }
   }
+
+  Future<dynamic> updateMenu(Map<String, dynamic> body, String menuId) async {
+    String? refreshToken = await _storage.read(key: "refreshToken");
+
+    if (refreshToken == null) {
+      throw Exception("Refresh token is null");
+    }
+
+    var headers = {
+      "Content-Type": "application/json",
+      "authorization": 'Bearer $refreshToken',
+    };
+
+    try {
+      Response response = await Dio().put(
+        ApiEndPoints.baseUrl +
+            ApiEndPoints.merchantEndpoints.singleMenu(menuId),
+        options: Options(
+          headers: headers,
+        ),
+        data: body,
+      );
+
+      return response;
+    } on DioError catch (e) {
+      return e.response;
+    } catch (e) {
+      print(e);
+      return e;
+    }
+  }
 }

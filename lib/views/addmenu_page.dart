@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vegytably_merchant/views/home_page.dart';
 import 'package:vegytably_merchant/widgets/input_text.dart';
 import 'package:dotted_border/dotted_border.dart';
 import '../controllers/menu_controller.dart';
@@ -399,8 +398,6 @@ class AddMenuPage extends StatelessWidget {
               height: 45,
               child: ElevatedButton(
                 onPressed: () {
-                  // Get.offAll(() => const HomePage(),
-                  //     transition: Transition.fade);
                   // Add Menu
                   menuController.addMenu(
                     nameController,
@@ -408,16 +405,16 @@ class AddMenuPage extends StatelessWidget {
                     priceController,
                   );
                 },
-                child: const Text(
-                  'Add Menu',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
                 style: ElevatedButton.styleFrom(
                   primary: const Color(0xff70cb88),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: const Text(
+                  'Add Menu',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),

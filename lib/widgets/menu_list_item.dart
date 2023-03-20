@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../controllers/menu_controller.dart';
+import '../models/menu_model.dart';
+import '../views/editmenu_page.dart';
 
 class MenuItem extends StatelessWidget {
-  final String? imageUrl;
-  final String name;
-  final double price;
-  // final String? restriction;
+  // final String? imageUrl;
+  // final String name;
+  // final double price;
+  // // final String? restriction;
+  final Menu menu;
 
   const MenuItem({
     super.key,
-    this.imageUrl,
-    required this.name,
-    required this.price,
-    // required this.restriction,
+    required this.menu,
   });
 
   @override
@@ -31,9 +34,9 @@ class MenuItem extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            imageUrl != null
+            menu.imageUrl != null
                 ? Image.network(
-                    imageUrl!,
+                    menu.imageUrl!,
                     width: 100,
                     height: 100,
                     loadingBuilder: (
@@ -66,13 +69,13 @@ class MenuItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            name,
+                            menu.name,
                             style: const TextStyle(
                                 fontSize: 15.0, fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 5),
                           Text(
-                            "Rp $price",
+                            "Rp ${menu.price}",
                             style: const TextStyle(
                                 fontSize: 13.0,
                                 fontWeight: FontWeight.w500,
@@ -84,13 +87,22 @@ class MenuItem extends StatelessWidget {
                             width: 200.0,
                           ),
                           const SizedBox(height: 8),
-                          const Text(
-                            "Edit Menu",
-                            style: TextStyle(
-                              fontSize: 11.0,
-                              fontWeight: FontWeight.w500,
-                              color: Color.fromARGB(129, 57, 56, 56),
-                              decoration: TextDecoration.underline,
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(() => EditMenuPage(menu: menu),
+                                  transition: Transition.fade);
+                              // set selected menu
+                              Get.find<MerchantMenuController>()
+                                  .setSelectedMenu(menu);
+                            },
+                            child: const Text(
+                              "Edit Menu",
+                              style: TextStyle(
+                                fontSize: 11.0,
+                                fontWeight: FontWeight.w500,
+                                color: Color.fromARGB(129, 57, 56, 56),
+                                decoration: TextDecoration.underline,
+                              ),
                             ),
                           ),
                         ]))),
