@@ -106,6 +106,9 @@ class MenuPage extends StatelessWidget {
                       var menuList = controller.menuList;
 
                       return ListView.builder(
+                        physics: const AlwaysScrollableScrollPhysics(
+                          parent: BouncingScrollPhysics(),
+                        ),
                         itemCount: menuList.length,
                         itemBuilder: (BuildContext context, index) {
                           var menuItem = menuList[index];
@@ -117,28 +120,21 @@ class MenuPage extends StatelessWidget {
                     },
                   ),
                   Positioned(
-                    bottom: 20,
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.85,
-                      height: 50,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          // add menu
-                          Get.to(() => AddMenuPage(),
-                              transition: Transition.fade);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          primary: const Color(0xff70cb88),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                        child: const Text(
-                          'Add Menu +',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
+                    right: 24,
+                    bottom: 32,
+                    child: MaterialButton(
+                      color: const Color(0xff70cb88),
+                      onPressed: () {
+                        Get.to(() => AddMenuPage(),
+                            transition: Transition.fade);
+                      },
+                      shape: const CircleBorder(),
+                      child: const Padding(
+                        padding: EdgeInsets.all(20.0),
+                        child: Icon(
+                          Icons.add,
+                          size: 36,
+                          color: Colors.white,
                         ),
                       ),
                     ),

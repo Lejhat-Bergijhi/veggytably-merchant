@@ -84,4 +84,34 @@ class MenuApi {
       return e;
     }
   }
+
+  Future<dynamic> deleteMenu(String menuId) async {
+    String? refreshToken = await _storage.read(key: "refreshToken");
+
+    if (refreshToken == null) {
+      throw Exception("Refresh token is null");
+    }
+
+    var headers = {
+      "Content-Type": "application/json",
+      "authorization": 'Bearer $refreshToken',
+    };
+
+    try {
+      Response response = await Dio().delete(
+        ApiEndPoints.baseUrl +
+            ApiEndPoints.merchantEndpoints.singleMenu(menuId),
+        options: Options(
+          headers: headers,
+        ),
+      );
+
+      return response;
+    } on DioError catch (e) {
+      return e.response;
+    } catch (e) {
+      print(e);
+      return e;
+    }
+  }
 }

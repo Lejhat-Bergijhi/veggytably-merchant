@@ -142,13 +142,6 @@ class MerchantMenuController extends GetxController {
       isLoading.value = true;
       update();
 
-      String? refreshToken = await _storage.read(key: "refreshToken");
-
-      if (refreshToken == null) {
-        throw Exception("Refresh token is null");
-      }
-      ;
-
       Map<String, dynamic> body = {
         "name": nameController.text,
         "price": double.tryParse(priceController.text.trim()) ?? 0,
@@ -169,6 +162,34 @@ class MerchantMenuController extends GetxController {
 
       Get.back();
       Get.snackbar("Success!", "Updated menu successfully.");
+    } catch (e) {
+      print(e);
+    } finally {
+      isLoading.value = false;
+      update();
+    }
+  }
+
+  Future<void> deleteMenu() async {
+    try {
+      isLoading.value = true;
+      update();
+
+      ;
+
+      Response response = await MenuApi.instance.deleteMenu(selectedMenu.id);
+
+      if (response.statusCode != 200) {
+        print(response);
+        String errorMessage = ExceptionResponse.getMessage(response.data);
+        throw Exception(errorMessage);
+      }
+
+      // refetch menu list
+      fetchMenuList();
+
+      Get.back();
+      Get.snackbar("Success!", "Deleted menu successfully.");
     } catch (e) {
       print(e);
     } finally {

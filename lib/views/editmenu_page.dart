@@ -69,7 +69,6 @@ class EditMenuPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 0),
                 child: ListView(
@@ -129,7 +128,6 @@ class EditMenuPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 30),
-
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -387,10 +385,26 @@ class EditMenuPage extends StatelessWidget {
                   ),
                 ],
               ),
-              // Input Email or Telephone Number
-              const SizedBox(height: 20),
-
-              const SizedBox(height: 40),
+              const SizedBox(
+                height: 32,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.85,
+                height: MediaQuery.of(context).size.height * 0.06,
+                child: ElevatedButton(
+                  onPressed: () {
+                    menuController.deleteMenu();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xffe74c3c),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: const Text("Delete Menu"),
+                ),
+              ),
+              const SizedBox(height: 150),
             ],
           ),
         ),
@@ -399,14 +413,11 @@ class EditMenuPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             SizedBox(height: MediaQuery.of(context).size.height * 0.8),
-            Container(
-              width: 300,
-              height: 45,
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.85,
+              height: MediaQuery.of(context).size.height * 0.06,
               child: ElevatedButton(
                 onPressed: () {
-                  // Get.offAll(() => const HomePage(),
-                  //     transition: Transition.fade);
-                  // update menu
                   menuController.updateMenu(
                     nameController,
                     descriptionController,
