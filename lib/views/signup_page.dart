@@ -60,7 +60,7 @@ class _SignUpPageState extends State<SignUpPage> {
             Container(
               width: 300,
               height: 45,
-              child: InputTextField(ownerUsernameController, "Your Name", 'Rubik',),
+              child: InputTextField(ownerUsernameController, "Your Name",),
             ),
             SizedBox(height: 10),
 
@@ -87,7 +87,7 @@ class _SignUpPageState extends State<SignUpPage> {
             Container(
               width: 300,
               height: 45,
-              child: InputTextField(telephoneController, "Telephone Number", 'Rubik',),
+              child: InputTextField(telephoneController, "Telephone Number",),
             ),
             SizedBox(height: 10),
 
@@ -122,7 +122,7 @@ class _SignUpPageState extends State<SignUpPage> {
               height: 45,
               child: InputTextField(
                 merchantUsernameController,
-                "Restaurant Name", 'Rubik',
+                "Restaurant Name",
               ),
             ),
             SizedBox(height: 10),
@@ -132,7 +132,7 @@ class _SignUpPageState extends State<SignUpPage> {
               height: 45,
               child: InputTextField(
                 addressController,
-                "Restaurant Address", 'Rubik',
+                "Restaurant Address",
               ),
             ),
             SizedBox(height: 10),
