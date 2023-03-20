@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vegytably_merchant/views/list_menu_page.dart';
+import 'package:vegytably_merchant/widgets/menu_list_item.dart';
 
 import '../controllers/menu_controller.dart';
 
@@ -84,11 +85,42 @@ class MenuPage extends StatelessWidget {
               ],
             ),
             // Body here
+            // Expanded(
+            //   child: Obx(
+            //     () => pages[_selectedIndex.value],
+            //   ),
+            // ),
             Expanded(
-              child: Obx(
-                () => pages[_selectedIndex.value],
+              child: GetBuilder<MerchantMenuController>(
+                builder: (controller) {
+                  if (controller.isLoading.value) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+
+                  if (controller.menuList.isEmpty) {
+                    return const Center(
+                      child: Text('No data'),
+                    );
+                  }
+
+                  var menuList = controller.menuList;
+
+                  return ListView.builder(
+                    itemCount: menuList.length,
+                    itemBuilder: (BuildContext context, index) {
+                      var menuItem = menuList[index];
+                      return MenuItem(
+                        name: menuItem.name,
+                        imageUrl: menuItem.imageUrl,
+                        price: menuItem.price,
+                      );
+                    },
+                  );
+                },
               ),
-            ),
+            )
           ],
         ),
       ),
