@@ -4,7 +4,8 @@ class InputTextField extends StatelessWidget {
   final TextEditingController textEditingController;
   final String hintText;
 
-  const InputTextField(this.textEditingController, this.hintText);
+  const InputTextField(
+      {required this.textEditingController, required this.hintText, this.fontFamily="Rubik"});
 
   @override
   Widget build(BuildContext context) {
@@ -12,23 +13,16 @@ class InputTextField extends StatelessWidget {
       //hint text color
       controller: textEditingController,
       decoration: InputDecoration(
-        //outline color
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color:Color(0xfff6f7fb), width: 0),
-          borderRadius: BorderRadius.circular(10),
-        ),
+
         filled: true,
-        fillColor: Color(0xfff6f7fb),
+        fillColor: const Color.fromARGB(255, 186, 192, 186).withOpacity(0.1),
         hintText: hintText,
-        hintStyle: TextStyle(
+        hintStyle: const TextStyle(
           color: Color(0xff9f9f9f),
-          fontFamily: 'Rubik',
         ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8 ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Color(0xfff6f7fb), width: 0),
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(
+              color: Color.fromARGB(255, 171, 174, 171), width: 1.0),
           borderRadius: BorderRadius.circular(10),
         ),
       ),

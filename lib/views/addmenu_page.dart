@@ -12,7 +12,6 @@ import '../widgets/menu_checkbox.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 
-
 class AddMenu extends StatelessWidget {
   final bool isChecked = false;
   const AddMenu({super.key});
@@ -399,6 +398,7 @@ class AddMenu extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(height: MediaQuery.of(context).size.height * 0.8),
+
             Container(
                   width: 300,
                   height: 45,
@@ -426,23 +426,22 @@ class AddMenu extends StatelessWidget {
         )
         ]
       ),
-      // bottomNavigationBar: Container(   
-      //       height: 87.7,                                          
-      //       decoration: BoxDecoration(          
-                                                   
+      // bottomNavigationBar: Container(
+      //       height: 87.7,
+      //       decoration: BoxDecoration(
+
       //           borderRadius: BorderRadius.only(topLeft: Radius.circular(25.50), topRight: Radius.circular(25.50), bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0), ),
-        
-      //           boxShadow: [                                                               
-      //           BoxShadow(color: Color.fromRGBO(0,0,0,230), spreadRadius: 0, blurRadius: 20),       
+
+      //           boxShadow: [
+      //           BoxShadow(color: Color.fromRGBO(0,0,0,230), spreadRadius: 0, blurRadius: 20),
       //           ],
 
-      //       ),               
+      //       ),
 
-      //       child: ClipRRect( 
-                
-                                                                         
+      //       child: ClipRRect(
+
       //           borderRadius: BorderRadius.only(topLeft: Radius.circular(25.50), topRight: Radius.circular(25.50), bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0), ),
-                                                                   
+
       //           child: CustomBottomNavigationBar(initialIndex: 3),
       //       )
       // )

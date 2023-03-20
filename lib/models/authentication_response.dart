@@ -1,3 +1,5 @@
+import 'user_model.dart';
+
 class AuthenticationResponse {
   late Data data;
 
@@ -16,47 +18,19 @@ class AuthenticationResponse {
 
 class Data {
   late User user;
-  late String accessToken;
   late String refreshToken;
 
-  Data(
-      {required this.user,
-      required this.accessToken,
-      required this.refreshToken});
+  Data({required this.user, required this.refreshToken});
 
   Data.fromJson(Map<String, dynamic> json) {
     user = User.fromJson(json['user']);
-    accessToken = json['accessToken'];
     refreshToken = json['refreshToken'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['user'] = user.toJson();
-    data['accessToken'] = accessToken;
     data['refreshToken'] = refreshToken;
-    return data;
-  }
-}
-
-class User {
-  late String id;
-  late String username;
-  late String email;
-
-  User({required this.id, required this.username, required this.email});
-
-  User.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    username = json['username'];
-    email = json['email'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['username'] = username;
-    data['email'] = email;
     return data;
   }
 }
