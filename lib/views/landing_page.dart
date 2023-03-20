@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vegytably_merchant/controllers/merchant_controller.dart';
+import 'package:vegytably_merchant/views/menu_page.dart';
 import 'package:vegytably_merchant/views/profile_page.dart';
 // import 'package:veggytably_customer/views/profile_page.dart';
 
@@ -13,8 +14,8 @@ class LandingPage extends StatelessWidget {
   final int initialIndex;
   final List<Widget> pages = [
     const HomePage(),
-    const Placeholder(), // discount
     const Placeholder(), // history
+    MenuPage(),
     const ProfilePage(),
   ];
   LandingPage({super.key, this.initialIndex = 0});
