@@ -4,18 +4,21 @@ class InputTextField extends StatelessWidget {
   final TextEditingController textEditingController;
   final String hintText;
   final String fontFamily;
+  final TextInputType? textInputType;
 
   const InputTextField({
     super.key,
     required this.textEditingController,
     required this.hintText,
     this.fontFamily = "Rubik",
+    this.textInputType = TextInputType.text,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       //hint text color
+      keyboardType: textInputType,
       controller: textEditingController,
       decoration: InputDecoration(
         filled: true,

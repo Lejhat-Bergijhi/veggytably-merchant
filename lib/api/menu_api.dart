@@ -28,4 +28,29 @@ class MenuApi {
       return e;
     }
   }
+
+  Future<dynamic> addMenu(
+      String refreshToken, Map<String, dynamic> body) async {
+    var headers = {
+      "Content-Type": "application/json",
+      "authorization": 'Bearer $refreshToken',
+    };
+
+    try {
+      Response response = await Dio().post(
+        ApiEndPoints.baseUrl + ApiEndPoints.merchantEndpoints.menu,
+        options: Options(
+          headers: headers,
+        ),
+        data: body,
+      );
+
+      return response;
+    } on DioError catch (e) {
+      return e.response;
+    } catch (e) {
+      print(e);
+      return e;
+    }
+  }
 }

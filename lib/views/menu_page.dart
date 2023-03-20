@@ -4,6 +4,7 @@ import 'package:vegytably_merchant/views/list_menu_page.dart';
 import 'package:vegytably_merchant/widgets/menu_list_item.dart';
 
 import '../controllers/menu_controller.dart';
+import 'addmenu_page.dart';
 
 class MenuPage extends StatelessWidget {
   final MerchantMenuController menuController =
@@ -84,41 +85,67 @@ class MenuPage extends StatelessWidget {
                 ),
               ],
             ),
-            // Body here
-            // Expanded(
-            //   child: Obx(
-            //     () => pages[_selectedIndex.value],
-            //   ),
-            // ),
             Expanded(
-              child: GetBuilder<MerchantMenuController>(
-                builder: (controller) {
-                  if (controller.isLoading.value) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  GetBuilder<MerchantMenuController>(
+                    builder: (controller) {
+                      if (controller.isLoading.value) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
 
-                  if (controller.menuList.isEmpty) {
-                    return const Center(
-                      child: Text('No data'),
-                    );
-                  }
+                      if (controller.menuList.isEmpty) {
+                        return const Center(
+                          child: Text('No data'),
+                        );
+                      }
 
-                  var menuList = controller.menuList;
+                      var menuList = controller.menuList;
 
-                  return ListView.builder(
-                    itemCount: menuList.length,
-                    itemBuilder: (BuildContext context, index) {
-                      var menuItem = menuList[index];
-                      return MenuItem(
-                        name: menuItem.name,
-                        imageUrl: menuItem.imageUrl,
-                        price: menuItem.price,
+                      return ListView.builder(
+                        itemCount: menuList.length,
+                        itemBuilder: (BuildContext context, index) {
+                          var menuItem = menuList[index];
+                          return MenuItem(
+                            name: menuItem.name,
+                            imageUrl: menuItem.imageUrl,
+                            price: menuItem.price,
+                          );
+                        },
                       );
                     },
-                  );
-                },
+                  ),
+                  Positioned(
+                    bottom: 20,
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.85,
+                      height: 50,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // add menu
+                          Get.to(() => AddMenuPage(),
+                              transition: Transition.fade);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: const Color(0xff70cb88),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: const Text(
+                          'Add Menu +',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             )
           ],
