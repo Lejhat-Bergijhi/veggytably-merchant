@@ -114,4 +114,36 @@ class MenuApi {
       return e;
     }
   }
+
+  Future<dynamic> uploadMenuImage(String filePath) async {
+    try {
+      String? refreshToken = await _storage.read(key: "refreshToken");
+
+      if (refreshToken == null) {
+        throw Exception("Refresh token is null");
+      }
+
+      FormData formData = FormData.fromMap({
+        "menu-image":
+            await MultipartFile.fromFile(filePath, filename: "menuImage.jpg")
+      });
+
+      Response response = await Dio().post(
+          ApiEndPoints.baseUrl + ApiEndPoints.merchantEndpoints.postMenuImage,
+          data: formData,
+          options: Options(
+            headers: <String, String>{
+              "authorization": "Bearer $refreshToken",
+              "Content-Type": "multipart/form-data",
+            },
+          ));
+
+      return response;
+    } on DioError catch (e) {
+      return e.response;
+    } catch (e) {
+      print(e);
+      return e;
+    }
+  }
 }

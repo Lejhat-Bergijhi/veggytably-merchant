@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:vegytably_merchant/views/home_page.dart';
 import 'package:vegytably_merchant/widgets/input_text.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -227,7 +228,7 @@ class EditMenuPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 5),
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width - 40 * 2,
                     child: DottedBorder(
                       dashPattern: const [8, 8],
@@ -241,9 +242,46 @@ class EditMenuPage extends StatelessWidget {
                                   height: 20,
                                 ),
                                 // Profile Image preview
-                                const Icon(
-                                  Icons.image_outlined,
-                                  size: 150,
+                                GetBuilder<MerchantMenuController>(
+                                  builder: (controller) {
+                                    if (controller.isLoading.value) {
+                                      // loading
+                                    }
+                                    if (controller
+                                        .uploadedImageUrl.value.isEmpty) {
+                                      // icon
+                                      const Icon(
+                                        Icons.image_outlined,
+                                        size: 150,
+                                      );
+                                    }
+                                    // network image
+                                    return Image.network(
+                                      controller.uploadedImageUrl.value,
+                                      width: 150,
+                                      height: 150,
+                                      loadingBuilder: (
+                                        BuildContext context,
+                                        Widget child,
+                                        ImageChunkEvent? loadingProgress,
+                                      ) {
+                                        if (loadingProgress == null) {
+                                          return child;
+                                        }
+                                        return const SizedBox(
+                                          width: 100,
+                                          height: 100,
+                                          child: Center(
+                                            child: CircularProgressIndicator(),
+                                          ),
+                                        );
+                                      },
+                                      errorBuilder:
+                                          (context, error, stackTrace) {
+                                        return Image.asset("assets/image7.png");
+                                      },
+                                    );
+                                  },
                                 ),
                                 const SizedBox(height: 19),
                                 const Text(
@@ -255,7 +293,7 @@ class EditMenuPage extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 19),
                                 // Camera Button
-                                Container(
+                                SizedBox(
                                   width: MediaQuery.of(context).size.width -
                                       40 * 2 -
                                       23 * 2,
@@ -270,7 +308,10 @@ class EditMenuPage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      menuController
+                                          .uploadImage(ImageSource.camera);
+                                    },
                                     child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
@@ -304,7 +345,7 @@ class EditMenuPage extends StatelessWidget {
                                   ),
                                 ),
                                 const SizedBox(height: 1),
-                                Container(
+                                SizedBox(
                                     width: MediaQuery.of(context).size.width -
                                         40 * 2 -
                                         23 * 2,
@@ -319,13 +360,16 @@ class EditMenuPage extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        menuController
+                                            .uploadImage(ImageSource.gallery);
+                                      },
                                       child: Row(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
                                           const Spacer(),
-                                          Container(
+                                          SizedBox(
                                               width: 22,
                                               height: 15,
                                               child: const Icon(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:vegytably_merchant/widgets/input_text.dart';
 import 'package:dotted_border/dotted_border.dart';
 import '../controllers/menu_controller.dart';
@@ -219,14 +220,14 @@ class AddMenuPage extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 40),
                     child: Column(
-                      children: [],
+                      children: const [],
                     ),
                   ),
                   const SizedBox(height: 5),
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width - 40 * 2,
                     child: DottedBorder(
-                      dashPattern: [8, 8],
+                      dashPattern: const [8, 8],
                       radius: const Radius.circular(8),
                       child: Container(
                           alignment: Alignment.center,
@@ -237,9 +238,46 @@ class AddMenuPage extends StatelessWidget {
                                   height: 20,
                                 ),
                                 // Profile Image preview
-                                const Icon(
-                                  Icons.image_outlined,
-                                  size: 150,
+                                GetBuilder<MerchantMenuController>(
+                                  builder: (controller) {
+                                    if (controller.isLoading.value) {
+                                      // loading
+                                    }
+                                    if (controller
+                                        .uploadedImageUrl.value.isEmpty) {
+                                      // icon
+                                      const Icon(
+                                        Icons.image_outlined,
+                                        size: 150,
+                                      );
+                                    }
+                                    // network image
+                                    return Image.network(
+                                      controller.uploadedImageUrl.value,
+                                      width: 150,
+                                      height: 150,
+                                      loadingBuilder: (
+                                        BuildContext context,
+                                        Widget child,
+                                        ImageChunkEvent? loadingProgress,
+                                      ) {
+                                        if (loadingProgress == null) {
+                                          return child;
+                                        }
+                                        return const SizedBox(
+                                          width: 100,
+                                          height: 100,
+                                          child: Center(
+                                            child: CircularProgressIndicator(),
+                                          ),
+                                        );
+                                      },
+                                      errorBuilder:
+                                          (context, error, stackTrace) {
+                                        return Image.asset("assets/image7.png");
+                                      },
+                                    );
+                                  },
                                 ),
                                 const SizedBox(height: 19),
                                 const Text(
@@ -251,7 +289,7 @@ class AddMenuPage extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 19),
                                 // Camera Button
-                                Container(
+                                SizedBox(
                                   width: MediaQuery.of(context).size.width -
                                       40 * 2 -
                                       23 * 2,
@@ -266,7 +304,10 @@ class AddMenuPage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      menuController
+                                          .uploadImage(ImageSource.camera);
+                                    },
                                     child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
@@ -300,7 +341,7 @@ class AddMenuPage extends StatelessWidget {
                                   ),
                                 ),
                                 const SizedBox(height: 1),
-                                Container(
+                                SizedBox(
                                     width: MediaQuery.of(context).size.width -
                                         40 * 2 -
                                         23 * 2,
@@ -315,23 +356,26 @@ class AddMenuPage extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        menuController
+                                            .uploadImage(ImageSource.gallery);
+                                      },
                                       child: Row(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
-                                        children: [
-                                          const Spacer(),
-                                          Container(
+                                        children: const [
+                                          Spacer(),
+                                          SizedBox(
                                               width: 22,
                                               height: 15,
-                                              child: const Icon(
+                                              child: Icon(
                                                 Icons.photo_library,
                                                 color: Color.fromARGB(
                                                     255, 0, 0, 0),
                                                 size: 20,
                                               )),
-                                          const SizedBox(width: 10),
-                                          const Text(
+                                          SizedBox(width: 10),
+                                          Text(
                                             "Gallery",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
@@ -339,7 +383,7 @@ class AddMenuPage extends StatelessWidget {
                                               fontSize: 15,
                                             ),
                                           ),
-                                          const Spacer(),
+                                          Spacer(),
                                         ],
                                       ),
                                     )),

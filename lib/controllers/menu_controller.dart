@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart' hide Response;
+import 'package:image_picker/image_picker.dart';
 import 'package:vegytably_merchant/api/menu_api.dart';
 
 import '../models/exception_response.dart';
@@ -22,6 +23,9 @@ class MerchantMenuController extends GetxController {
     merchantId: '',
   ).obs;
 
+  Rx<String> uploadedImageId = ''.obs;
+  Rx<String> uploadedImageUrl = ''.obs;
+
   Rx<bool> isLoading = false.obs;
 
   Menu get selectedMenu => _selectedMenu.value;
@@ -36,6 +40,17 @@ class MerchantMenuController extends GetxController {
   void onClose() {
     super.onClose();
     clearMenu();
+  }
+
+  void setUploadedImage(String imageId, String imageUrl) {
+    uploadedImageId.value = imageId;
+    uploadedImageUrl.value = imageUrl;
+    update();
+  }
+
+  void clearUploadedImage() {
+    uploadedImageId.value = "";
+    uploadedImageUrl.value = "";
   }
 
   void setSelectedMenu(Menu menu) {
@@ -110,6 +125,8 @@ class MerchantMenuController extends GetxController {
         "name": nameController.text,
         "price": double.tryParse(priceController.text.trim()) ?? 0,
         "description": descriptionController.text,
+        "imageId":
+            uploadedImageId.value.isNotEmpty ? uploadedImageId.value : null,
       };
 
       Response response = await MenuApi.instance.addMenu(refreshToken, body);
@@ -128,6 +145,7 @@ class MerchantMenuController extends GetxController {
     } catch (e) {
       print(e);
     } finally {
+      clearUploadedImage();
       isLoading.value = false;
       update();
     }
@@ -146,6 +164,8 @@ class MerchantMenuController extends GetxController {
         "name": nameController.text,
         "price": double.tryParse(priceController.text.trim()) ?? 0,
         "description": descriptionController.text,
+        "imageId":
+            uploadedImageId.value.isNotEmpty ? uploadedImageId.value : null,
       };
 
       Response response =
@@ -165,6 +185,7 @@ class MerchantMenuController extends GetxController {
     } catch (e) {
       print(e);
     } finally {
+      clearUploadedImage();
       isLoading.value = false;
       update();
     }
@@ -194,6 +215,37 @@ class MerchantMenuController extends GetxController {
       print(e);
     } finally {
       isLoading.value = false;
+      update();
+    }
+  }
+
+  void uploadImage(ImageSource imageSource) async {
+    try {
+      final pickedFile = await ImagePicker().pickImage(
+        source: imageSource,
+        preferredCameraDevice: CameraDevice.front,
+        imageQuality: 50,
+      );
+      isLoading(true);
+      update();
+      if (pickedFile != null) {
+        var response = await MenuApi.instance.uploadMenuImage(pickedFile.path);
+
+        if (response.statusCode == 200) {
+          String imageId = response.data["data"]["imageId"];
+          String imageUrl = response.data["data"]["imageUrl"];
+
+          setUploadedImage(imageId, imageUrl);
+
+          Get.snackbar('Success', 'Image uploaded successfully');
+        } else {
+          Get.snackbar('Failed', 'Error Code: ${response.statusCode}');
+        }
+      } else {
+        Get.snackbar('Failed', 'Image not selected');
+      }
+    } finally {
+      isLoading(false);
       update();
     }
   }
