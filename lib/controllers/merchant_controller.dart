@@ -6,7 +6,6 @@ import 'package:get/get.dart' hide Response;
 import '../api/merchant_api.dart';
 import '../models/exception_response.dart';
 import '../models/merchant.dart';
-import '../views/landing_page.dart';
 import '../views/login_page.dart';
 import 'auth_controller.dart';
 

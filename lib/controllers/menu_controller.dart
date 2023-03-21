@@ -160,8 +160,6 @@ class MerchantMenuController extends GetxController {
         throw Exception(errorMessage);
       }
 
-      print(response);
-
       Menu menu = Menu.fromJson(response.data["data"]["menu"]);
 
       menuByStock[menu.inStock ? 'ready' : 'notReady']!.add(menu);
@@ -169,7 +167,7 @@ class MerchantMenuController extends GetxController {
 
       Get.back();
     } catch (e) {
-      print(e);
+      Get.snackbar("Failed", "$e");
     } finally {
       clearUploadedImage();
       isLoading.value = false;
@@ -212,7 +210,7 @@ class MerchantMenuController extends GetxController {
       Get.back();
       Get.snackbar("Success!", "Updated menu successfully.");
     } catch (e) {
-      print(e);
+      Get.snackbar("Failed", "$e");
     } finally {
       clearUploadedImage();
       isLoading.value = false;

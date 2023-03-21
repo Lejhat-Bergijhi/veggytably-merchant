@@ -248,12 +248,17 @@ class EditMenuPage extends StatelessWidget {
                                 GetBuilder<MerchantMenuController>(
                                   builder: (controller) {
                                     if (controller.isLoading.value) {
-                                      // loading
+                                      return const SizedBox(
+                                        width: 100,
+                                        height: 100,
+                                        child: Center(
+                                          child: CircularProgressIndicator(),
+                                        ),
+                                      );
                                     }
                                     if (controller
                                         .uploadedImageUrl.value.isEmpty) {
-                                      // icon
-                                      const Icon(
+                                      return const Icon(
                                         Icons.image_outlined,
                                         size: 150,
                                       );
@@ -451,63 +456,48 @@ class EditMenuPage extends StatelessWidget {
                   child: const Text("Delete Menu"),
                 ),
               ),
-              const SizedBox(height: 150),
+              const SizedBox(height: 116),
             ],
           ),
         ),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            SizedBox(height: MediaQuery.of(context).size.height * 0.8),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.85,
-              height: MediaQuery.of(context).size.height * 0.06,
-              child: ElevatedButton(
-                onPressed: () {
-                  menuController.updateMenu(
-                    nameController,
-                    descriptionController,
-                    priceController,
-                    inStock.value,
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xff70cb88),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+        Visibility(
+          visible: MediaQuery.of(context).viewInsets.bottom == 0,
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              SizedBox(height: MediaQuery.of(context).size.height * 0.8),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.85,
+                height: MediaQuery.of(context).size.height * 0.06,
+                child: ElevatedButton(
+                  onPressed: () {
+                    menuController.updateMenu(
+                      nameController,
+                      descriptionController,
+                      priceController,
+                      inStock.value,
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xff70cb88),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
-                ),
-                child: const Text(
-                  'Save Changes',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+                  child: const Text(
+                    'Save Changes',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ]),
+            ]),
+          ),
         )
       ]),
-      // bottomNavigationBar: Container(
-      //       height: 87.7,
-      //       decoration: BoxDecoration(
-
-      //           borderRadius: BorderRadius.only(topLeft: Radius.circular(25.50), topRight: Radius.circular(25.50), bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0), ),
-
-      //           boxShadow: [
-      //           BoxShadow(color: Color.fromRGBO(0,0,0,230), spreadRadius: 0, blurRadius: 20),
-      //           ],
-
-      //       ),
-
-      //       child: ClipRRect(
-
-      //           borderRadius: BorderRadius.only(topLeft: Radius.circular(25.50), topRight: Radius.circular(25.50), bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0), ),
-
-      //           child: CustomBottomNavigationBar(initialIndex: 3),
-      //       )
-      // )
     );
   }
 }
