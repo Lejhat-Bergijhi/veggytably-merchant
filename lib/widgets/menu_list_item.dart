@@ -6,15 +6,13 @@ import '../models/menu_model.dart';
 import '../views/editmenu_page.dart';
 
 class MenuItem extends StatelessWidget {
-  // final String? imageUrl;
-  // final String name;
-  // final double price;
-  // // final String? restriction;
   final Menu menu;
+  final bool inStock;
 
   const MenuItem({
     super.key,
     required this.menu,
+    required this.inStock,
   });
 
   @override
@@ -35,31 +33,39 @@ class MenuItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             menu.imageUrl != null
-                ? Image.network(
-                    menu.imageUrl!,
-                    width: 100,
-                    height: 100,
-                    loadingBuilder: (
-                      BuildContext context,
-                      Widget child,
-                      ImageChunkEvent? loadingProgress,
-                    ) {
-                      if (loadingProgress == null) return child;
-                      return const SizedBox(
-                        width: 100,
-                        height: 100,
-                        child: Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
-                    },
-                    errorBuilder: (context, error, stackTrace) {
-                      return Image.asset("assets/image7.png");
-                    },
+                ? GreyOverlay(
+                    isGrey: !inStock,
+                    child: Image.network(
+                      menu.imageUrl!,
+                      width: 100,
+                      height: 100,
+                      loadingBuilder: (
+                        BuildContext context,
+                        Widget child,
+                        ImageChunkEvent? loadingProgress,
+                      ) {
+                        if (loadingProgress == null) return child;
+                        return const SizedBox(
+                          width: 100,
+                          height: 100,
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      },
+                      errorBuilder: (context, error, stackTrace) {
+                        return GreyOverlay(
+                            isGrey: !inStock,
+                            child: Image.asset("assets/image7.png"));
+                      },
+                    ),
                   )
-                : Image.asset(
-                    "assets/image7.png",
-                    width: 100,
+                : GreyOverlay(
+                    isGrey: !inStock,
+                    child: Image.asset(
+                      "assets/image7.png",
+                      width: 100,
+                    ),
                   ),
             Container(
                 padding: const EdgeInsets.all(5),
@@ -111,5 +117,29 @@ class MenuItem extends StatelessWidget {
       ),
     );
     //Divider();
+  }
+}
+
+class GreyOverlay extends StatelessWidget {
+  final Widget child;
+  final bool isGrey;
+
+  const GreyOverlay({
+    required this.child,
+    super.key,
+    this.isGrey = true,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return isGrey
+        ? ColorFiltered(
+            colorFilter: const ColorFilter.mode(
+              Colors.white,
+              BlendMode.saturation,
+            ),
+            child: child,
+          )
+        : child;
   }
 }

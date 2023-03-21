@@ -12,7 +12,8 @@ class AddMenuPage extends StatelessWidget {
   final TextEditingController priceController = TextEditingController();
   final MerchantMenuController menuController =
       Get.put(MerchantMenuController());
-  final bool isChecked = false;
+  // final bool isChecked = false;
+  RxBool inStock = true.obs;
 
   AddMenuPage({super.key});
 
@@ -87,36 +88,39 @@ class AddMenuPage extends StatelessWidget {
                             width: 1,
                           ),
                         ),
-                        child: CheckboxListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                'Menu Ready Stock',
-                                style: TextStyle(
-                                  color: Color(0xff2f0808),
-                                  fontSize: 15,
-                                  fontFamily: "Rubik",
-                                  fontWeight: FontWeight.w600,
+                        child: Obx(
+                          () => CheckboxListTile(
+                            title: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: const [
+                                Text(
+                                  'Menu Ready Stock',
+                                  style: TextStyle(
+                                    color: Color(0xff2f0808),
+                                    fontSize: 15,
+                                    fontFamily: "Rubik",
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 4),
-                              Text(
-                                'Check the box whenever you’re ready to serve this menu!',
-                                style: TextStyle(
-                                  color: Color(0xff9f9f9f),
-                                  fontSize: 12,
-                                  fontFamily: "Rubik",
-                                  fontWeight: FontWeight.w600,
+                                SizedBox(height: 4),
+                                Text(
+                                  'Check the box whenever you’re ready to serve this menu!',
+                                  style: TextStyle(
+                                    color: Color(0xff9f9f9f),
+                                    fontSize: 12,
+                                    fontFamily: "Rubik",
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
+                            controlAffinity: ListTileControlAffinity.trailing,
+                            value: inStock.value,
+                            onChanged: (bool? value) {
+                              // isChecked = !isChecked;
+                              inStock.value = !inStock.value;
+                            },
                           ),
-                          controlAffinity: ListTileControlAffinity.trailing,
-                          value: isChecked,
-                          onChanged: (bool? value) {
-                            // isChecked = !isChecked;
-                          },
                         ),
                       ),
                     )
@@ -447,6 +451,7 @@ class AddMenuPage extends StatelessWidget {
                     nameController,
                     descriptionController,
                     priceController,
+                    inStock.value,
                   );
                 },
                 style: ElevatedButton.styleFrom(

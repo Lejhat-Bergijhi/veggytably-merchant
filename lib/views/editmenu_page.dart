@@ -17,11 +17,12 @@ class EditMenuPage extends StatelessWidget {
   final TextEditingController descriptionController;
   final TextEditingController priceController;
 
-  final bool isChecked = false;
+  RxBool inStock;
   EditMenuPage({super.key, required this.menu})
       : nameController = TextEditingController(text: menu.name),
         descriptionController = TextEditingController(text: menu.description),
-        priceController = TextEditingController(text: menu.price.toString());
+        priceController = TextEditingController(text: menu.price.toString()),
+        inStock = menu.inStock.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -92,36 +93,38 @@ class EditMenuPage extends StatelessWidget {
                             width: 1,
                           ),
                         ),
-                        child: CheckboxListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                'Menu Ready Stock',
-                                style: TextStyle(
-                                  color: Color(0xff2f0808),
-                                  fontSize: 15,
-                                  fontFamily: "Rubik",
-                                  fontWeight: FontWeight.w600,
+                        child: Obx(
+                          () => CheckboxListTile(
+                            title: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: const [
+                                Text(
+                                  'Menu Ready Stock',
+                                  style: TextStyle(
+                                    color: Color(0xff2f0808),
+                                    fontSize: 15,
+                                    fontFamily: "Rubik",
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(height: 4),
-                              Text(
-                                'Check the box whenever you’re ready to serve this menu!',
-                                style: TextStyle(
-                                  color: Color(0xff9f9f9f),
-                                  fontSize: 12,
-                                  fontFamily: "Rubik",
-                                  fontWeight: FontWeight.w600,
+                                SizedBox(height: 4),
+                                Text(
+                                  'Check the box whenever you’re ready to serve this menu!',
+                                  style: TextStyle(
+                                    color: Color(0xff9f9f9f),
+                                    fontSize: 12,
+                                    fontFamily: "Rubik",
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
+                            controlAffinity: ListTileControlAffinity.trailing,
+                            value: inStock.value,
+                            onChanged: (bool? value) {
+                              inStock.value = !inStock.value;
+                            },
                           ),
-                          controlAffinity: ListTileControlAffinity.trailing,
-                          value: isChecked,
-                          onChanged: (bool? value) {
-                            // isChecked = !isChecked;
-                          },
                         ),
                       ),
                     )
@@ -367,19 +370,19 @@ class EditMenuPage extends StatelessWidget {
                                       child: Row(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
-                                        children: [
-                                          const Spacer(),
+                                        children: const [
+                                          Spacer(),
                                           SizedBox(
                                               width: 22,
                                               height: 15,
-                                              child: const Icon(
+                                              child: Icon(
                                                 Icons.photo_library,
                                                 color: Color.fromARGB(
                                                     255, 0, 0, 0),
                                                 size: 20,
                                               )),
-                                          const SizedBox(width: 10),
-                                          const Text(
+                                          SizedBox(width: 10),
+                                          Text(
                                             "Gallery",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
@@ -387,7 +390,7 @@ class EditMenuPage extends StatelessWidget {
                                               fontSize: 15,
                                             ),
                                           ),
-                                          const Spacer(),
+                                          Spacer(),
                                         ],
                                       ),
                                     )),
@@ -466,18 +469,19 @@ class EditMenuPage extends StatelessWidget {
                     nameController,
                     descriptionController,
                     priceController,
+                    inStock.value,
                   );
                 },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xff70cb88),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
                 child: const Text(
                   'Save Changes',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: const Color(0xff70cb88),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
                   ),
                 ),
               ),

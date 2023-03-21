@@ -12,6 +12,11 @@ class MerchantMenuController extends GetxController {
   static MerchantMenuController to = Get.find();
   final _storage = const FlutterSecureStorage();
 
+  Map<String, List<Menu>> menuByStock = {
+    'ready': <Menu>[],
+    'notReady': <Menu>[],
+  }.obs;
+
   RxList<Menu> menuList = <Menu>[].obs;
   final Rx<Menu> _selectedMenu = Menu(
     id: '',
@@ -21,12 +26,14 @@ class MerchantMenuController extends GetxController {
     imageId: '',
     imageUrl: '',
     merchantId: '',
+    inStock: false,
   ).obs;
 
   Rx<String> uploadedImageId = ''.obs;
   Rx<String> uploadedImageUrl = ''.obs;
 
   Rx<bool> isLoading = false.obs;
+  RxBool viewReadyStock = true.obs;
 
   Menu get selectedMenu => _selectedMenu.value;
 
@@ -59,7 +66,20 @@ class MerchantMenuController extends GetxController {
   }
 
   void setMenuList(List<Menu> menu) {
-    menuList.value = menu;
+    // menuList.value = menu;
+
+    menuByStock['ready'] =
+        menu.where((element) => element.inStock == true).toList();
+    menuByStock['notReady'] =
+        menu.where((element) => element.inStock == false).toList();
+
+    update();
+  }
+
+  void setView(bool readyStock) {
+    viewReadyStock.value = readyStock;
+    menuList.value = menuByStock[readyStock ? 'ready' : 'notReady']!;
+
     update();
   }
 
@@ -72,6 +92,7 @@ class MerchantMenuController extends GetxController {
       imageId: '',
       imageUrl: '',
       merchantId: '',
+      inStock: false,
     );
     update();
   }
@@ -97,6 +118,7 @@ class MerchantMenuController extends GetxController {
           Menu.fromJsonList(response.data["data"]["menuList"]);
 
       setMenuList(menuList);
+      setView(true);
     } catch (e) {
       print(e);
     } finally {
@@ -109,6 +131,7 @@ class MerchantMenuController extends GetxController {
     TextEditingController nameController,
     TextEditingController descriptionController,
     TextEditingController priceController,
+    bool inStock,
   ) async {
     try {
       isLoading.value = true;
@@ -127,6 +150,7 @@ class MerchantMenuController extends GetxController {
         "description": descriptionController.text,
         "imageId":
             uploadedImageId.value.isNotEmpty ? uploadedImageId.value : null,
+        "inStock": inStock,
       };
 
       Response response = await MenuApi.instance.addMenu(refreshToken, body);
@@ -139,7 +163,9 @@ class MerchantMenuController extends GetxController {
       print(response);
 
       Menu menu = Menu.fromJson(response.data["data"]["menu"]);
-      menuList.add(menu);
+
+      menuByStock[menu.inStock ? 'ready' : 'notReady']!.add(menu);
+      clearUploadedImage();
 
       Get.back();
     } catch (e) {
@@ -155,6 +181,7 @@ class MerchantMenuController extends GetxController {
     TextEditingController nameController,
     TextEditingController descriptionController,
     TextEditingController priceController,
+    bool inStock,
   ) async {
     try {
       isLoading.value = true;
@@ -166,6 +193,7 @@ class MerchantMenuController extends GetxController {
         "description": descriptionController.text,
         "imageId":
             uploadedImageId.value.isNotEmpty ? uploadedImageId.value : null,
+        "inStock": inStock,
       };
 
       Response response =
@@ -179,6 +207,7 @@ class MerchantMenuController extends GetxController {
 
       // refetch menu list
       fetchMenuList();
+      setView(true);
 
       Get.back();
       Get.snackbar("Success!", "Updated menu successfully.");

@@ -6,6 +6,7 @@ class Menu {
   final String? imageId;
   final String? imageUrl;
   final String merchantId;
+  late final bool inStock;
   // Restriction?
 
   Menu({
@@ -16,6 +17,7 @@ class Menu {
     this.imageId,
     this.imageUrl,
     required this.merchantId,
+    required this.inStock,
   });
 
   factory Menu.fromJson(Map<String, dynamic> json) {
@@ -27,6 +29,7 @@ class Menu {
       imageId: json['imageId'],
       imageUrl: json['imageUrl'],
       merchantId: json['merchantId'],
+      inStock: json['inStock'] ?? false,
     );
   }
 
