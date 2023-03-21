@@ -9,13 +9,13 @@ environment:
 dependencies:
   dio: ^5.0.1
   dotted_border: ^2.0.0+3
+  email_validator: ^2.1.17
   flutter:
     sdk: flutter
   flutter_secure_storage: ^8.0.0
   get: ^4.6.5
   http: ^0.13.5
-  image_picker: ^0.8.6+4
-  email_validator: ^2.1.17
+  image_picker: ^0.8.7
 
 dev_dependencies:
   flutter_lints: ^2.0.0

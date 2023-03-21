@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vegytably_merchant/views/list_menu_page.dart';
+import 'package:vegytably_merchant/widgets/menu_list_item.dart';
+
+import '../controllers/menu_controller.dart';
+import 'addmenu_page.dart';
 
 class MenuPage extends StatelessWidget {
-  final int initialIndex;
-  final List<Widget> pages = [
-    const ListMenuReadyPage(),
-    const Placeholder(),
-  ];
+  final MerchantMenuController menuController =
+      Get.put(MerchantMenuController());
 
-  late final RxInt _selectedIndex = initialIndex.obs;
+  MenuPage({super.key});
 
-  MenuPage({super.key, this.initialIndex = 0});
-
-  void setSelectedIndex(int index) {
-    if (_selectedIndex.value != index) {
-      _selectedIndex.value = index;
+  TextStyle setTextStyle(bool selected) {
+    if (selected) {
+      return const TextStyle(
+        fontSize: 15,
+        fontWeight: FontWeight.w400,
+        color: Colors.black,
+        decoration: TextDecoration.underline,
+      );
+    } else {
+      return const TextStyle(
+        fontSize: 15,
+        fontWeight: FontWeight.w400,
+        color: Colors.black,
+      );
     }
   }
 
@@ -46,44 +55,90 @@ class MenuPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: TextButton(
-                    onPressed: () {
-                      setSelectedIndex(0);
-                    },
-                    child: const Text(
-                      'Ready Stock',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black,
-                        decoration: TextDecoration.underline,
-                      ),
-                    ),
-                  ),
+                      onPressed: () {
+                        menuController.setView(true);
+                      },
+                      child: Obx(
+                        () => Text(
+                          'Ready Stock',
+                          style:
+                              setTextStyle(menuController.viewReadyStock.value),
+                        ),
+                      )),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4.0),
                   child: TextButton(
                     onPressed: () {
-                      setSelectedIndex(1);
+                      menuController.setView(false);
                     },
-                    child: const Text(
-                      'Out of Stock',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w400,
-                        color: Color.fromARGB(185, 103, 102, 102),
+                    child: Obx(
+                      () => Text(
+                        'Out of Stock',
+                        style:
+                            setTextStyle(!menuController.viewReadyStock.value),
                       ),
                     ),
                   ),
                 ),
               ],
             ),
-            // Body here
             Expanded(
-              child: Obx(
-                () => pages[_selectedIndex.value],
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  GetBuilder<MerchantMenuController>(
+                    builder: (controller) {
+                      if (menuController.isLoading.value) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+
+                      if (menuController.menuList.isEmpty) {
+                        return const Center(
+                          child: Text('No data'),
+                        );
+                      }
+
+                      return ListView.builder(
+                        physics: const AlwaysScrollableScrollPhysics(
+                          parent: BouncingScrollPhysics(),
+                        ),
+                        itemCount: controller.menuList.length,
+                        itemBuilder: (BuildContext context, index) {
+                          var menuItem = controller.menuList[index];
+                          return MenuItem(
+                            menu: menuItem,
+                            inStock: controller.viewReadyStock.value,
+                          );
+                        },
+                      );
+                    },
+                  ),
+                  Positioned(
+                    right: 24,
+                    bottom: 32,
+                    child: MaterialButton(
+                      color: const Color(0xff70cb88),
+                      onPressed: () {
+                        Get.to(() => AddMenuPage(),
+                            transition: Transition.fade);
+                      },
+                      shape: const CircleBorder(),
+                      child: const Padding(
+                        padding: EdgeInsets.all(20.0),
+                        child: Icon(
+                          Icons.add,
+                          size: 36,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
+            )
           ],
         ),
       ),

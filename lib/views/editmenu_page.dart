@@ -1,25 +1,31 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:vegytably_merchant/views/home_page.dart';
-import 'package:vegytably_merchant/widgets/bottom_navbar.dart';
-import 'package:vegytably_merchant/widgets/profile_menu.dart';
-import 'package:vegytably_merchant/widgets/upload_pic.dart';
 import 'package:vegytably_merchant/widgets/input_text.dart';
 import 'package:dotted_border/dotted_border.dart';
+import '../controllers/menu_controller.dart';
+import '../models/menu_model.dart';
 import '../widgets/menu_checkbox.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
-class EditMenu extends StatelessWidget {
-  final bool isChecked = false;
-  const EditMenu({super.key});
+class EditMenuPage extends StatelessWidget {
+  final MerchantMenuController menuController = Get.find();
+
+  final Menu menu;
+
+  final TextEditingController nameController;
+  final TextEditingController descriptionController;
+  final TextEditingController priceController;
+
+  RxBool inStock;
+  EditMenuPage({super.key, required this.menu})
+      : nameController = TextEditingController(text: menu.name),
+        descriptionController = TextEditingController(text: menu.description),
+        priceController = TextEditingController(text: menu.price.toString()),
+        inStock = menu.inStock.obs;
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController nameFoodController = TextEditingController();
-    TextEditingController descController = TextEditingController();
-    TextEditingController priceController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -47,12 +53,12 @@ class EditMenu extends StatelessWidget {
         toolbarHeight: 50,
         leadingWidth: 30,
       ),
-      backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+      backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       body: Stack(children: [
         Container(
-          padding: EdgeInsets.only(top: 11, left: 40, right: 40),
+          padding: const EdgeInsets.only(top: 11, left: 40, right: 40),
           child: ListView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             children: [
               Container(
                 alignment: Alignment.centerLeft,
@@ -64,8 +70,7 @@ class EditMenu extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
-
+              const SizedBox(height: 20),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 0),
                 child: ListView(
@@ -84,15 +89,15 @@ class EditMenu extends StatelessWidget {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(
-                            color: Color(0xff70CB88),
+                            color: const Color(0xff70CB88),
                             width: 1,
                           ),
                         ),
-                        child: CheckboxListTile(
-                          title: Container(
-                            child: Column(
+                        child: Obx(
+                          () => CheckboxListTile(
+                            title: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
+                              children: const [
                                 Text(
                                   'Menu Ready Stock',
                                   style: TextStyle(
@@ -114,24 +119,23 @@ class EditMenu extends StatelessWidget {
                                 ),
                               ],
                             ),
+                            controlAffinity: ListTileControlAffinity.trailing,
+                            value: inStock.value,
+                            onChanged: (bool? value) {
+                              inStock.value = !inStock.value;
+                            },
                           ),
-                          controlAffinity: ListTileControlAffinity.trailing,
-                          value: isChecked,
-                          onChanged: (bool? value) {
-                            // isChecked = !isChecked;
-                          },
                         ),
                       ),
                     )
                   ],
                 ),
               ),
-              SizedBox(height: 30),
-
+              const SizedBox(height: 30),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "TITLE",
                     style: TextStyle(
                       color: Color(0xff9f9f9f),
@@ -141,16 +145,16 @@ class EditMenu extends StatelessWidget {
                     ),
                     textAlign: TextAlign.left,
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Container(
                     // width: 300,
                     child: InputTextField(
-                      textEditingController: nameFoodController,
+                      textEditingController: nameController,
                       hintText: 'Cth: Ayam goyang + Nasi',
                     ),
                   ),
-                  SizedBox(height: 30),
-                  Text(
+                  const SizedBox(height: 30),
+                  const Text(
                     "DESKRIPSI",
                     style: TextStyle(
                       color: Color(0xff9f9f9f),
@@ -160,24 +164,24 @@ class EditMenu extends StatelessWidget {
                     ),
                     textAlign: TextAlign.left,
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Container(
                     child: TextField(
                       //hint text color
                       maxLines: 3,
-                      controller: descController,
+                      controller: descriptionController,
                       decoration: InputDecoration(
                         //outline color
                         enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Color(0xfff6f7fb), width: 0),
+                          borderSide: const BorderSide(
+                              color: Color(0xfff6f7fb), width: 0),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         filled: true,
-                        fillColor: Color(0xfff6f7fb),
+                        fillColor: const Color(0xfff6f7fb),
                         hintText:
                             "Cth: Ayam digoyang-goyangin dengan oreo vanila",
-                        hintStyle: TextStyle(
+                        hintStyle: const TextStyle(
                           color: Color(0xff9f9f9f),
                           fontFamily: 'Rubik',
                         ),
@@ -185,15 +189,15 @@ class EditMenu extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Color(0xfff6f7fb), width: 0),
+                          borderSide: const BorderSide(
+                              color: Color(0xfff6f7fb), width: 0),
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 30),
-                  Text(
+                  const SizedBox(height: 30),
+                  const Text(
                     "PRICE",
                     style: TextStyle(
                       color: Color(0xff9f9f9f),
@@ -203,16 +207,14 @@ class EditMenu extends StatelessWidget {
                     ),
                     textAlign: TextAlign.left,
                   ),
-                  SizedBox(height: 5),
-                  Container(
-                    // width: 300,
-                    child: InputTextField(
-                      textEditingController: priceController,
-                      hintText: 'Cth: 21.999',
-                    ),
+                  const SizedBox(height: 5),
+                  InputTextField(
+                    textInputType: TextInputType.number,
+                    textEditingController: priceController,
+                    hintText: 'Cth: 21.999',
                   ),
-                  SizedBox(height: 30),
-                  Text(
+                  const SizedBox(height: 30),
+                  const Text(
                     "MENU PICTURE",
                     style: TextStyle(
                       color: Color(0xff9f9f9f),
@@ -223,61 +225,106 @@ class EditMenu extends StatelessWidget {
                     textAlign: TextAlign.left,
                   ),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 40),
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
                     child: Column(
-                      children: [],
+                      children: const [],
                     ),
                   ),
-                  SizedBox(height: 5),
-                  Container(
+                  const SizedBox(height: 5),
+                  SizedBox(
                     width: MediaQuery.of(context).size.width - 40 * 2,
                     child: DottedBorder(
-                      dashPattern: [8, 8],
-                      radius: Radius.circular(8),
+                      dashPattern: const [8, 8],
+                      radius: const Radius.circular(8),
                       child: Container(
                           alignment: Alignment.center,
                           child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SizedBox(
+                                const SizedBox(
                                   height: 20,
                                 ),
                                 // Profile Image preview
-                                Icon(
-                                  Icons.image_outlined,
-                                  size: 150,
+                                GetBuilder<MerchantMenuController>(
+                                  builder: (controller) {
+                                    if (controller.isLoading.value) {
+                                      return const SizedBox(
+                                        width: 100,
+                                        height: 100,
+                                        child: Center(
+                                          child: CircularProgressIndicator(),
+                                        ),
+                                      );
+                                    }
+                                    if (controller
+                                        .uploadedImageUrl.value.isEmpty) {
+                                      return const Icon(
+                                        Icons.image_outlined,
+                                        size: 150,
+                                      );
+                                    }
+                                    // network image
+                                    return Image.network(
+                                      controller.uploadedImageUrl.value,
+                                      width: 150,
+                                      height: 150,
+                                      loadingBuilder: (
+                                        BuildContext context,
+                                        Widget child,
+                                        ImageChunkEvent? loadingProgress,
+                                      ) {
+                                        if (loadingProgress == null) {
+                                          return child;
+                                        }
+                                        return const SizedBox(
+                                          width: 100,
+                                          height: 100,
+                                          child: Center(
+                                            child: CircularProgressIndicator(),
+                                          ),
+                                        );
+                                      },
+                                      errorBuilder:
+                                          (context, error, stackTrace) {
+                                        return Image.asset("assets/image7.png");
+                                      },
+                                    );
+                                  },
                                 ),
-                                SizedBox(height: 19),
-                                Text(
+                                const SizedBox(height: 19),
+                                const Text(
                                   "Upload Image From Your Device",
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 15,
                                   ),
                                 ),
-                                SizedBox(height: 19),
+                                const SizedBox(height: 19),
                                 // Camera Button
-                                Container(
+                                SizedBox(
                                   width: MediaQuery.of(context).size.width -
                                       40 * 2 -
                                       23 * 2,
                                   height: 36,
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                      primary: Color(0xffefefef),
-                                      shape: RoundedRectangleBorder(
+                                      primary: const Color(0xffefefef),
+                                      shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.only(
                                           topLeft: Radius.circular(8),
                                           topRight: Radius.circular(8),
                                         ),
                                       ),
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      menuController
+                                          .uploadImage(ImageSource.camera);
+                                    },
                                     child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        Spacer(),
+                                        const Spacer(),
                                         Container(
                                             width: 20,
                                             height: 18,
@@ -285,14 +332,14 @@ class EditMenu extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(8),
                                             ),
-                                            child: Icon(
+                                            child: const Icon(
                                               Icons.camera_alt,
                                               color:
                                                   Color.fromARGB(255, 0, 0, 0),
                                               size: 20,
                                             )),
-                                        SizedBox(width: 10),
-                                        Text(
+                                        const SizedBox(width: 10),
+                                        const Text(
                                           "Camera",
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
@@ -300,34 +347,37 @@ class EditMenu extends StatelessWidget {
                                             fontSize: 15,
                                           ),
                                         ),
-                                        Spacer(),
+                                        const Spacer(),
                                       ],
                                     ),
                                   ),
                                 ),
-                                SizedBox(height: 1),
-                                Container(
+                                const SizedBox(height: 1),
+                                SizedBox(
                                     width: MediaQuery.of(context).size.width -
                                         40 * 2 -
                                         23 * 2,
                                     height: 36,
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        primary: Color(0xffefefef),
-                                        shape: RoundedRectangleBorder(
+                                        primary: const Color(0xffefefef),
+                                        shape: const RoundedRectangleBorder(
                                           borderRadius: BorderRadius.only(
                                             bottomLeft: Radius.circular(8),
                                             bottomRight: Radius.circular(8),
                                           ),
                                         ),
                                       ),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        menuController
+                                            .uploadImage(ImageSource.gallery);
+                                      },
                                       child: Row(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
-                                        children: [
+                                        children: const [
                                           Spacer(),
-                                          Container(
+                                          SizedBox(
                                               width: 22,
                                               height: 15,
                                               child: Icon(
@@ -349,12 +399,12 @@ class EditMenu extends StatelessWidget {
                                         ],
                                       ),
                                     )),
-                                SizedBox(height: 24),
+                                const SizedBox(height: 24),
                               ])),
                     ),
                   ),
-                  SizedBox(height: 30),
-                  Text(
+                  const SizedBox(height: 30),
+                  const Text(
                     "FOOD REQUIREMENT",
                     style: TextStyle(
                       color: Color(0xff9f9f9f),
@@ -364,10 +414,11 @@ class EditMenu extends StatelessWidget {
                     ),
                     textAlign: TextAlign.left,
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 0),
                     child: ListView(
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       children: [
                         MenuCheckbox('Dairy-Free (no milk products)'),
@@ -386,63 +437,67 @@ class EditMenu extends StatelessWidget {
                   ),
                 ],
               ),
-              // Input Email or Telephone Number
-              SizedBox(height: 20),
-
-              SizedBox(height: 40),
+              const SizedBox(
+                height: 32,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.85,
+                height: MediaQuery.of(context).size.height * 0.06,
+                child: ElevatedButton(
+                  onPressed: () {
+                    menuController.deleteMenu();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xffe74c3c),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: const Text("Delete Menu"),
+                ),
+              ),
+              const SizedBox(height: 116),
             ],
           ),
         ),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.symmetric(horizontal: 24),
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            SizedBox(height: MediaQuery.of(context).size.height * 0.8),
-            Container(
-              width: 300,
-              height: 45,
-              child: ElevatedButton(
-                onPressed: () {
-                  Get.offAll(() => HomePage(), transition: Transition.fade);
-                  // emailController.clear();
-                  // passwordController.clear();
-                },
-                child: Text(
-                  'Save Changes',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+        Visibility(
+          visible: MediaQuery.of(context).viewInsets.bottom == 0,
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              SizedBox(height: MediaQuery.of(context).size.height * 0.8),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.85,
+                height: MediaQuery.of(context).size.height * 0.06,
+                child: ElevatedButton(
+                  onPressed: () {
+                    menuController.updateMenu(
+                      nameController,
+                      descriptionController,
+                      priceController,
+                      inStock.value,
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xff70cb88),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: Color(0xff70cb88),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                  child: const Text(
+                    'Save Changes',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ]),
+            ]),
+          ),
         )
       ]),
-      // bottomNavigationBar: Container(
-      //       height: 87.7,
-      //       decoration: BoxDecoration(
-
-      //           borderRadius: BorderRadius.only(topLeft: Radius.circular(25.50), topRight: Radius.circular(25.50), bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0), ),
-
-      //           boxShadow: [
-      //           BoxShadow(color: Color.fromRGBO(0,0,0,230), spreadRadius: 0, blurRadius: 20),
-      //           ],
-
-      //       ),
-
-      //       child: ClipRRect(
-
-      //           borderRadius: BorderRadius.only(topLeft: Radius.circular(25.50), topRight: Radius.circular(25.50), bottomLeft: Radius.circular(0), bottomRight: Radius.circular(0), ),
-
-      //           child: CustomBottomNavigationBar(initialIndex: 3),
-      //       )
-      // )
     );
   }
 }
