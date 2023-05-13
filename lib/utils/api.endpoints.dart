@@ -2,6 +2,8 @@ class ApiEndPoints {
   static const String baseUrl = "http://192.168.88.143:5000/";
   static final _AuthEndPoints authEndpoints = _AuthEndPoints();
   static final _MerchantEndPoints merchantEndpoints = _MerchantEndPoints();
+  static final _TransactionEndPoints transactionEndPoints =
+      _TransactionEndPoints();
 }
 
 class _AuthEndPoints {
@@ -24,4 +26,11 @@ class _MerchantEndPoints {
   final String postMenuImage = "merchants/menu/upload-image";
   String deleteMenuImage(String menuId, String imageId) =>
       "merchants/menu/$menuId/$imageId";
+}
+
+class _TransactionEndPoints {
+  final String getTransactions = "transactions";
+  final String getTransaction = "transactions";
+  final String updateTransaction = "transactions";
+  final String deleteTransaction = "transactions";
 }
