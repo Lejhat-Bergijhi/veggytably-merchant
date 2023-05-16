@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vegytably_merchant/widgets/order_item.dart';
 
 import '../controllers/transaction_controller.dart';
 import '../utils/socket_service.dart';
@@ -56,55 +57,19 @@ class OrderPage extends StatelessWidget {
         Expanded(
           child: GetBuilder<TransactionController>(builder: (controller) {
             return ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                reverse: false,
                 itemCount: controller.transactions.length,
                 itemBuilder: (context, index) {
                   var orders = controller.transactions;
-                  return Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.grey,
-                      ),
+                  return Padding(
+                    padding: const EdgeInsets.only(
+                      left: 24,
+                      right: 24,
+                      top: 12,
+                      bottom: 12,
                     ),
-                    child: Column(
-                      children: [
-                        Text(
-                          "id: ${orders[index].id}",
-                          style: const TextStyle(
-                            fontSize: 18,
-                          ),
-                        ),
-                        Text(
-                          "status: ${orders[index].status}",
-                          style: const TextStyle(
-                            fontSize: 18,
-                          ),
-                        ),
-                        Text(
-                          "date: ${orders[index].date}",
-                          style: const TextStyle(
-                            fontSize: 18,
-                          ),
-                        ),
-                        Text(
-                          "items: ${orders[index].cart.cartItem.length}",
-                          style: const TextStyle(
-                            fontSize: 18,
-                          ),
-                        ),
-                        Text(
-                          "customer: ${orders[index].customer.user.username}",
-                          style: const TextStyle(
-                            fontSize: 18,
-                          ),
-                        ),
-                        Text(
-                          "address: ${orders[index].customer.address}",
-                          style: const TextStyle(
-                            fontSize: 18,
-                          ),
-                        )
-                      ],
-                    ),
+                    child: OrderItem(transaction: orders[index]),
                   );
                 });
           }),

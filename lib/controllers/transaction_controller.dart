@@ -23,6 +23,7 @@ class TransactionController extends GetxController {
       Transaction transaction = Transaction.fromJson(data);
       addTransaction(transaction);
       print(transaction);
+
       update();
     });
   }
@@ -40,7 +41,7 @@ class TransactionController extends GetxController {
   }
 
   void addTransaction(Transaction transaction) {
-    transactions.add(transaction);
+    transactions.insert(0, transaction);
   }
 
   void removeTransaction(Transaction transaction) {
@@ -60,6 +61,7 @@ class TransactionController extends GetxController {
 
       List<Transaction> transactions =
           (response.data['data']['transaction'] as List)
+              .reversed
               .map((transaction) => Transaction.fromJson(transaction))
               .toList();
 
