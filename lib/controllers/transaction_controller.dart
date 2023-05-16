@@ -22,6 +22,8 @@ class TransactionController extends GetxController {
       // update transaction list here
       Transaction transaction = Transaction.fromJson(data);
       addTransaction(transaction);
+      print(transaction);
+      update();
     });
   }
 
