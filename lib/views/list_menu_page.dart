@@ -11,8 +11,9 @@ class _ListMenuReadyPageState extends State<ListMenuReadyPage> {
   String activeButton = 'Ready Stock';
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Column(
       children: const <Widget>[
+        Text('Pesanan',),
         ListMenu(
             gambar: "image9.png",
             text: "Salad Yammy",
