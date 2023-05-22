@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vegytably_merchant/views/login_page.dart';
-import 'package:email_validator/email_validator.dart';
 
 import '../controllers/auth_controller.dart';
-import '../widgets/input_text.dart';
 
 class SignUpPage2 extends StatefulWidget {
   const SignUpPage2({super.key});

@@ -20,16 +20,16 @@ class _PesananPageState extends State<PesananPage> {
           toolbarHeight: 70,
           leading: IconButton(
             icon: Image.asset('assets/images/arrow-left.png'),
-            color: Color(0x5F5F5F),
+            color: const Color(0x5F5F5F),
             onPressed: () {
               Get.back();
             },
             iconSize: 40,
           ),
           titleSpacing: 0,
-          title: Text(
+          title: const Text(
             "Detail Pesanan",
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.black,
               fontSize: 15,
               fontFamily: "Rubik",
@@ -56,72 +56,51 @@ class _PesananPageState extends State<PesananPage> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
-            Container(
-              margin: EdgeInsets.only(left: 15.0, right: 15.0),
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  color: Color(0xFFF6F7FB),
-                  border: Border.all(color: Color(0xF6F7FB)),
-                  borderRadius: BorderRadius.circular(3.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Column(
+                  crossAxisAlignment:
+                      CrossAxisAlignment.start, // Align text to the left
+                  children: [
+                    const Text(
+                      'Pony',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontFamily: "Rubik",
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Text(
+                      '#425345 | 12 Des, 22:10',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 159, 159, 159),
+                        fontSize: 12,
+                        fontFamily: "Rubik",
+                      ),
+                    ),
+                  ],
                 ),
-              ),
+                const SizedBox(width: 82),
+                const Icon(
+                  Icons.message,
+                  color: Color.fromARGB(222, 112, 203, 136),
+                  size: 24,
+                ),
+                const SizedBox(width: 8),
+                const Icon(
+                  Icons.phone,
+                  color: Color.fromARGB(222, 112, 203, 136),
+                  size: 24,
+                )
+              ],
             ),
-            Container(
-              width: 312,
-              height: 50,
-              padding: const EdgeInsets.only(
-                  left: 10, right: 25, top: 10, bottom: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    crossAxisAlignment:
-                        CrossAxisAlignment.start, // Align text to the left
-                    children: [
-                      Text(
-                        'Pony',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontFamily: "Rubik",
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        '#425345 | 12 Des, 22:10',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 159, 159, 159),
-                          fontSize: 12,
-                          fontFamily: "Rubik",
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(width: 82),
-                  Icon(
-                    Icons.message,
-                    color: Color.fromARGB(222, 112, 203, 136),
-                    size: 24,
-                  ),
-                  SizedBox(width: 8),
-                  Icon(
-                    Icons.phone,
-                    color: Color.fromARGB(222, 112, 203, 136),
-                    size: 24,
-                  )
-                ],
-              ),
-              decoration: BoxDecoration(
-                color: Color(0xFFF6F7FB),
-                borderRadius: BorderRadius.circular(7.0),
-              ),
-              margin: EdgeInsets.only(left: 15.0, right: 15.0),
-            ),
-            SizedBox(
+            const SizedBox(
               height: 7,
             ),
             const Padding(
@@ -140,7 +119,7 @@ class _PesananPageState extends State<PesananPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(
+              padding: const EdgeInsets.only(
                   left: 25, top: 5), // Adjust the left padding as needed
               child: Row(
                 children: [
@@ -149,7 +128,7 @@ class _PesananPageState extends State<PesananPage> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 7,
             ),
             const Padding(
@@ -167,24 +146,24 @@ class _PesananPageState extends State<PesananPage> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Expanded(
               child: ListView(
-                padding:
-                    EdgeInsets.only(right: 15, left: 15, bottom: 5, top: 5),
+                padding: const EdgeInsets.only(
+                    right: 15, left: 15, bottom: 5, top: 5),
                 children: [
-                  OrderListItem('1x', 'Sego Tiwul', 'Rp3.000'),
-                  Divider(),
-                  OrderListItem('2x', 'Nasi Liwet', 'Rp10.000'),
-                  Divider(),
-                  OrderListItem('1x', 'Jeruk Anget', 'Rp3.000'),
-                  Divider(),
+                  const OrderListItem('1x', 'Sego Tiwul', 'Rp3.000'),
+                  const Divider(),
+                  const OrderListItem('2x', 'Nasi Liwet', 'Rp10.000'),
+                  const Divider(),
+                  const OrderListItem('1x', 'Jeruk Anget', 'Rp3.000'),
+                  const Divider(),
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             const Padding(
@@ -202,20 +181,17 @@ class _PesananPageState extends State<PesananPage> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
-
             Container(
-              padding: EdgeInsets.only(left: 15, right: 15),
+              padding: const EdgeInsets.only(left: 15, right: 15),
               child: Column(
-                crossAxisAlignment:
-                        CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row( 
+                  Row(
                     children: [
-                      
-                      Text(
+                      const Text(
                         'Total Order',
                         style: TextStyle(
                           color: Colors.black,
@@ -225,8 +201,10 @@ class _PesananPageState extends State<PesananPage> {
                         ),
                         textAlign: TextAlign.start,
                       ),
-                      SizedBox(width: 184,),
-                      Text(
+                      const SizedBox(
+                        width: 184,
+                      ),
+                      const Text(
                         'Rp 26.000',
                         style: TextStyle(
                           color: Colors.black,
@@ -238,11 +216,12 @@ class _PesananPageState extends State<PesananPage> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 7,),
-                  Row( 
+                  const SizedBox(
+                    height: 7,
+                  ),
+                  Row(
                     children: [
-                      
-                      Text(
+                      const Text(
                         'Delivery Fee',
                         style: TextStyle(
                           color: Colors.black,
@@ -252,8 +231,10 @@ class _PesananPageState extends State<PesananPage> {
                         ),
                         textAlign: TextAlign.start,
                       ),
-                      SizedBox(width: 176,),
-                      Text(
+                      const SizedBox(
+                        width: 176,
+                      ),
+                      const Text(
                         'Rp 10.000',
                         style: TextStyle(
                           color: Colors.black,
@@ -267,10 +248,9 @@ class _PesananPageState extends State<PesananPage> {
                   ),
                 ],
               ),
-              margin: EdgeInsets.all(15),
+              margin: const EdgeInsets.all(15),
             ),
-
-            SizedBox(
+            const SizedBox(
               height: 7,
             ),
             const Padding(
@@ -289,35 +269,31 @@ class _PesananPageState extends State<PesananPage> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(left: 15.0, right: 15.0),
+              margin: const EdgeInsets.only(left: 15.0, right: 15.0),
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  color: Color(0xFFF6F7FB),
-                  border: Border.all(color: Color(0xF6F7FB)),
+                  color: const Color(0xFFF6F7FB),
+                  border: Border.all(color: const Color(0xF6F7FB)),
                   borderRadius: BorderRadius.circular(3.0),
                 ),
               ),
             ),
             Container(
-              width: 312,
-              height: 50,
-              padding: const EdgeInsets.only(
-                  left: 10, right: 25, top: 10, bottom: 10),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.message,
                     color: Color.fromARGB(222, 112, 203, 136),
                     size: 24,
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Column(
                     crossAxisAlignment:
                         CrossAxisAlignment.start, // Align text to the left
                     children: [
-                      Text(
+                      const Text(
                         'Panda Nampai',
                         style: TextStyle(
                           color: Colors.black,
@@ -326,7 +302,7 @@ class _PesananPageState extends State<PesananPage> {
                           fontWeight: FontWeight.normal,
                         ),
                       ),
-                      Text(
+                      const Text(
                         'Sampai sebentar lagi',
                         style: TextStyle(
                           color: Color.fromARGB(255, 159, 159, 159),
@@ -336,8 +312,8 @@ class _PesananPageState extends State<PesananPage> {
                       ),
                     ],
                   ),
-                  SizedBox(width: 100),
-                  Icon(
+                  const SizedBox(width: 100),
+                  const Icon(
                     Icons.phone,
                     color: Color.fromARGB(222, 112, 203, 136),
                     size: 24,
@@ -345,40 +321,36 @@ class _PesananPageState extends State<PesananPage> {
                 ],
               ),
               decoration: BoxDecoration(
-                color: Color(0xFFF6F7FB),
+                color: const Color(0xFFF6F7FB),
                 borderRadius: BorderRadius.circular(7.0),
               ),
-              margin: EdgeInsets.only(left: 15.0, right: 15.0),
+              margin: const EdgeInsets.only(left: 15.0, right: 15.0),
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Container(
-              margin: EdgeInsets.only(left: 15.0, right: 15.0),
+              margin: const EdgeInsets.only(left: 15.0, right: 15.0),
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  color: Color(0xFFF6F7FB),
-                  border: Border.all(color: Color(0xF6F7FB)),
+                  color: const Color(0xFFF6F7FB),
+                  border: Border.all(color: const Color(0xF6F7FB)),
                   borderRadius: BorderRadius.circular(3.0),
                 ),
               ),
             ),
             Container(
-              width: 312,
-              height: 60,
-              padding: const EdgeInsets.only(
-                  left: 10, right: 122, top: 10, bottom: 10),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image.asset("assets/images/Group342.png"),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   Column(
                     crossAxisAlignment:
                         CrossAxisAlignment.start, // Align text to the left
                     children: [
-                      Text(
+                      const Text(
                         'Driver belum mengisi PIN',
                         style: TextStyle(
                           color: Colors.black,
@@ -387,7 +359,7 @@ class _PesananPageState extends State<PesananPage> {
                           fontWeight: FontWeight.normal,
                         ),
                       ),
-                      Text(
+                      const Text(
                         '5739',
                         style: TextStyle(
                           color: Colors.black,
@@ -401,23 +373,23 @@ class _PesananPageState extends State<PesananPage> {
                 ],
               ),
               decoration: BoxDecoration(
-                color: Color(0xFFF6F7FB),
+                color: const Color(0xFFF6F7FB),
                 borderRadius: BorderRadius.circular(7.0),
               ),
-              margin: EdgeInsets.only(left: 15.0, right: 15.0),
+              margin: const EdgeInsets.only(left: 15.0, right: 15.0),
             ),
             Container(
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                   top: 10.0, left: 15.0, right: 15.0, bottom: 10.0),
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  color: Color(0xFFF6F7FB),
-                  border: Border.all(color: Color(0xF6F7FB)),
+                  color: const Color(0xFFF6F7FB),
+                  border: Border.all(color: const Color(0xF6F7FB)),
                   borderRadius: BorderRadius.circular(7.0),
                 ),
               ),
             ),
-            SizedBox(height: 70),
+            const SizedBox(height: 70),
             Container(
               padding: const EdgeInsets.only(bottom: 20),
               width: 312,

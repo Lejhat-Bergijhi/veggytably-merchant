@@ -9,8 +9,6 @@ class InputPasswordField extends StatefulWidget {
 }
 
 class _InputPasswordFieldState extends State<InputPasswordField> {
-  bool _obscureText = true;
-
   @override
   Widget build(BuildContext context) {
     return const Placeholder();

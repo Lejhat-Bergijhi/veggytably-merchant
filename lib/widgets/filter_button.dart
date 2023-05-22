@@ -1,6 +1,5 @@
 //template
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class FilterButton extends StatelessWidget {
   final String title;
@@ -12,7 +11,7 @@ class FilterButton extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color: Recomendation_selected? Color(0xffb1e4be):Color(0xffefefef),
+        color: Recomendation_selected ? Color(0xffb1e4be) : Color(0xffefefef),
       ),
       padding: const EdgeInsets.symmetric(
         horizontal: 8,
@@ -27,7 +26,7 @@ class FilterButton extends StatelessWidget {
             title,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Recomendation_selected? Colors.black:Color(0xff9f9f9f),
+              color: Recomendation_selected ? Colors.black : Color(0xff9f9f9f),
               fontSize: 10,
             ),
           ),

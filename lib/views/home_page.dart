@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:get/get.dart';
-import 'package:vegytably_merchant/views/profile_page.dart';
-import 'package:vegytably_merchant/widgets/bottom_navbar.dart';
-import 'package:vegytably_merchant/widgets/sliver_search_app_bar.dart';
 // import '../api/merchant_api.dart';
 // import '../controllers/auth_controller.dart';
 // import '../models/merchant_profile.dart';

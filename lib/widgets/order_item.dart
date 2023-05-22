@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../models/transaction_model.dart';
 import '../utils/date_formatter.dart';
+import '../views/pesanan_page.dart';
 
 class OrderItem extends StatelessWidget {
   final Transaction transaction;
@@ -85,7 +87,9 @@ class OrderItem extends StatelessWidget {
               ),
               const Spacer(),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(() => PesananPage());
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF70CB88),
                   shape: const RoundedRectangleBorder(

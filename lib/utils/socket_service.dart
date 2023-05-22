@@ -22,6 +22,13 @@ class SocketService {
     socket.onConnect((_) {
       print('connected to server');
       // specify merchant id
+      if (MerchantController.to.merchant.id == "") {
+        // retry after 1 second
+        Future.delayed(const Duration(seconds: 1), () {
+          print("retry");
+          socket.emit('subscribe', MerchantController.to.merchant.id);
+        });
+      }
       socket.emit('subscribe', MerchantController.to.merchant.id);
     });
     socket.onDisconnect((_) => print('disconnect'));

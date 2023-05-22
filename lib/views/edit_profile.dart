@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vegytably_merchant/views/profile_page.dart';
 import 'package:vegytably_merchant/widgets/input_text.dart';
 
 import '../controllers/merchant_controller.dart';
@@ -26,7 +25,6 @@ class EditProfile extends StatelessWidget {
     TextEditingController restaurantAddressController =
         TextEditingController(text: merchant.restaurantAddress);
 
-    var name = '/assets/ProfPic.png';
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,

@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 // import 'package:vegytably_merchant/views/discount_page.dart';
-import 'package:vegytably_merchant/views/home_page.dart';
 // import 'package:vegytably_merchant/views/order_page.dart';
-import 'package:vegytably_merchant/views/profile_page.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
-  @override
   final int initialIndex;
   final void Function(int index) setSelectedIndex;
 

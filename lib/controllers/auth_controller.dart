@@ -2,7 +2,6 @@ import "package:dio/dio.dart";
 import "package:flutter/material.dart";
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import "package:get/get.dart" hide Response;
-import "package:vegytably_merchant/utils/api.endpoints.dart";
 import "package:vegytably_merchant/views/landing_page.dart";
 import "package:vegytably_merchant/views/login_page.dart";
 
@@ -96,10 +95,6 @@ class AuthController extends GetxController {
     TextEditingController passwordController,
   ) async {
     try {
-      var headers = {"Content-Type": "application/json"};
-      var url =
-          Uri.parse(ApiEndPoints.baseUrl + ApiEndPoints.authEndpoints.login);
-
       Map<String, String> body = {
         "email": emailController.text.trim(),
         "password": passwordController.text,

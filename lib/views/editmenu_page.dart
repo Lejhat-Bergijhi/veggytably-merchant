@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:vegytably_merchant/views/home_page.dart';
 import 'package:vegytably_merchant/widgets/input_text.dart';
 import 'package:dotted_border/dotted_border.dart';
 import '../controllers/menu_controller.dart';
@@ -17,7 +16,7 @@ class EditMenuPage extends StatelessWidget {
   final TextEditingController descriptionController;
   final TextEditingController priceController;
 
-  RxBool inStock;
+  final RxBool inStock;
   EditMenuPage({super.key, required this.menu})
       : nameController = TextEditingController(text: menu.name),
         descriptionController = TextEditingController(text: menu.description),

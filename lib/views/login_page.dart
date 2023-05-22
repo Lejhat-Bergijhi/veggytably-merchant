@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vegytably_merchant/views/signup_page.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:vegytably_merchant/views/signup_page_2.dart';
 
 import '../controllers/auth_controller.dart';
 

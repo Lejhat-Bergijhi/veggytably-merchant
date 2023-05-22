@@ -1,7 +1,4 @@
-import 'dart:js_util';
-
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class OrderListItem extends StatelessWidget {
   final String quantity;
