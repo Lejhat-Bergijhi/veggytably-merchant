@@ -19,6 +19,7 @@ class AuthController extends GetxController {
     username: "",
     email: "",
     phone: "",
+    wallet: 0,
   ).obs;
   RxBool isLogin = false.obs;
   RxBool isLoading = false.obs;
@@ -196,6 +197,7 @@ class AuthController extends GetxController {
       username: "",
       email: "",
       phone: "",
+      wallet: 0,
     );
     isLogin.value = false;
     update();
