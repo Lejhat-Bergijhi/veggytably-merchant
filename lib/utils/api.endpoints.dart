@@ -29,7 +29,9 @@ class _MerchantEndPoints {
 }
 
 class _TransactionEndPoints {
-  final String getTransactions = "transactions";
+  // final String getTransactions = "transactions";
+  String getTransactions(String merchantId) => "transactions/$merchantId";
+
   final String getTransaction = "transactions";
   final String updateTransaction = "transactions";
   final String deleteTransaction = "transactions";

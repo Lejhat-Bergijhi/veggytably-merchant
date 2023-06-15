@@ -54,6 +54,7 @@ class TransactionController extends GetxController {
       update();
 
       Response response = await TransactionApi.instance.fetchTransactions();
+      print(response);
       if (response.statusCode != 200) {
         String errorMessage = ExceptionResponse.getMessage(response.data);
         throw Exception(errorMessage);
@@ -64,6 +65,8 @@ class TransactionController extends GetxController {
               .reversed
               .map((transaction) => Transaction.fromJson(transaction))
               .toList();
+
+      print(transactions);
 
       setTransactions(transactions);
     } catch (e) {

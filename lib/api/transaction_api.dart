@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:vegytably_merchant/controllers/merchant_controller.dart';
 import '../utils/api.endpoints.dart';
 
 class TransactionApi {
@@ -14,10 +15,16 @@ class TransactionApi {
       "authorization": 'Bearer $refreshToken',
     };
 
+    if (MerchantController.to.merchant.id == "") {
+      // delay for 1 second
+      await Future.delayed(const Duration(seconds: 3));
+    }
+
     try {
       Response response = await Dio().get(
         ApiEndPoints.baseUrl +
-            ApiEndPoints.transactionEndPoints.getTransactions,
+            ApiEndPoints.transactionEndPoints
+                .getTransactions(MerchantController.to.merchant.id),
         options: Options(
           headers: headers,
         ),
